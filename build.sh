@@ -35,3 +35,9 @@ for f in $FRAGMENTOS; do
 done
 
 echo "index.html reconstruido: $(wc -c < index.html) bytes"
+
+# Red de seguridad: que ningun recurso citado falte y que las variantes 1x/2x
+# de los logos compartan proporcion. Un fallo aqui seria un 404 en produccion.
+if command -v python3 >/dev/null 2>&1; then
+  python3 check-assets.py || exit 1
+fi
