@@ -16,30 +16,20 @@ y solo se usa para el ticket; si no carga, el ticket cae en `window.print()`.
 |---|---|
 | `index.html` | La tienda completa (HTML + CSS + JS embebidos). |
 | `robots.txt` | Reglas de rastreo y referencia al sitemap. |
-| `sitemap.xml` | 102 URLs (páginas, 12 categorías y 77 productos). |
-| `.htaccess` | Cabeceras de seguridad, HTTPS, caché y rutas limpias para **Apache** (Hostinger/cPanel). |
-| `nginx.conf` | Lo mismo para **nginx** (VPS propio). |
-| `vercel.json` | Cabeceras, rewrites y caché para **Vercel/Netlify**. |
+| `sitemap.xml` | 119 URLs (páginas, 12 categorías y 93 productos). |
+| `vercel.json` | Cabeceras, rewrites y caché. Es el único despliegue que se usa. |
 
 ---
 
 ## 2. Guía de despliegue
 
-### Opción A — Hostinger / cPanel (Apache)
-1. Entra en **Administrador de archivos** y abre `public_html/`.
-2. Sube `index.html`, `robots.txt`, `sitemap.xml` y `.htaccess`.
-   - El `.htaccess` empieza por punto: activa "mostrar archivos ocultos" para verlo.
-3. En **SSL/TLS**, activa el certificado Let's Encrypt gratuito.
-4. Fuerza HTTPS desde el panel (o confía en la regla del `.htaccess`).
-5. Comprueba: `https://tudominio/robots.txt` y `https://tudominio/sitemap.xml`.
-
-### Opción B — Vercel (recomendada si quieres CI/CD con Git)
+### Despliegue en Vercel (el que se usa)
 1. Sube el repo a GitHub y conéctalo en Vercel (**Add New → Project**).
 2. Framework Preset: **Other**. Build command: *(vacío)*. Output: `.`
 3. Vercel detecta `vercel.json` y aplica cabeceras, rewrites y caché.
 4. El dominio queda en HTTPS automático.
 
-### Opción C — Netlify
+### (Alternativa) Netlify
 1. **Add new site → Import an existing project**, elige el repo.
 2. Build command: *(vacío)*. Publish directory: `.`
 3. Copia las cabeceras de `vercel.json` a un archivo `_headers` en la raíz:
@@ -52,12 +42,6 @@ y solo se usa para el ticket; si no carga, el ticket cae en `window.print()`.
      Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
    ```
    Y las redirecciones a `_redirects`: `/*  /index.html  200`
-
-### Opción D — nginx (VPS propio)
-1. Copia los archivos a `/var/www/sinergia/`.
-2. Incluye los bloques de `nginx.conf` en tu `server {}`.
-3. `sudo certbot --nginx -d tudominio -d www.tudominio`
-4. `sudo nginx -t && sudo systemctl reload nginx`
 
 ---
 
@@ -102,7 +86,7 @@ Abre `index.html`, busca `REEMPLAZAR` (hay 28 marcadores) y cambia:
 
 ### Otros
 - `index.html`: `<link rel="canonical">`, `og:url`, `og:image`, los `hreflang` y el `@id`
-  del JSON-LD usan `https://www.sinergia.digital` — cámbialo por tu dominio.
+  del JSON-LD usan `https://sinergiadigital-pedrocollazo1988.vercel.app` — cámbialo por tu dominio.
 - `robots.txt` y `sitemap.xml`: mismo dominio.
 - Las imágenes de producto apuntan a **Unsplash**. Para producción, súbelas a tu propio
   hosting (mejora privacidad, velocidad y evita dependencias externas).
@@ -170,7 +154,7 @@ tal cual; lo que ganas es SEO real por producto y pedidos que no se pierden.
 
 | Control | Estado |
 |---|---|
-| CSP restrictiva (`default-src 'self'`, orígenes mínimos) | ✅ en `<meta>` y como cabecera en `.htaccess` / `nginx.conf` / `vercel.json` |
+| CSP restrictiva (`default-src 'self'`, orígenes mínimos) | ✅ en `<meta>` y como cabecera en `vercel.json` |
 | `X-Frame-Options` / `frame-ancestors` | ✅ como cabecera de servidor (en `<meta>` no funcionan) |
 | HSTS | ✅ en las tres configuraciones de servidor |
 | `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` | ✅ |

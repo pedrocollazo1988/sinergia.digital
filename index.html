@@ -12,7 +12,7 @@
   OJO SEGURIDAD: aqui solo se pueden poner cabeceras que el navegador respete
   como <meta>. X-Frame-Options, frame-ancestors, HSTS, X-Content-Type-Options,
   Referrer-Policy y Permissions-Policy DEBEN ir como cabecera HTTP real del
-  servidor (ver .htaccess / nginx.conf entregados aparte). En <meta> el
+  servidor (ver vercel.json). En <meta> el
   navegador IGNORA frame-ancestors y X-Frame-Options.
   ----------------------------------------------------------------------------
   CSP: 'unsafe-inline' es necesario porque CSS y JS van embebidos en el archivo.
@@ -20,7 +20,7 @@
   archivos propios y usar nonce o hash. Ver autoevaluacion al final.
   ============================================================================
 -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://images.unsplash.com https://images.pexels.com; connect-src 'self'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src https://www.bc.gob.cu; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <title>Tienda de tecnología en Cuba | Sinergia Digital</title>
@@ -36,10 +36,10 @@
 <meta name="geo.region" content="CU-03">
 <meta name="geo.placename" content="La Habana, Cuba">
 
-<link rel="canonical" href="https://www.sinergia.digital/">
-<link rel="alternate" hreflang="es-CU" href="https://www.sinergia.digital/">
-<link rel="alternate" hreflang="es" href="https://www.sinergia.digital/">
-<link rel="alternate" hreflang="x-default" href="https://www.sinergia.digital/">
+<link rel="canonical" href="https://sinergiadigital-pedrocollazo1988.vercel.app/">
+<link rel="alternate" hreflang="es-CU" href="https://sinergiadigital-pedrocollazo1988.vercel.app/">
+<link rel="alternate" hreflang="es" href="https://sinergiadigital-pedrocollazo1988.vercel.app/">
+<link rel="alternate" hreflang="x-default" href="https://sinergiadigital-pedrocollazo1988.vercel.app/">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -47,8 +47,8 @@
 <meta property="og:locale" content="es_CU">
 <meta property="og:title" content="Tienda de tecnología en Cuba | Sinergia Digital">
 <meta property="og:description" content="Laptops, energía solar, seguridad, clima y suministros de impresión con envío a domicilio en Cuba. Garantía y pago seguro.">
-<meta property="og:url" content="https://www.sinergia.digital/">
-<meta property="og:image" content="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=630&fit=crop&q=70">
+<meta property="og:url" content="https://sinergiadigital-pedrocollazo1988.vercel.app/">
+<meta property="og:image" content="https://sinergiadigital-pedrocollazo1988.vercel.app/public/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Tienda de tecnología Sinergia Digital en Cuba">
@@ -57,18 +57,18 @@
 <meta name="twitter:site" content="@sinergiadigital">
 <meta name="twitter:title" content="Tienda de tecnología en Cuba | Sinergia Digital">
 <meta name="twitter:description" content="Laptops, energía solar, seguridad, clima y suministros de impresión con envío a domicilio en Cuba.">
-<meta name="twitter:image" content="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=630&fit=crop&q=70">
+<meta name="twitter:image" content="https://sinergiadigital-pedrocollazo1988.vercel.app/public/og-image.jpg">
 
-<!-- Favicon SVG inline (la "S" de la marca) -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%231E3FBF'/%3E%3Cstop offset='.55' stop-color='%2322C7D6'/%3E%3Cstop offset='1' stop-color='%237C6CF0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230F1B5C'/%3E%3Cpath d='M45 19c-4-6-17-7-22 0-5 7 1 12 10 14 9 2 16 5 12 13-4 7-17 7-22 0' fill='none' stroke='url(%23g)' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F1B5C'/%3E%3Cpath d='M45 19c-4-6-17-7-22 0-5 7 1 12 10 14 9 2 16 5 12 13-4 7-17 7-22 0' fill='none' stroke='%2322C7D6' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
+<!-- Favicon e iconos: el logotipo real de la marca -->
+<link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/public/favicon-48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/public/favicon-180.png">
+<link rel="mask-icon" href="/public/favicon-180.png" color="#0A33B5">
 
 <!-- Rendimiento: adelantar el saludo TLS a los origenes que usamos -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
 <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-<link rel="dns-prefetch" href="https://images.pexels.com">
 
 <!-- Tipografia: Sora (geometrica). font-display=swap via &display=swap -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all';this.onload=null">
@@ -81,10 +81,10 @@
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://www.sinergia.digital/#organization",
+      "@id": "https://sinergiadigital-pedrocollazo1988.vercel.app/#organization",
       "name": "Sinergia Digital",
-      "url": "https://www.sinergia.digital/",
-      "logo": "https://www.sinergia.digital/logo-sinergia-digital.svg",
+      "url": "https://sinergiadigital-pedrocollazo1988.vercel.app/",
+      "logo": "https://sinergiadigital-pedrocollazo1988.vercel.app/public/logo-full-1200.png",
       "email": "ventas@sinergia.digital",
       "telephone": "+5355550000",
       "sameAs": [
@@ -102,10 +102,10 @@
     },
     {
       "@type": "Store",
-      "@id": "https://www.sinergia.digital/#store",
+      "@id": "https://sinergiadigital-pedrocollazo1988.vercel.app/#store",
       "name": "Sinergia Digital",
-      "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=630&fit=crop&q=70",
-      "url": "https://www.sinergia.digital/",
+      "image": "https://sinergiadigital-pedrocollazo1988.vercel.app/public/og-image.jpg",
+      "url": "https://sinergiadigital-pedrocollazo1988.vercel.app/",
       "telephone": "+5355550000",
       "priceRange": "$$",
       "currenciesAccepted": "USD, CUP, USDT",
@@ -127,24 +127,24 @@
     },
     {
       "@type": "WebSite",
-      "@id": "https://www.sinergia.digital/#website",
-      "url": "https://www.sinergia.digital/",
+      "@id": "https://sinergiadigital-pedrocollazo1988.vercel.app/#website",
+      "url": "https://sinergiadigital-pedrocollazo1988.vercel.app/",
       "name": "Sinergia Digital",
       "inLanguage": "es-CU",
-      "publisher": { "@id": "https://www.sinergia.digital/#organization" },
+      "publisher": { "@id": "https://sinergiadigital-pedrocollazo1988.vercel.app/#organization" },
       "potentialAction": {
         "@type": "SearchAction",
-        "target": { "@type": "EntryPoint", "urlTemplate": "https://www.sinergia.digital/?q={search_term_string}" },
+        "target": { "@type": "EntryPoint", "urlTemplate": "https://sinergiadigital-pedrocollazo1988.vercel.app/?q={search_term_string}" },
         "query-input": "required name=search_term_string"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.sinergia.digital/#breadcrumb",
+      "@id": "https://sinergiadigital-pedrocollazo1988.vercel.app/#breadcrumb",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.sinergia.digital/" },
-        { "@type": "ListItem", "position": 2, "name": "Catálogo", "item": "https://www.sinergia.digital/catalogo" },
-        { "@type": "ListItem", "position": 3, "name": "Ofertas", "item": "https://www.sinergia.digital/ofertas" }
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://sinergiadigital-pedrocollazo1988.vercel.app/" },
+        { "@type": "ListItem", "position": 2, "name": "Catálogo", "item": "https://sinergiadigital-pedrocollazo1988.vercel.app/catalogo" },
+        { "@type": "ListItem", "position": 3, "name": "Ofertas", "item": "https://sinergiadigital-pedrocollazo1988.vercel.app/ofertas" }
       ]
     }
   ]
@@ -180,26 +180,39 @@
 
 /* ---------- 1. TOKENS (variables de diseno) ---------- */
 :root{
-  --navy:#0F1B5C;
-  --blue:#1E3FBF;
-  --blue-600:#18349e;
-  --cyan:#22C7D6;
-  --turquoise:#3AE8E0;
-  --violet:#7C6CF0;
-  --cream:#FBF9F3;
+  /* Paleta tomada del logotipo real (muestreo del PNG, ver public/logo-*) */
+  --navy:#0B1853;        /* azul marino del texto */
+  --navy-900:#081038;    /* navy mas profundo, para degradados y pie */
+  --blue:#0A33B5;        /* azul real de la marca */
+  --blue-600:#0929A0;    /* azul mas oscuro para hover */
+  --cyan:#15C4D4;        /* cian de la marca */
+  --turquoise:#3EF5E9;   /* turquesa claro, acentos */
+  --violet:#7762F4;      /* violeta del logo */
+  --cream:#FCF9F1;       /* crema de fondo del logo */
   --white:#FFFFFF;
 
-  --gray-50:#F6F7FB;
-  --gray-100:#EDEFF6;
+  /* Variantes de TEXTO: el cian y el violeta puros solo dan 2.1:1 y 4.3:1
+     sobre blanco, asi que no sirven para texto. Estas versiones oscurecidas
+     pasan AA (>=4.5:1) y se usan donde el color es la letra, no el adorno. */
+  --cyan-text:#0B7A87;   /* 5.06:1 sobre blanco */
+  --violet-text:#5B47D6; /* 6.33:1 sobre blanco */
+  --violet-bg:rgba(119,98,244,.16);
+  /* El azul de marca es oscuro: perfecto como TEXTO en tema claro, pero en
+     tema oscuro daria 1.75:1. --blue-text es la version que se usa cuando el
+     azul es la letra o el icono; los fondos siguen con --blue. */
+  --blue-text:var(--blue);
+
+  --gray-50:#F7F7F4;
+  --gray-100:#EFEFF6;
   --gray-200:#DCE0EC;
   --gray-300:#C2C8DA;
   --gray-400:#98A0B8;
-  --gray-500:#6B7488;
+  --gray-500:#5F6879;   /* 5.39:1 sobre crema (antes 4.46) */
   --gray-600:#4C556B;
   --gray-700:#333C52;
   --gray-800:#1F2739;
 
-  --ok:#128A5B;
+  --ok:#0F7A50;         /* 5.14:1 sobre crema (antes 4.15) */
   --ok-bg:#E3F7EE;
   --warn:#B45309;
   --warn-bg:#FDF3E2;
@@ -221,8 +234,12 @@
   --shadow:0 4px 14px rgba(15,27,92,.08);
   --shadow-lg:0 18px 48px rgba(15,27,92,.16);
   --ring:0 0 0 3px rgba(34,199,214,.45);
-  --grad:linear-gradient(120deg,var(--blue) 0%,var(--cyan) 100%);
+  /* Degradado de marca para botones: acaba en teal, no en cian puro,
+     porque el blanco sobre #15C4D4 solo daria 2:1. */
+  --grad:linear-gradient(120deg,var(--blue) 0%,#0C6E96 100%);
   --grad-soft:linear-gradient(120deg,rgba(30,63,191,.08),rgba(34,199,214,.10));
+  /* tintes del hero: claros, para que el texto oscuro se lea encima */
+  --hero-a:#F5F8FF; --hero-b:#E6EEFF; --hero-c:#E0F7FB; --hero-d:#EEE9FF;
   --header-h:64px;
   --radius-sm:8px;
   --radius:14px;
@@ -249,11 +266,16 @@
     --shadow-sm:0 1px 2px rgba(0,0,0,.4);
     --shadow:0 6px 20px rgba(0,0,0,.45);
     --shadow-lg:0 20px 50px rgba(0,0,0,.55);
-    --grad-soft:linear-gradient(120deg,rgba(30,63,191,.22),rgba(34,199,214,.16));
+    --grad-soft:linear-gradient(120deg,rgba(10,51,181,.22),rgba(21,196,212,.16));
+    --hero-a:#0A1024; --hero-b:#0F1C3E; --hero-c:#0C2A38; --hero-d:#181540;
     --ok-bg:#0F2E22; --ok:#5BE0A6;
     --warn-bg:#3A2A0E; --warn:#F7C566;
     --danger-bg:#3A1518; --danger:#FF8A8A;
     --info-bg:#13284d;
+    /* En oscuro el violeta de la marca se queda en 3.9:1; se aclara */
+    --violet-text:#A99BFF;
+    --cyan-text:#4FDCE8;
+    --violet-bg:rgba(119,98,244,.24);
   }
 }
 /* Modo oscuro manual */
@@ -264,11 +286,16 @@
   --shadow-sm:0 1px 2px rgba(0,0,0,.4);
   --shadow:0 6px 20px rgba(0,0,0,.45);
   --shadow-lg:0 20px 50px rgba(0,0,0,.55);
-  --grad-soft:linear-gradient(120deg,rgba(30,63,191,.22),rgba(34,199,214,.16));
+  --grad-soft:linear-gradient(120deg,rgba(10,51,181,.22),rgba(21,196,212,.16));
+  --hero-a:#0A1024; --hero-b:#0F1C3E; --hero-c:#0C2A38; --hero-d:#181540;
   --ok-bg:#0F2E22; --ok:#5BE0A6;
   --warn-bg:#3A2A0E; --warn:#F7C566;
   --danger-bg:#3A1518; --danger:#FF8A8A;
   --info-bg:#13284d;
+  --violet-text:#A99BFF;
+  --cyan-text:#4FDCE8;
+  --blue-text:#8FAEFF;   /* 7.9:1 sobre --bg oscuro */
+  --violet-bg:rgba(119,98,244,.24);
 }
 
 /* ---------- 2. RESET Y BASE ---------- */
@@ -287,7 +314,7 @@ body{
 }
 img,svg,video{max-width:100%;display:block}
 img{height:auto;background:var(--surface-2)}
-a{color:var(--blue);text-decoration:none}
+a{color:var(--blue-text);text-decoration:none}
 a:hover{text-decoration:underline}
 button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 input,select,textarea{font:inherit;color:inherit}
@@ -344,7 +371,7 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .btn--primary:hover{box-shadow:0 10px 26px rgba(30,63,191,.38)}
 .btn--dark{background:var(--navy);color:#fff}
 .btn--outline{background:var(--surface);color:var(--text);border-color:var(--border-strong)}
-.btn--outline:hover{border-color:var(--blue);color:var(--blue)}
+.btn--outline:hover{border-color:var(--blue);color:var(--blue-text)}
 .btn--ghost{background:var(--surface-2);color:var(--text)}
 .btn--danger{background:var(--danger-bg);color:var(--danger)}
 .btn--ok{background:#1EA36B;color:#fff}
@@ -352,23 +379,27 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .btn--tg{background:#2AABEE;color:#062a3d}
 .btn--sm{padding:.42rem .8rem;font-size:.86rem}
 .btn--block{width:100%}
+/* Los iconos dentro de un boton nunca deben estirarse: toman el tamano de la
+   letra. Sin esta regla, el SVG (que no trae width/height) se expande al
+   contenedor flex y sale gigante. */
+.btn svg{width:1em;height:1em;flex:0 0 auto}
 .btn--lg{padding:.9rem 1.5rem;font-size:1.03rem}
 
 .badge{
   display:inline-flex;align-items:center;gap:.3rem;padding:.2rem .55rem;border-radius:var(--radius-pill);
   font-size:.72rem;font-weight:700;letter-spacing:.02em;text-transform:uppercase;
 }
-.badge--new{background:var(--info-bg);color:var(--blue)}
+.badge--new{background:var(--info-bg);color:var(--blue-text)}
 .badge--offer{background:var(--danger-bg);color:var(--danger)}
 .badge--best{background:var(--warn-bg);color:var(--warn)}
 .badge--fast{background:var(--ok-bg);color:var(--ok)}
-.badge--violet{background:rgba(124,108,240,.16);color:var(--violet)}
+.badge--violet{background:var(--violet-bg);color:var(--violet-text)}
 
 .stock{display:inline-flex;align-items:center;gap:.35rem;font-size:.8rem;font-weight:600}
 .stock::before{content:"";width:.55rem;height:.55rem;border-radius:50%;background:currentColor}
 .stock--in{color:var(--ok)}
 .stock--low{color:var(--warn)}
-.stock--order{color:var(--violet)}
+.stock--order{color:var(--violet-text)}
 
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm)}
 .pill{display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .7rem;border-radius:var(--radius-pill);background:var(--surface-2);border:1px solid var(--border);font-size:.82rem;font-weight:600}
@@ -379,7 +410,7 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .notice--warn{background:var(--warn-bg);border-color:transparent;color:var(--warn)}
 .notice--danger{background:var(--danger-bg);border-color:transparent;color:var(--danger)}
 .notice--ok{background:var(--ok-bg);border-color:transparent;color:var(--ok)}
-.notice--info{background:var(--info-bg);border-color:transparent;color:var(--blue)}
+.notice--info{background:var(--info-bg);border-color:transparent;color:var(--blue-text)}
 .notice strong{color:inherit}
 
 .rating{display:inline-flex;align-items:center;gap:.25rem;color:#E8A317;font-size:.85rem;font-weight:600}
@@ -395,9 +426,33 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .header{position:sticky;top:0;z-index:900;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
 .header__bar{display:flex;align-items:center;gap:clamp(.5rem,2vw,1.2rem);min-height:var(--header-h)}
 .brand{display:flex;align-items:center;gap:.6rem;flex:0 0 auto;text-decoration:none!important}
-.brand__logo{width:42px;height:42px;flex:0 0 auto}
+/* Logotipo real. Se pinta como fondo para poder cambiar de variante con el
+   tema. El tamano es fijo para no provocar saltos de maquetacion (CLS).
+   Se declara primero el PNG y despues image-set: si el navegador no entiende
+   image-set, se queda con el PNG (mejora progresiva sin @supports). */
+.brand__logo{
+  width:42px;height:42px;flex:0 0 auto;
+  background-image:url("/public/logo-mark-128.png");
+  background-size:contain;background-position:center;background-repeat:no-repeat;
+}
+.brand__logo{
+  background-image:image-set(url("/public/logo-mark-128.webp") 1x, url("/public/logo-mark-256.png") 2x);
+}
+/* Variante clara (texto y azul aclarados) sobre fondos oscuros */
+[data-theme="dark"] .brand__logo,
+.footer .brand__logo{background-image:url("/public/logo-mark-claro-128.png")}
+[data-theme="dark"] .brand__logo,
+.footer .brand__logo{
+  background-image:image-set(url("/public/logo-mark-claro-128.webp") 1x, url("/public/logo-mark-claro-256.png") 2x);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .brand__logo{background-image:url("/public/logo-mark-claro-128.png")}
+  :root:not([data-theme="light"]) .brand__logo{
+    background-image:image-set(url("/public/logo-mark-claro-128.webp") 1x, url("/public/logo-mark-claro-256.png") 2x);
+  }
+}
 .brand__name{font-weight:800;font-size:1.12rem;letter-spacing:-.02em;color:var(--navy);line-height:1}
-.brand__tag{display:block;font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-top:2px}
+.brand__tag{display:block;font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan-text);margin-top:2px}
 [data-theme="dark"] .brand__name{color:var(--text)}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .brand__name{color:var(--text)}}
 
@@ -437,11 +492,13 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .header__actions{display:flex;align-items:center;gap:.35rem;margin-left:auto}
 .iconbtn{
   position:relative;display:inline-flex;align-items:center;justify-content:center;
-  width:42px;height:42px;border-radius:var(--radius-pill);color:var(--text);
+  width:42px;height:42px;flex:0 0 auto;border-radius:var(--radius-pill);color:var(--text);
   transition:background var(--t-fast),color var(--t-fast);
 }
-.iconbtn:hover{background:var(--surface-2);color:var(--blue)}
-.iconbtn svg{width:21px;height:21px}
+.iconbtn:hover{background:var(--surface-2);color:var(--blue-text)}
+/* flex:0 0 auto en el padre es imprescindible: sin el, la barra de acciones
+   comprime el boton, el SVG se encoge a lo ancho y deja de ser cuadrado. */
+.iconbtn svg{width:21px;height:21px;flex:0 0 auto}
 .iconbtn__count{
   position:absolute;top:2px;right:2px;min-width:18px;height:18px;padding:0 4px;
   display:grid;place-items:center;background:var(--cyan);color:#04202a;border-radius:var(--radius-pill);
@@ -457,13 +514,16 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .nav__list{display:flex;gap:.15rem;list-style:none;margin:0;padding:0;overflow-x:auto;scrollbar-width:thin}
 .nav__list::-webkit-scrollbar{height:4px}
 .nav__list::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:4px}
+/* Con 11 enlaces el menu no cabe en pantallas medianas. En vez de cortarlo,
+   se reparte en varias filas; la barra de scroll solo aparece en movil. */
+@media (min-width:1024px){.nav__list{flex-wrap:wrap;overflow-x:visible}}
 .nav__link{
-  display:inline-flex;align-items:center;gap:.4rem;padding:.65rem .8rem;font-weight:600;font-size:.9rem;
+  display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .68rem;font-weight:600;font-size:.86rem;
   color:var(--text-soft);border-bottom:3px solid transparent;white-space:nowrap;text-decoration:none!important;
 }
-.nav__link:hover{color:var(--blue)}
-.nav__link[aria-current="page"]{color:var(--blue);border-bottom-color:var(--cyan)}
-.nav__toggle{display:flex;align-items:center;gap:.4rem;padding:.65rem .8rem;font-weight:600;font-size:.9rem;color:var(--text-soft)}
+.nav__link:hover{color:var(--blue-text)}
+.nav__link[aria-current="page"]{color:var(--blue-text);border-bottom-color:var(--cyan)}
+.nav__toggle{display:flex;align-items:center;gap:.35rem;padding:.55rem .68rem;font-weight:600;font-size:.86rem;color:var(--text-soft)}
 .nav__mega{
   position:absolute;left:0;right:0;top:100%;z-index:880;background:var(--surface);
   border-bottom:1px solid var(--border);box-shadow:var(--shadow-lg);padding:1.2rem 0;
@@ -471,8 +531,8 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .nav__mega[hidden]{display:none}
 .nav__mega-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.35rem}
 .nav__mega a{display:flex;gap:.6rem;align-items:center;padding:.55rem .6rem;border-radius:var(--radius-sm);color:var(--text);font-size:.9rem;font-weight:500}
-.nav__mega a:hover{background:var(--surface-2);text-decoration:none;color:var(--blue)}
-.nav__mega svg{width:20px;height:20px;flex:0 0 auto;color:var(--blue)}
+.nav__mega a:hover{background:var(--surface-2);text-decoration:none;color:var(--blue-text)}
+.nav__mega svg{width:20px;height:20px;flex:0 0 auto;color:var(--blue-text)}
 
 /* Menu movil desplegable */
 .mobile-nav{position:fixed;inset:0;z-index:1200;display:none}
@@ -493,17 +553,27 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .hero__grid{display:grid;gap:clamp(18px,4vw,40px);align-items:center;grid-template-columns:1fr}
 @media (min-width:900px){.hero__grid{grid-template-columns:1.05fr .95fr}}
 .hero h1{margin-bottom:.6rem}
-.hero__kicker{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .75rem;border-radius:var(--radius-pill);background:var(--surface);border:1px solid var(--border);font-size:.8rem;font-weight:700;color:var(--blue);margin-bottom:.9rem}
+.hero__kicker{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .75rem;border-radius:var(--radius-pill);background:var(--surface);border:1px solid var(--border);font-size:.8rem;font-weight:700;color:var(--blue-text);margin-bottom:.9rem}
 .hero__cta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.2rem}
 .hero__art{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:16/11;background:var(--surface-2)}
 .hero__art img{width:100%;height:100%;object-fit:cover}
 .hero__dots{display:flex;gap:.4rem;justify-content:center;padding-bottom:1rem}
-.hero__dot{width:10px;height:10px;border-radius:50%;background:var(--border-strong);transition:transform var(--t-fast),background var(--t-fast)}
-.hero__dot[aria-current="true"]{background:var(--blue);transform:scale(1.25)}
+/* El punto se ve de 10px, pero el boton mide 24px para que se pueda pulsar
+   con el dedo (minimo tactil recomendado por WCAG 2.5.8). El circulo se
+   dibuja con un pseudo-elemento para no agrandar el punto visible. */
+.hero__dot{
+  width:24px;height:24px;display:grid;place-items:center;
+  background:none;border:0;padding:0;cursor:pointer;border-radius:50%;
+}
+.hero__dot::before{
+  content:"";width:10px;height:10px;border-radius:50%;background:var(--border-strong);
+  transition:transform var(--t-fast),background var(--t-fast);
+}
+.hero__dot[aria-current="true"]::before{background:var(--blue-text);transform:scale(1.25)}
 
 .benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.8rem}
 .benefit{display:flex;gap:.75rem;align-items:flex-start;padding:1rem;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border)}
-.benefit svg{width:26px;height:26px;flex:0 0 auto;color:var(--blue)}
+.benefit svg{width:26px;height:26px;flex:0 0 auto;color:var(--blue-text)}
 .benefit b{display:block;font-size:.94rem}
 .benefit small{color:var(--text-mute);font-size:.8rem;line-height:1.4}
 
@@ -517,7 +587,7 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.8rem}
 .cat{display:flex;flex-direction:column;gap:.5rem;align-items:center;text-align:center;padding:1.05rem .7rem;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border);color:var(--text);transition:transform var(--t-fast),box-shadow var(--t-fast),border-color var(--t-fast);text-decoration:none!important}
 .cat:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--cyan)}
-.cat svg{width:32px;height:32px;color:var(--blue)}
+.cat svg{width:32px;height:32px;color:var(--blue-text)}
 .cat b{font-size:.86rem;font-weight:600;line-height:1.3}
 .cat small{color:var(--text-mute);font-size:.74rem}
 
@@ -542,14 +612,14 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .product__tools{position:absolute;top:.5rem;right:.5rem;display:flex;flex-direction:column;gap:.35rem;z-index:2;opacity:0;transform:translateX(6px);transition:opacity var(--t-fast),transform var(--t-fast)}
 .product:hover .product__tools,.product:focus-within .product__tools{opacity:1;transform:none}
 .product__tool{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:color-mix(in srgb,var(--surface) 92%,transparent);border:1px solid var(--border);color:var(--text);box-shadow:var(--shadow-sm)}
-.product__tool:hover{color:var(--blue);border-color:var(--blue)}
+.product__tool:hover{color:var(--blue-text);border-color:var(--blue)}
 .product__tool[aria-pressed="true"]{color:#e0245e;border-color:#e0245e}
 .product__tool svg{width:17px;height:17px}
 .product__body{display:flex;flex-direction:column;gap:.45rem;padding:.85rem;flex:1}
-.product__brand{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan)}
+.product__brand{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan-text)}
 .product__name{font-size:.95rem;font-weight:600;line-height:1.35;margin:0;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .product__name a{color:inherit;text-decoration:none}
-.product__name a:hover{color:var(--blue)}
+.product__name a:hover{color:var(--blue-text)}
 .product__desc{font-size:.8rem;color:var(--text-mute);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:0}
 .product__price{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap;margin-top:auto}
 .price{font-size:1.16rem;font-weight:800;color:var(--navy);letter-spacing:-.02em}
@@ -563,6 +633,28 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .product--list .product__media{flex:0 0 34%;aspect-ratio:4/3}
 .product--list .product__body{padding:1rem}
 @media (max-width:560px){.product--list{flex-direction:column}.product--list .product__media{flex:none;width:100%}}
+
+/* Catalogo: los filtros van en una barra lateral en escritorio y se apilan
+   arriba en pantallas estrechas. El grid vive aqui (no inline) para que la
+   media query pueda sobreescribirlo. */
+#catalogLayout{display:grid;gap:1.4rem;grid-template-columns:1fr}
+@media (min-width:900px){
+  #catalogLayout{grid-template-columns:262px 1fr}
+}
+/* Barra lateral de filtros pegajosa bajo el header en escritorio. El header
+   mide mas que --header-h porque la barra de navegacion ocupa varias filas. */
+#filtersPanel{align-self:start}
+@media (min-width:900px){
+  #filtersPanel{position:sticky;top:calc(var(--sticky-top,170px) + .8rem);max-height:calc(100vh - var(--sticky-top,170px) - 1.6rem);overflow-y:auto}
+}
+
+/* Widget de tasas del Banco Central de Cuba (pagina de metodos de pago) */
+.rate-widget{margin-top:1.4rem;padding:1.1rem}
+.rate-widget__head{flex-wrap:wrap;gap:.6rem;align-items:center}
+.rate-widget__head h3{margin:0;font-size:1.02rem}
+.rate-widget__note{margin:.5rem 0 .9rem;max-width:70ch}
+.rate-widget__frame{width:100%;height:520px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface)}
+@media (max-width:560px){.rate-widget__frame{height:440px}}
 
 /* Esqueleto de carga */
 .skeleton{background:linear-gradient(90deg,var(--surface-2) 25%,var(--border) 37%,var(--surface-2) 63%);background-size:400% 100%;animation:shimmer 1.3s infinite;border-radius:var(--radius)}
@@ -600,7 +692,7 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .cartline__name{font-size:.9rem;font-weight:600;line-height:1.3;margin:0}
 .qty{display:inline-flex;align-items:center;border:1px solid var(--border-strong);border-radius:var(--radius-pill);overflow:hidden}
 .qty button{width:32px;height:32px;display:grid;place-items:center;font-weight:700;color:var(--text)}
-.qty button:hover{background:var(--surface-2);color:var(--blue)}
+.qty button:hover{background:var(--surface-2);color:var(--blue-text)}
 .qty input{width:44px;text-align:center;border:0;background:transparent;padding:.3rem 0;font-variant-numeric:tabular-nums}
 
 .toast-host{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);z-index:1500;display:flex;flex-direction:column;gap:.5rem;align-items:center;pointer-events:none}
@@ -642,7 +734,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 .paycard:has(input:checked){border-color:var(--blue);box-shadow:var(--ring)}
 .paycard input[type=radio]{position:absolute;opacity:0}
 .paycard__top{display:flex;align-items:center;gap:.6rem}
-.paycard__logo{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:var(--grad-soft);color:var(--blue);font-weight:800;flex:0 0 auto}
+.paycard__logo{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:var(--grad-soft);color:var(--blue-text);font-weight:800;flex:0 0 auto}
 .paycard__logo svg{width:22px;height:22px}
 .paycard__name{font-weight:700;font-size:.94rem}
 .paycard__amt{margin-left:auto;font-weight:800;font-variant-numeric:tabular-nums}
@@ -685,7 +777,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 .specs td:first-child{color:var(--text-mute);width:42%}
 .tabs{display:flex;gap:.3rem;border-bottom:1px solid var(--border);margin-bottom:1rem;overflow-x:auto}
 .tabs button{padding:.6rem .9rem;font-weight:600;font-size:.9rem;color:var(--text-mute);border-bottom:3px solid transparent;white-space:nowrap}
-.tabs button[aria-selected="true"]{color:var(--blue);border-bottom-color:var(--cyan)}
+.tabs button[aria-selected="true"]{color:var(--blue-text);border-bottom-color:var(--cyan)}
 
 /* ---------- 9. PIE ---------- */
 .footer{background:var(--navy);color:#c9d6f5;margin-top:auto}
@@ -743,7 +835,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 .avail{display:inline-flex;align-items:center;gap:.45rem;padding:.35rem .7rem;border-radius:var(--radius-pill);font-size:.82rem;font-weight:700}
 .avail--in{background:var(--ok-bg);color:var(--ok)}
 .avail--low{background:var(--warn-bg);color:var(--warn)}
-.avail--order{background:rgba(124,108,240,.16);color:var(--violet)}
+.avail--order{background:var(--violet-bg);color:var(--violet-text)}
 
 /* Migas de pan */
 .crumbs{font-size:.82rem;color:var(--text-mute);padding:.7rem 0}
@@ -751,7 +843,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 .crumbs li::after{content:"›";margin-left:.4rem;color:var(--border-strong)}
 .crumbs li:last-child::after{content:""}
 .crumbs a{color:var(--text-mute)}
-.crumbs a:hover{color:var(--blue)}
+.crumbs a:hover{color:var(--blue-text)}
 
 /* Vista de vista rapida: precio y compra */
 .buybox{display:grid;gap:.7rem}
@@ -760,9 +852,9 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 .faq details{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);margin-bottom:.5rem;overflow:hidden}
 .faq summary{padding:.85rem 1rem;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1rem;align-items:center}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";font-size:1.3rem;color:var(--blue);font-weight:400}
+.faq summary::after{content:"+";font-size:1.3rem;color:var(--blue-text);font-weight:400}
 .faq details[open] summary::after{content:"–"}
-.faq details[open] summary{color:var(--blue)}
+.faq details[open] summary{color:var(--blue-text)}
 .faq .faq__body{padding:0 1rem 1rem;color:var(--text-soft);font-size:.9rem}
 
 /* Pasos numerados (Como comprar) */
@@ -774,7 +866,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 
 /* Mapa (placeholder accesible) */
 .map{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:var(--surface-2);aspect-ratio:16/9;display:grid;place-items:center;text-align:center;padding:1rem}
-.map svg{width:40px;height:40px;color:var(--blue);margin-inline:auto;margin-bottom:.5rem}
+.map svg{width:40px;height:40px;color:var(--blue-text);margin-inline:auto;margin-bottom:.5rem}
 
 /* ---------- 12. ANIMACIONES Y MOVIMIENTO REDUCIDO ---------- */
 @keyframes fade{from{opacity:0}to{opacity:1}}
@@ -788,6 +880,85 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .product:hover{transform:none}
+}
+
+/* ---------- 12b. EFECTOS (aspecto profesional) ---------- */
+
+/* 1. Barra de progreso de lectura, bajo la cabecera */
+.scroll-progress{
+  position:fixed;top:0;left:0;height:3px;width:100%;transform:scaleX(0);
+  transform-origin:0 50%;z-index:1000;pointer-events:none;
+  background:linear-gradient(90deg,var(--blue),var(--cyan),var(--violet));
+}
+@supports (animation-timeline: scroll()){
+  .scroll-progress{
+    animation:creceLineal linear;
+    animation-timeline:scroll(root block);
+  }
+}
+@keyframes creceLineal{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* 2. Revelado al entrar en pantalla. El JS pone data-revelar="visible";
+   el estado inicial solo se aplica si hay JS (clase .js en la raiz), para
+   que sin JavaScript el contenido nunca se quede oculto. */
+.js [data-revelar]{opacity:0;transform:translateY(14px)}
+.js [data-revelar="visible"]{
+  opacity:1;transform:none;
+  transition:opacity .5s cubic-bezier(.4,0,.2,1),transform .5s cubic-bezier(.4,0,.2,1);
+}
+
+/* 3. Degradado animado muy lento en el hero. Son tintes CLAROS en tema claro y
+   oscuros en tema oscuro, para que el texto del hero (navy o casi blanco) siga
+   pasando AA mientras el fondo respira. */
+.grad-vivo{
+  background-image:linear-gradient(120deg,var(--hero-a) 0%,var(--hero-b) 34%,var(--hero-c) 68%,var(--hero-d) 100%);
+  background-size:220% 220%;
+  animation:respiraGrad 22s ease-in-out infinite;
+}
+@keyframes respiraGrad{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+
+/* 4. Borde de luz que gira en la tarjeta destacada del dia */
+.card--brillo{position:relative;isolation:isolate}
+.card--brillo::before{
+  content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;z-index:-1;
+  background:conic-gradient(from var(--ang,0deg),transparent 0 72%,var(--cyan) 82%,var(--violet) 92%,transparent 100%);
+  animation:giraBorde 7s linear infinite;
+}
+@keyframes giraBorde{to{--ang:360deg}}
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+
+/* 5. Subrayado que crece en los enlaces del pie y el menu */
+.nav__link,.footer a{position:relative}
+.nav__link::after,.footer__bottom a::after{
+  content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--violet));
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .25s cubic-bezier(.4,0,.2,1);
+}
+.nav__link:hover::after,.nav__link[aria-current="page"]::after,
+.footer__bottom a:hover::after{transform:scaleX(1)}
+
+/* 6. Las imagenes de producto, un poco mas vivas al pasar el raton */
+.product__media img{transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.product:hover .product__media img{transform:scale(1.05)}
+.product{transition:transform .25s cubic-bezier(.4,0,.2,1),box-shadow .25s ease}
+
+/* 7. Cabecera con mas presencia al bajar */
+.header{transition:box-shadow .25s ease,background-color .25s ease}
+.header[data-scrolled="true"]{box-shadow:var(--shadow)}
+
+/* 8. Esqueleto mientras cargan las imagenes del catalogo */
+.cargando{background:linear-gradient(90deg,var(--surface-2) 25%,var(--gray-100) 50%,var(--surface-2) 75%);
+  background-size:200% 100%;animation:shimmer 1.4s linear infinite}
+
+@media (prefers-reduced-motion: reduce){
+  .scroll-progress{animation:none;transform:scaleX(0)}
+  .grad-vivo{animation:none}
+  .card--brillo::before{animation:none;background:linear-gradient(120deg,var(--cyan),var(--violet))}
+  .js [data-revelar]{opacity:1;transform:none}
+  .product:hover .product__media img{transform:none}
 }
 
 /* ---------- 13. IMPRESION (respaldo del ticket si jsPDF falla) ---------- */
@@ -880,13 +1051,17 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 </div>
 
 <!-- ============================ CABECERA ============================ -->
+<!-- Barra de progreso de lectura (se anima con el scroll) -->
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
 <header class="header" id="cabecera">
   <div class="wrap header__bar">
     <a class="brand" href="/" data-nav="inicio" aria-label="Sinergia Digital, ir al inicio">
-      <svg class="brand__logo" viewBox="0 0 64 64" role="img" aria-hidden="true" focusable="false">
-        <rect width="64" height="64" rx="14" fill="#0F1B5C"/>
-        <path d="M45 19c-4-6-17-7-22 0-5 7 1 12 10 14 9 2 16 5 12 13-4 7-17 7-22 0" fill="none" stroke="url(#sdgrad)" stroke-width="8" stroke-linecap="round"/>
-      </svg>
+      <!-- Logotipo real (PNG transparente). Se pinta como fondo CSS para poder
+           cambiar a la variante clara en modo oscuro; el atributo media de
+           <picture> solo mira el tema del sistema y no respeta el boton manual.
+           Es decorativo: el nombre va como texto al lado (mejor para SEO). -->
+      <span class="brand__logo" aria-hidden="true"></span>
       <span>
         <span class="brand__name">Sinergia Digital</span>
         <span class="brand__tag">Tecnología en Cuba</span>
@@ -1034,7 +1209,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
   <!-- ============================ INICIO ============================ -->
   <section class="view" id="view-inicio" data-title="Tienda de tecnología en Cuba">
     <!-- Hero rotativo -->
-    <div class="hero" id="hero" aria-roledescription="carrusel" aria-label="Promociones destacadas">
+    <div class="hero grad-vivo" id="hero" aria-roledescription="carrusel" aria-label="Promociones destacadas">
       <div class="hero__slide" data-active="true">
         <div class="wrap hero__grid">
           <div>
@@ -1047,7 +1222,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
             </div>
           </div>
           <div class="hero__art">
-            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=900&q=70" width="900" height="619" alt="Paneles solares instalados en el techo de una casa en Cuba" fetchpriority="high" decoding="async">
+            <img src="/public/img/solar-panel-photovoltaic-module-lg.webp" width="900" height="619" alt="Paneles solares instalados en el techo de una casa en Cuba" fetchpriority="high" decoding="async">
           </div>
         </div>
       </div>
@@ -1062,7 +1237,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
             </div>
           </div>
           <div class="hero__art">
-            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=900&q=70" width="900" height="619" alt="Laptop moderna sobre un escritorio de trabajo" loading="lazy" decoding="async">
+            <img src="/public/img/laptop-computer-lg.webp" width="900" height="619" alt="Laptop moderna sobre un escritorio de trabajo" loading="lazy" decoding="async">
           </div>
         </div>
       </div>
@@ -1077,7 +1252,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
             </div>
           </div>
           <div class="hero__art">
-            <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=900&q=70" width="900" height="619" alt="Cámara de seguridad instalada en la pared de un edificio" loading="lazy" decoding="async">
+            <img src="/public/img/cctv-surveillance-camera-lg.webp" width="900" height="619" alt="Cámara de seguridad instalada en la pared de un edificio" loading="lazy" decoding="async">
           </div>
         </div>
       </div>
@@ -1178,7 +1353,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
         <p id="catalogLead" class="lead">Explora más de 60 productos con precios en USD, CUP y USDT, envío a domicilio y garantía.</p>
       </div>
 
-      <div style="display:grid;gap:1.4rem;grid-template-columns:1fr" id="catalogLayout">
+      <div id="catalogLayout">
         <!-- Panel de filtros -->
         <aside class="card" id="filtersPanel" style="padding:1.1rem;align-self:start" aria-label="Filtros de catálogo">
           <div class="between" style="margin-bottom:.8rem">
@@ -1365,6 +1540,29 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
       <div class="notice notice--warn" style="margin-top:1.4rem">
         <strong>El front-end no valida pagos.</strong> Esta página solo muestra instrucciones y guarda la referencia que tú envías. La confirmación real del abono la hace un operador de forma manual o un backend con las credenciales de cada pasarela. Nunca pongas claves de pasarela en el código del navegador.
       </div>
+
+      <!-- Tasa de cambio oficial del Banco Central de Cuba, incrustada desde
+           bc.gob.cu. El iframe lleva sandbox para que la pagina ajena no pueda
+           navegar la pestana principal. Si el BC bloquea la incrustacion, el
+           enlace "Abrir en el BC" y el bloque <noscript> son el respaldo. -->
+      <section class="rate-widget card" aria-labelledby="bcRateTitle">
+        <div class="between rate-widget__head">
+          <h3 id="bcRateTitle">Tasa de cambio oficial (Banco Central de Cuba)</h3>
+          <a class="btn btn--outline btn--sm" href="https://www.bc.gob.cu/widget/tasas-de-cambio" target="_blank" rel="noopener noreferrer">Abrir en el BC</a>
+        </div>
+        <p class="small muted rate-widget__note">USD y EUR con respecto al CUP, según el Banco Central de Cuba. Aviso: los precios de esta tienda se publican en USD y se convierten con la tasa propia de la web, que no tiene por qué coincidir con la oficial.</p>
+        <iframe
+          class="rate-widget__frame"
+          src="https://www.bc.gob.cu/widget/tasas-de-cambio"
+          title="Tasas de cambio oficiales del Banco Central de Cuba"
+          loading="lazy"
+          referrerpolicy="no-referrer"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+        ></iframe>
+        <noscript>
+          <p class="small">Tu navegador no muestra el widget. Consulta las tasas directamente en <a href="https://www.bc.gob.cu/widget/tasas-de-cambio" target="_blank" rel="noopener noreferrer">bc.gob.cu</a>.</p>
+        </noscript>
+      </section>
     </div>
   </section>
 
@@ -1826,10 +2024,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
   <div class="wrap footer__grid">
     <div class="footer__brand">
       <a class="brand" href="/" data-nav="inicio" aria-label="Sinergia Digital, ir al inicio">
-        <svg class="brand__logo" viewBox="0 0 64 64" role="img" aria-hidden="true" focusable="false">
-          <rect width="64" height="64" rx="14" fill="#0F1B5C"/>
-          <path d="M45 19c-4-6-17-7-22 0-5 7 1 12 10 14 9 2 16 5 12 13-4 7-17 7-22 0" fill="none" stroke="url(#sdgrad)" stroke-width="8" stroke-linecap="round"/>
-        </svg>
+        <span class="brand__logo brand__logo--claro" aria-hidden="true"></span>
         <span><span class="brand__name">Sinergia Digital</span><span class="brand__tag">Tecnología en Cuba</span></span>
       </a>
       <p class="small" style="margin-top:.8rem">Tienda cubana de tecnología, energía solar y suministros. Enviamos a toda Cuba y damos garantía real.</p>
@@ -1884,6 +2079,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
     <p style="margin:0">
       <a href="/privacidad" data-nav="privacidad">Privacidad</a> ·
       <a href="/terminos" data-nav="terminos">Términos de compra</a> ·
+      <a href="/creditos.html">Créditos de imágenes</a> ·
       <a href="/sitemap.xml">Mapa del sitio</a>
     </p>
   </div>
@@ -2012,7 +2208,7 @@ const CONFIG = {
     horario: "Lunes a viernes 9:00-18:00, sábados 9:00-13:00", // REEMPLAZAR
     horarioCorto: "Lun-Vie 9-18, Sáb 9-13",
     coordenadas: { lat: 23.1136, lng: -82.3666 },  // REEMPLAZAR
-    sitio: "https://www.sinergia.digital",         // REEMPLAZAR: dominio final
+    sitio: "https://sinergiadigital-pedrocollazo1988.vercel.app", // URL del despliegue de Vercel
     redes: {
       facebook: "https://www.facebook.com/sinergiadigital",   // REEMPLAZAR
       instagram: "https://www.instagram.com/sinergiadigital", // REEMPLAZAR
@@ -2021,9 +2217,13 @@ const CONFIG = {
   },
 
   // Tasas de cambio. REEMPLAZAR con las tasas del dia y su fecha.
+  // OJO: usdCup y usdtUsd son las tasas PROPIAS de la tienda, las que se usan
+  // para convertir los precios. No tienen por que coincidir con la tasa oficial
+  // del Banco Central de Cuba, que se muestra aparte en "Metodos de pago"
+  // incrustando el widget de bc.gob.cu.
   tasas: {
-    usdCup: 320,          // 1 USD = 320 CUP
-    usdtUsd: 0.98,        // 1 USDT = 0.98 USD
+    usdCup: 320,          // 1 USD = 320 CUP (tasa de la tienda, REEMPLAZAR)
+    usdtUsd: 0.98,        // 1 USDT = 0.98 USD (tasa de la tienda, REEMPLAZAR)
     fecha: "2026-11-01",  // fecha de actualizacion (YYYY-MM-DD)
     comisionPago: 0.03    // 3 % de recargo por gestión de pago (0 para desactivar)
   },
@@ -2100,8 +2300,10 @@ const CATEGORIAS = [
 // Mapa rapido id -> categoria
 const CATEGORIA_POR_ID = CATEGORIAS.reduce((acc, c) => (acc[c.id] = c, acc), {});
 
-// Imagenes reales (Unsplash) verificadas. Si no cargan, el onerror del HTML pone un SVG.
-const IMG = (id, w) => "https://images.unsplash.com/" + id + "?w=" + (w || 600) + "&q=70";
+// Imagenes locales en /public/img, descargadas de Wikimedia Commons y
+// verificadas una a una (ver /creditos). Se sirven en local, en WebP y a 480 px,
+// para que la tienda cargue rapido con la conexion cubana. El onerror del HTML
+// pone un SVG de respaldo si alguna falla.
 
 // ---------------------------------------------------------------------------
 // CATALOGO: 72 productos de ejemplo realistas.
@@ -2110,105 +2312,122 @@ const IMG = (id, w) => "https://images.unsplash.com/" + id + "?w=" + (w || 600) 
 // ---------------------------------------------------------------------------
 const PRODUCTOS = [
   // --- Equipos de computo ---
-  { id:"p01", sku:"SD-COM-0001", nombre:"Laptop Lenovo IdeaPad 3 15.6\" Core i5", marca:"Lenovo", categoria:"computo", precio:689, precioAnterior:759, stock:8, descripcion:"Laptop para trabajo y estudio con pantalla Full HD y teclado numérico. Ideal para ofimática, clases en línea y diseño ligero.", specs:["Procesador: Intel Core i5-1235U","Memoria: 8 GB DDR4 ampliable","Disco: SSD 512 GB NVMe","Pantalla: 15.6\" Full HD 1920x1080","Sistema: Windows 11 Home","Batería: hasta 7 horas"], garantia:12, rating:4.6, tags:["mas-vendido","oferta"], img:IMG("photo-1496181133206-80ce9b88a853"), gal:[IMG("photo-1496181133206-80ce9b88a853"),IMG("photo-1517336714731-489689fd1ca8"),IMG("photo-1588872657578-7efd1f1555ed")] },
-  { id:"p02", sku:"SD-COM-0002", nombre:"Laptop HP 250 G9 15.6\" Core i3", marca:"HP", categoria:"computo", precio:529, precioAnterior:null, stock:11, descripcion:"Portátil económico y resistente para tareas de oficina, contabilidad y navegación.", specs:["Procesador: Intel Core i3-1215U","Memoria: 8 GB DDR4","Disco: SSD 256 GB","Pantalla: 15.6\" HD","Sistema: Windows 11 Pro","Peso: 1.74 kg"], garantia:12, rating:4.4, tags:["nuevo"], img:IMG("photo-1517336714731-489689fd1ca8"), gal:[IMG("photo-1517336714731-489689fd1ca8"),IMG("photo-1498050108023-c5249f4df085")] },
-  { id:"p03", sku:"SD-COM-0003", nombre:"Laptop Dell Latitude 5440 Core i5 14\"", marca:"Dell", categoria:"computo", precio:899, precioAnterior:999, stock:5, descripcion:"Equipo empresarial con chasis reforzado, ideal para negocios que necesitan durabilidad.", specs:["Procesador: Intel Core i5-1335U","Memoria: 16 GB DDR4","Disco: SSD 512 GB","Pantalla: 14\" Full HD","Sistema: Windows 11 Pro","Garantía empresarial"], garantia:12, rating:4.7, tags:["mas-vendido","oferta"], img:IMG("photo-1588872657578-7efd1f1555ed"), gal:[IMG("photo-1588872657578-7efd1f1555ed"),IMG("photo-1496181133206-80ce9b88a853")] },
-  { id:"p04", sku:"SD-COM-0004", nombre:"PC de escritorio HP ProDesk con monitor 21.5\"", marca:"HP", categoria:"computo", precio:479, precioAnterior:null, stock:9, descripcion:"Conjunto de PC y monitor para oficina, caja registradora o aula. Listo para usar.", specs:["Procesador: Intel Core i3-12100","Memoria: 8 GB DDR4","Disco: SSD 256 GB + HDD 1 TB","Monitor: 21.5\" Full HD incluido","Teclado y ratón incluidos","Sistema: Windows 11 Pro"], garantia:12, rating:4.3, tags:["entrega-inmediata"], img:IMG("photo-1498050108023-c5249f4df085"), gal:[IMG("photo-1498050108023-c5249f4df085"),IMG("photo-1547082299-de196ea013d6")] },
-  { id:"p05", sku:"SD-COM-0005", nombre:"Monitor Samsung 24\" Full HD IPS", marca:"Samsung", categoria:"computo", precio:149, precioAnterior:179, stock:14, descripcion:"Monitor IPS con colores fieles, ideal para trabajo, diseño y entretenimiento.", specs:["Tamaño: 24 pulgadas","Resolución: 1920x1080 Full HD","Panel: IPS 75 Hz","Conectores: HDMI y VGA","Montaje VESA 100x100"], garantia:12, rating:4.5, tags:["oferta"], img:IMG("photo-1527443224154-c4a3942d3acf"), gal:[IMG("photo-1527443224154-c4a3942d3acf")] },
-  { id:"p06", sku:"SD-COM-0006", nombre:"UPS Forza 1000 VA con regulador", marca:"Forza", categoria:"computo", precio:129, precioAnterior:null, stock:12, descripcion:"Protege tu PC, router o televisor ante apagones y variaciones de voltaje. Clave en Cuba.", specs:["Capacidad: 1000 VA / 600 W","Tipo: interactivo con AVR","Autonomía: 10-25 min según carga","Salidas: 8 tomacorrientes","Batería recargable incluida"], garantia:12, rating:4.6, tags:["mas-vendido","entrega-inmediata"], img:IMG("photo-1558494949-ef010cbdcc31"), gal:[IMG("photo-1558494949-ef010cbdcc31")] },
-  { id:"p07", sku:"SD-COM-0007", nombre:"Teclado y ratón inalámbricos Logitech MK270", marca:"Logitech", categoria:"computo", precio:34, precioAnterior:42, stock:25, descripcion:"Combinación inalámbrica silenciosa con receptor USB y batería de larga duración.", specs:["Conexión: USB 2.4 GHz","Teclado: diseño completo con teclado numérico","Ratón: 1000 DPI","Alcance: 10 m","Batería: hasta 24 meses"], garantia:6, rating:4.4, tags:["oferta"], img:IMG("photo-1587829741301-dc798b83add3"), gal:[IMG("photo-1587829741301-dc798b83add3")] },
-  { id:"p08", sku:"SD-COM-0008", nombre:"Disco duro externo Seagate 2 TB USB 3.0", marca:"Seagate", categoria:"computo", precio:79, precioAnterior:null, stock:18, descripcion:"Respaldo portátil de 2 TB para fotos, documentos y copias de seguridad.", specs:["Capacidad: 2 TB","Interfaz: USB 3.0","Velocidad: 5400 RPM","Formato: 2.5 pulgadas","Compatible con Windows y macOS"], garantia:12, rating:4.5, tags:["nuevo"], img:IMG("photo-1531297484001-80022131f5a1"), gal:[IMG("photo-1531297484001-80022131f5a1")] },
+  { id:"p01", sku:"SD-COM-0001", nombre:"Laptop Lenovo IdeaPad 3 15.6\" Core i5", marca:"Lenovo", categoria:"computo", precio:689, precioAnterior:759, stock:8, descripcion:"Laptop para trabajo y estudio con pantalla Full HD y teclado numérico. Ideal para ofimática, clases en línea y diseño ligero.", specs:["Procesador: Intel Core i5-1235U","Memoria: 8 GB DDR4 ampliable","Disco: SSD 512 GB NVMe","Pantalla: 15.6\" Full HD 1920x1080","Sistema: Windows 11 Home","Batería: hasta 7 horas"], garantia:12, rating:4.6, tags:["mas-vendido","oferta"], img:"/public/img/laptop-computer.webp", gal:["/public/img/laptop-computer.webp","/public/img/desktop-computer-tower.webp","/public/img/monitor-computer.webp"] },
+  { id:"p02", sku:"SD-COM-0002", nombre:"Laptop HP 250 G9 15.6\" Core i3", marca:"HP", categoria:"computo", precio:529, precioAnterior:null, stock:11, descripcion:"Portátil económico y resistente para tareas de oficina, contabilidad y navegación.", specs:["Procesador: Intel Core i3-1215U","Memoria: 8 GB DDR4","Disco: SSD 256 GB","Pantalla: 15.6\" HD","Sistema: Windows 11 Pro","Peso: 1.74 kg"], garantia:12, rating:4.4, tags:["nuevo"], img:"/public/img/laptop-computer.webp", gal:["/public/img/laptop-computer.webp","/public/img/desktop-computer-tower.webp","/public/img/monitor-computer.webp"] },
+  { id:"p03", sku:"SD-COM-0003", nombre:"Laptop Dell Latitude 5440 Core i5 14\"", marca:"Dell", categoria:"computo", precio:899, precioAnterior:999, stock:5, descripcion:"Equipo empresarial con chasis reforzado, ideal para negocios que necesitan durabilidad.", specs:["Procesador: Intel Core i5-1335U","Memoria: 16 GB DDR4","Disco: SSD 512 GB","Pantalla: 14\" Full HD","Sistema: Windows 11 Pro","Garantía empresarial"], garantia:12, rating:4.7, tags:["mas-vendido","oferta"], img:"/public/img/laptop-computer.webp", gal:["/public/img/laptop-computer.webp","/public/img/desktop-computer-tower.webp","/public/img/monitor-computer.webp"] },
+  { id:"p04", sku:"SD-COM-0004", nombre:"PC de escritorio HP ProDesk con monitor 21.5\"", marca:"HP", categoria:"computo", precio:479, precioAnterior:null, stock:9, descripcion:"Conjunto de PC y monitor para oficina, caja registradora o aula. Listo para usar.", specs:["Procesador: Intel Core i3-12100","Memoria: 8 GB DDR4","Disco: SSD 256 GB + HDD 1 TB","Monitor: 21.5\" Full HD incluido","Teclado y ratón incluidos","Sistema: Windows 11 Pro"], garantia:12, rating:4.3, tags:["entrega-inmediata"], img:"/public/img/desktop-computer-tower.webp", gal:["/public/img/desktop-computer-tower.webp","/public/img/laptop-computer.webp","/public/img/monitor-computer.webp"] },
+  { id:"p05", sku:"SD-COM-0005", nombre:"Monitor Samsung 24\" Full HD IPS", marca:"Samsung", categoria:"computo", precio:149, precioAnterior:179, stock:14, descripcion:"Monitor IPS con colores fieles, ideal para trabajo, diseño y entretenimiento.", specs:["Tamaño: 24 pulgadas","Resolución: 1920x1080 Full HD","Panel: IPS 75 Hz","Conectores: HDMI y VGA","Montaje VESA 100x100"], garantia:12, rating:4.5, tags:["oferta"], img:"/public/img/monitor-computer.webp", gal:["/public/img/monitor-computer.webp","/public/img/desktop-computer-tower.webp"] },
+  { id:"p06", sku:"SD-COM-0006", nombre:"UPS Forza 1000 VA con regulador", marca:"Forza", categoria:"computo", precio:129, precioAnterior:null, stock:12, descripcion:"Protege tu PC, router o televisor ante apagones y variaciones de voltaje. Clave en Cuba.", specs:["Capacidad: 1000 VA / 600 W","Tipo: interactivo con AVR","Autonomía: 10-25 min según carga","Salidas: 8 tomacorrientes","Batería recargable incluida"], garantia:12, rating:4.6, tags:["mas-vendido","entrega-inmediata"], img:"/public/img/ups-uninterruptible-power-supply.webp", gal:["/public/img/ups-uninterruptible-power-supply.webp","/public/img/power-strip-surge-protector.webp"] },
+  { id:"p07", sku:"SD-COM-0007", nombre:"Teclado y ratón inalámbricos Logitech MK270", marca:"Logitech", categoria:"computo", precio:34, precioAnterior:42, stock:25, descripcion:"Combinación inalámbrica silenciosa con receptor USB y batería de larga duración.", specs:["Conexión: USB 2.4 GHz","Teclado: diseño completo con teclado numérico","Ratón: 1000 DPI","Alcance: 10 m","Batería: hasta 24 meses"], garantia:6, rating:4.4, tags:["oferta"], img:"/public/img/laptop-computer.webp", gal:["/public/img/laptop-computer.webp","/public/img/desktop-computer-tower.webp","/public/img/monitor-computer.webp"] },
+  { id:"p08", sku:"SD-COM-0008", nombre:"Disco duro externo Seagate 2 TB USB 3.0", marca:"Seagate", categoria:"computo", precio:79, precioAnterior:null, stock:18, descripcion:"Respaldo portátil de 2 TB para fotos, documentos y copias de seguridad.", specs:["Capacidad: 2 TB","Interfaz: USB 3.0","Velocidad: 5400 RPM","Formato: 2.5 pulgadas","Compatible con Windows y macOS"], garantia:12, rating:4.5, tags:["nuevo"], img:"/public/img/laptop-computer.webp", gal:["/public/img/laptop-computer.webp","/public/img/desktop-computer-tower.webp","/public/img/monitor-computer.webp"] },
 
   // --- Telecomunicaciones ---
-  { id:"p09", sku:"SD-TEL-0001", nombre:"Router TP-Link Archer AX23 WiFi 6", marca:"TP-Link", categoria:"telecom", precio:89, precioAnterior:109, stock:16, descripcion:"WiFi 6 de doble banda con cobertura amplia y control parental por app.", specs:["Estándar: WiFi 6 (802.11ax)","Velocidad: hasta 1800 Mbps","Bandas: 2.4 y 5 GHz","Antenas: 4 externas","Puertos: 1 WAN + 4 LAN gigabit"], garantia:12, rating:4.7, tags:["mas-vendido","oferta"], img:IMG("photo-1544197150-b99a580bb7a8"), gal:[IMG("photo-1544197150-b99a580bb7a8"),IMG("photo-1606904825846-647eb07f5be2")] },
-  { id:"p10", sku:"SD-TEL-0002", nombre:"Router MikroTik hEX RB750Gr3", marca:"MikroTik", categoria:"telecom", precio:79, precioAnterior:null, stock:10, descripcion:"Router profesional de 5 puertos gigabit, muy usado por proveedores y redes pequeñas.", specs:["CPU: 880 MHz dual core","RAM: 256 MB","Puertos: 5 gigabit","Sistema: RouterOS L4","Consumo: 5 W"], garantia:12, rating:4.8, tags:["nuevo"], img:IMG("photo-1544197150-b99a580bb7a8"), gal:[IMG("photo-1544197150-b99a580bb7a8")] },
-  { id:"p11", sku:"SD-TEL-0003", nombre:"Switch TP-Link 8 puertos gigabit TL-SG108", marca:"TP-Link", categoria:"telecom", precio:39, precioAnterior:null, stock:20, descripcion:"Switch no gestionable de 8 puertos para oficinas y redes domésticas.", specs:["Puertos: 8 gigabit","Tipo: no gestionable","Carcasa: metal","Plug and play","Alimentación: externa"], garantia:12, rating:4.5, tags:["entrega-inmediata"], img:IMG("photo-1558494949-ef010cbdcc31"), gal:[IMG("photo-1558494949-ef010cbdcc31")] },
-  { id:"p12", sku:"SD-TEL-0004", nombre:"Access point Ubiquiti UniFi U6 Lite", marca:"Ubiquiti", categoria:"telecom", precio:149, precioAnterior:169, stock:7, descripcion:"Punto de acceso WiFi 6 para negocios con administración centralizada.", specs:["Estándar: WiFi 6","Velocidad: hasta 1500 Mbps","Antenas: MIMO 2x2","Alimentación: PoE","Gestión: UniFi Network"], garantia:12, rating:4.8, tags:["oferta"], img:IMG("photo-1606904825846-647eb07f5be2"), gal:[IMG("photo-1606904825846-647eb07f5be2")] },
-  { id:"p13", sku:"SD-TEL-0005", nombre:"CPE antena Ubiquiti LiteBeam 5AC", marca:"Ubiquiti", categoria:"telecom", precio:99, precioAnterior:null, stock:6, descripcion:"Antena para enlaces inalámbricos de larga distancia entre puntos.", specs:["Banda: 5 GHz","Ganancia: 23 dBi","Alcance: hasta 15 km","Alimentación: PoE 24 V","Gestión: airOS"], garantia:12, rating:4.7, tags:["nuevo"], img:IMG("photo-1612815154858-60aa4c59eaa6"), gal:[IMG("photo-1612815154858-60aa4c59eaa6")] },
-  { id:"p14", sku:"SD-TEL-0006", nombre:"Repetidor WiFi TP-Link RE450", marca:"TP-Link", categoria:"telecom", precio:44, precioAnterior:55, stock:15, descripcion:"Amplía la señal WiFi en las zonas muertas de tu casa con tres antenas.", specs:["Velocidad: hasta 1750 Mbps","Bandas: 2.4 y 5 GHz","Antenas: 3 externas","Puerto Ethernet gigabit","Configuración por app"], garantia:12, rating:4.3, tags:["oferta"], img:IMG("photo-1544197150-b99a580bb7a8"), gal:[IMG("photo-1544197150-b99a580bb7a8")] },
-  { id:"p15", sku:"SD-TEL-0007", nombre:"Cable de red UTP cat 6 (rollo 100 m)", marca:"Genérico", categoria:"telecom", precio:59, precioAnterior:null, stock:13, descripcion:"Rollo de cable Cat 6 para instalaciones de red y cámaras.", specs:["Categoría: Cat 6","Longitud: 100 m","Conductores: cobre","Blindaje: UTP","Uso: interior"], garantia:3, rating:4.2, tags:[], img:IMG("photo-1558494949-ef010cbdcc31"), gal:[IMG("photo-1558494949-ef010cbdcc31")] },
+  { id:"p09", sku:"SD-TEL-0001", nombre:"Router TP-Link Archer AX23 WiFi 6", marca:"TP-Link", categoria:"telecom", precio:89, precioAnterior:109, stock:16, descripcion:"WiFi 6 de doble banda con cobertura amplia y control parental por app.", specs:["Estándar: WiFi 6 (802.11ax)","Velocidad: hasta 1800 Mbps","Bandas: 2.4 y 5 GHz","Antenas: 4 externas","Puertos: 1 WAN + 4 LAN gigabit"], garantia:12, rating:4.7, tags:["mas-vendido","oferta"], img:"/public/img/wifi-router.webp", gal:["/public/img/wifi-router.webp","/public/img/network-switch-ethernet.webp","/public/img/wireless-access-point.webp"] },
+  { id:"p10", sku:"SD-TEL-0002", nombre:"Router MikroTik hEX RB750Gr3", marca:"MikroTik", categoria:"telecom", precio:79, precioAnterior:null, stock:10, descripcion:"Router profesional de 5 puertos gigabit, muy usado por proveedores y redes pequeñas.", specs:["CPU: 880 MHz dual core","RAM: 256 MB","Puertos: 5 gigabit","Sistema: RouterOS L4","Consumo: 5 W"], garantia:12, rating:4.8, tags:["nuevo"], img:"/public/img/wifi-router.webp", gal:["/public/img/wifi-router.webp","/public/img/network-switch-ethernet.webp","/public/img/wireless-access-point.webp"] },
+  { id:"p11", sku:"SD-TEL-0003", nombre:"Switch TP-Link 8 puertos gigabit TL-SG108", marca:"TP-Link", categoria:"telecom", precio:39, precioAnterior:null, stock:20, descripcion:"Switch no gestionable de 8 puertos para oficinas y redes domésticas.", specs:["Puertos: 8 gigabit","Tipo: no gestionable","Carcasa: metal","Plug and play","Alimentación: externa"], garantia:12, rating:4.5, tags:["entrega-inmediata"], img:"/public/img/network-switch-ethernet.webp", gal:["/public/img/network-switch-ethernet.webp","/public/img/wifi-router.webp","/public/img/ethernet-cable-cat6.webp"] },
+  { id:"p12", sku:"SD-TEL-0004", nombre:"Access point Ubiquiti UniFi U6 Lite", marca:"Ubiquiti", categoria:"telecom", precio:149, precioAnterior:169, stock:7, descripcion:"Punto de acceso WiFi 6 para negocios con administración centralizada.", specs:["Estándar: WiFi 6","Velocidad: hasta 1500 Mbps","Antenas: MIMO 2x2","Alimentación: PoE","Gestión: UniFi Network"], garantia:12, rating:4.8, tags:["oferta"], img:"/public/img/wireless-access-point.webp", gal:["/public/img/wireless-access-point.webp","/public/img/wifi-router.webp"] },
+  { id:"p13", sku:"SD-TEL-0005", nombre:"CPE antena Ubiquiti LiteBeam 5AC", marca:"Ubiquiti", categoria:"telecom", precio:99, precioAnterior:null, stock:6, descripcion:"Antena para enlaces inalámbricos de larga distancia entre puntos.", specs:["Banda: 5 GHz","Ganancia: 23 dBi","Alcance: hasta 15 km","Alimentación: PoE 24 V","Gestión: airOS"], garantia:12, rating:4.7, tags:["nuevo"], img:"/public/img/wireless-access-point.webp", gal:["/public/img/wireless-access-point.webp","/public/img/wifi-router.webp"] },
+  { id:"p14", sku:"SD-TEL-0006", nombre:"Repetidor WiFi TP-Link RE450", marca:"TP-Link", categoria:"telecom", precio:44, precioAnterior:55, stock:15, descripcion:"Amplía la señal WiFi en las zonas muertas de tu casa con tres antenas.", specs:["Velocidad: hasta 1750 Mbps","Bandas: 2.4 y 5 GHz","Antenas: 3 externas","Puerto Ethernet gigabit","Configuración por app"], garantia:12, rating:4.3, tags:["oferta"], img:"/public/img/wifi-router.webp", gal:["/public/img/wifi-router.webp","/public/img/network-switch-ethernet.webp","/public/img/wireless-access-point.webp"] },
+  { id:"p15", sku:"SD-TEL-0007", nombre:"Cable de red UTP cat 6 (rollo 100 m)", marca:"Genérico", categoria:"telecom", precio:59, precioAnterior:null, stock:13, descripcion:"Rollo de cable Cat 6 para instalaciones de red y cámaras.", specs:["Categoría: Cat 6","Longitud: 100 m","Conductores: cobre","Blindaje: UTP","Uso: interior"], garantia:3, rating:4.2, tags:[], img:"/public/img/ethernet-cable-cat6.webp", gal:["/public/img/ethernet-cable-cat6.webp","/public/img/network-switch-ethernet.webp","/public/img/wifi-router.webp"] },
 
   // --- Insumos de impresion ---
-  { id:"p16", sku:"SD-IMP-0001", nombre:"Tóner HP 85A negro original", marca:"HP", categoria:"impresion", precio:69, precioAnterior:89, stock:22, descripcion:"Tóner original para impresoras HP LaserJet P1102 y M1132. Rendimiento alto.", specs:["Código: CE285A","Rendimiento: 1600 páginas","Tipo: original","Color: negro","Compatibilidad: LaserJet P1102/M1132"], garantia:3, rating:4.8, tags:["mas-vendido","oferta"], img:IMG("photo-1612815154858-60aa4c59eaa6"), gal:[IMG("photo-1612815154858-60aa4c59eaa6")] },
-  { id:"p17", sku:"SD-IMP-0002", nombre:"Tóner HP 26A negro original", marca:"HP", categoria:"impresion", precio:79, precioAnterior:null, stock:18, descripcion:"Tóner original para la serie HP LaserJet Pro M402 y M426.", specs:["Código: CF226A","Rendimiento: 3100 páginas","Tipo: original","Color: negro","Serie: LaserJet Pro M402/M426"], garantia:3, rating:4.7, tags:["nuevo"], img:IMG("photo-1612815154858-60aa4c59eaa6"), gal:[IMG("photo-1612815154858-60aa4c59eaa6")] },
-  { id:"p18", sku:"SD-IMP-0003", nombre:"Cartucho Epson 664 negro original", marca:"Epson", categoria:"impresion", precio:19, precioAnterior:24, stock:30, descripcion:"Cartucho original para impresoras Epson EcoTank L220, L360 y similares.", specs:["Código: T664120","Tipo: botella de tinta","Color: negro","Rendimiento: 70 ml","Serie: EcoTank L"], garantia:3, rating:4.6, tags:["oferta"], img:IMG("photo-1612815154858-60aa4c59eaa6"), gal:[IMG("photo-1612815154858-60aa4c59eaa6")] },
-  { id:"p19", sku:"SD-IMP-0004", nombre:"Cartucho Canon PG-245 negro", marca:"Canon", categoria:"impresion", precio:22, precioAnterior:null, stock:24, descripcion:"Cartucho de tinta negro para impresoras Canon Pixma MG y MX.", specs:["Código: PG-245","Color: negro","Tipo: original","Rendimiento: 180 páginas","Serie: Pixma MG/MX"], garantia:3, rating:4.4, tags:[], img:IMG("photo-1612815154858-60aa4c59eaa6"), gal:[IMG("photo-1612815154858-60aa4c59eaa6")] },
-  { id:"p20", sku:"SD-IMP-0005", nombre:"Resma de papel A4 80 g (500 hojas)", marca:"Report", categoria:"impresion", precio:8, precioAnterior:null, stock:120, descripcion:"Papel bond blanco de 80 g para impresión y fotocopia. Resma sellada.", specs:["Formato: A4 (210x297 mm)","Gramaje: 80 g/m²","Hojas: 500","Blancura: alta","Uso: láser e inyección"], garantia:0, rating:4.5, tags:["entrega-inmediata"], img:IMG("photo-1587829741301-dc798b83add3"), gal:[IMG("photo-1587829741301-dc798b83add3")] },
-  { id:"p21", sku:"SD-IMP-0006", nombre:"Impresora multifuncional HP Smart Tank 580", marca:"HP", categoria:"impresion", precio:229, precioAnterior:269, stock:6, descripcion:"Imprime, escanea y copia con tinta recargable de bajo costo por página.", specs:["Funciones: imprimir, escanear, copiar","Tecnología: tanque de tinta","Conexión: WiFi y USB","Velocidad: 12 ppm negro","Dúplex: manual"], garantia:12, rating:4.5, tags:["oferta"], img:IMG("photo-1612815154858-60aa4c59eaa6"), gal:[IMG("photo-1612815154858-60aa4c59eaa6")] },
+  { id:"p16", sku:"SD-IMP-0001", nombre:"Tóner HP 85A negro original", marca:"HP", categoria:"impresion", precio:69, precioAnterior:89, stock:22, descripcion:"Tóner original para impresoras HP LaserJet P1102 y M1132. Rendimiento alto.", specs:["Código: CE285A","Rendimiento: 1600 páginas","Tipo: original","Color: negro","Compatibilidad: LaserJet P1102/M1132"], garantia:3, rating:4.8, tags:["mas-vendido","oferta"], img:"/public/img/laser-toner-cartridge.webp", gal:["/public/img/laser-toner-cartridge.webp","/public/img/inkjet-ink-cartridge.webp","/public/img/multifunction-printer-office.webp"] },
+  { id:"p17", sku:"SD-IMP-0002", nombre:"Tóner HP 26A negro original", marca:"HP", categoria:"impresion", precio:79, precioAnterior:null, stock:18, descripcion:"Tóner original para la serie HP LaserJet Pro M402 y M426.", specs:["Código: CF226A","Rendimiento: 3100 páginas","Tipo: original","Color: negro","Serie: LaserJet Pro M402/M426"], garantia:3, rating:4.7, tags:["nuevo"], img:"/public/img/laser-toner-cartridge.webp", gal:["/public/img/laser-toner-cartridge.webp","/public/img/inkjet-ink-cartridge.webp","/public/img/multifunction-printer-office.webp"] },
+  { id:"p18", sku:"SD-IMP-0003", nombre:"Cartucho Epson 664 negro original", marca:"Epson", categoria:"impresion", precio:19, precioAnterior:24, stock:30, descripcion:"Cartucho original para impresoras Epson EcoTank L220, L360 y similares.", specs:["Código: T664120","Tipo: botella de tinta","Color: negro","Rendimiento: 70 ml","Serie: EcoTank L"], garantia:3, rating:4.6, tags:["oferta"], img:"/public/img/inkjet-ink-cartridge.webp", gal:["/public/img/inkjet-ink-cartridge.webp","/public/img/laser-toner-cartridge.webp","/public/img/multifunction-printer-office.webp"] },
+  { id:"p19", sku:"SD-IMP-0004", nombre:"Cartucho Canon PG-245 negro", marca:"Canon", categoria:"impresion", precio:22, precioAnterior:null, stock:24, descripcion:"Cartucho de tinta negro para impresoras Canon Pixma MG y MX.", specs:["Código: PG-245","Color: negro","Tipo: original","Rendimiento: 180 páginas","Serie: Pixma MG/MX"], garantia:3, rating:4.4, tags:[], img:"/public/img/inkjet-ink-cartridge.webp", gal:["/public/img/inkjet-ink-cartridge.webp","/public/img/laser-toner-cartridge.webp","/public/img/multifunction-printer-office.webp"] },
+  { id:"p20", sku:"SD-IMP-0005", nombre:"Resma de papel A4 80 g (500 hojas)", marca:"Report", categoria:"impresion", precio:8, precioAnterior:null, stock:120, descripcion:"Papel bond blanco de 80 g para impresión y fotocopia. Resma sellada.", specs:["Formato: A4 (210x297 mm)","Gramaje: 80 g/m²","Hojas: 500","Blancura: alta","Uso: láser e inyección"], garantia:0, rating:4.5, tags:["entrega-inmediata"], img:"/public/img/ream-paper-a4.webp", gal:["/public/img/ream-paper-a4.webp","/public/img/multifunction-printer-office.webp"] },
+  { id:"p21", sku:"SD-IMP-0006", nombre:"Impresora multifuncional HP Smart Tank 580", marca:"HP", categoria:"impresion", precio:229, precioAnterior:269, stock:6, descripcion:"Imprime, escanea y copia con tinta recargable de bajo costo por página.", specs:["Funciones: imprimir, escanear, copiar","Tecnología: tanque de tinta","Conexión: WiFi y USB","Velocidad: 12 ppm negro","Dúplex: manual"], garantia:12, rating:4.5, tags:["oferta"], img:"/public/img/multifunction-printer-office.webp", gal:["/public/img/multifunction-printer-office.webp","/public/img/laser-toner-cartridge.webp","/public/img/ream-paper-a4.webp"] },
 
   // --- Camaras de seguridad ---
-  { id:"p22", sku:"SD-SEG-0001", nombre:"Cámara IP Hikvision 2 MP exterior", marca:"Hikvision", categoria:"seguridad", precio:49, precioAnterior:59, stock:28, descripcion:"Cámara IP con visión nocturna y detección de movimiento. Resistente al agua.", specs:["Resolución: 2 MP (1080p)","Visión nocturna: 30 m IR","Protección: IP67 exterior","Alimentación: PoE o 12 V","Compresión: H.265+"], garantia:12, rating:4.7, tags:["mas-vendido","oferta"], img:IMG("photo-1557597774-9d273605dfa9"), gal:[IMG("photo-1557597774-9d273605dfa9")] },
-  { id:"p23", sku:"SD-SEG-0002", nombre:"Cámara IP Dahua 5 MP con audio", marca:"Dahua", categoria:"seguridad", precio:69, precioAnterior:null, stock:20, descripcion:"Cámara de alta resolución con micrófono integrado y detección inteligente.", specs:["Resolución: 5 MP","Audio: micrófono integrado","Visión nocturna: 40 m","Protección: IP67","Alimentación: PoE"], garantia:12, rating:4.8, tags:["nuevo"], img:IMG("photo-1557597774-9d273605dfa9"), gal:[IMG("photo-1557597774-9d273605dfa9")] },
-  { id:"p24", sku:"SD-SEG-0003", nombre:"DVR Hikvision 8 canales + 1 TB", marca:"Hikvision", categoria:"seguridad", precio:189, precioAnterior:219, stock:9, descripcion:"Grabador digital de 8 canales con disco de 1 TB incluido y acceso remoto.", specs:["Canales: 8","Disco: 1 TB incluido","Compresión: H.265+","Acceso remoto: Hik-Connect","Salidas: HDMI y VGA"], garantia:12, rating:4.6, tags:["oferta"], img:IMG("photo-1558002038-1055907df827"), gal:[IMG("photo-1558002038-1055907df827")] },
-  { id:"p25", sku:"SD-SEG-0004", nombre:"Kit 4 cámaras Hikvision + DVR + instalación", marca:"Hikvision", categoria:"seguridad", precio:399, precioAnterior:459, stock:5, descripcion:"Kit completo de videovigilancia con 4 cámaras, DVR, disco y configuración en tu teléfono.", specs:["Cámaras: 4 exterior 2 MP","DVR: 4 canales con disco 1 TB","Cableado: 30 m por cámara","Acceso: app móvil","Incluye: fuente y conectores"], garantia:12, rating:4.9, tags:["mas-vendido","oferta"], img:IMG("photo-1557597774-9d273605dfa9"), gal:[IMG("photo-1557597774-9d273605dfa9"),IMG("photo-1558002038-1055907df827")] },
-  { id:"p26", sku:"SD-SEG-0005", nombre:"Cámara WiFi TP-Link Tapo C200 interior", marca:"TP-Link", categoria:"seguridad", precio:29, precioAnterior:39, stock:35, descripcion:"Cámara interior con movimiento horizontal y vertical, audio bidireccional.", specs:["Resolución: 1080p","Movimiento: 360° horizontal","Audio: bidireccional","Visión nocturna: 9 m","Almacenamiento: microSD hasta 128 GB"], garantia:12, rating:4.5, tags:["oferta","entrega-inmediata"], img:IMG("photo-1557597774-9d273605dfa9"), gal:[IMG("photo-1557597774-9d273605dfa9")] },
+  { id:"p22", sku:"SD-SEG-0001", nombre:"Cámara IP Hikvision 2 MP exterior", marca:"Hikvision", categoria:"seguridad", precio:49, precioAnterior:59, stock:28, descripcion:"Cámara IP con visión nocturna y detección de movimiento. Resistente al agua.", specs:["Resolución: 2 MP (1080p)","Visión nocturna: 30 m IR","Protección: IP67 exterior","Alimentación: PoE o 12 V","Compresión: H.265+"], garantia:12, rating:4.7, tags:["mas-vendido","oferta"], img:"/public/img/cctv-surveillance-camera.webp", gal:["/public/img/cctv-surveillance-camera.webp","/public/img/dome-camera-security.webp","/public/img/network-video-recorder.webp"] },
+  { id:"p23", sku:"SD-SEG-0002", nombre:"Cámara IP Dahua 5 MP con audio", marca:"Dahua", categoria:"seguridad", precio:69, precioAnterior:null, stock:20, descripcion:"Cámara de alta resolución con micrófono integrado y detección inteligente.", specs:["Resolución: 5 MP","Audio: micrófono integrado","Visión nocturna: 40 m","Protección: IP67","Alimentación: PoE"], garantia:12, rating:4.8, tags:["nuevo"], img:"/public/img/dome-camera-security.webp", gal:["/public/img/dome-camera-security.webp","/public/img/cctv-surveillance-camera.webp","/public/img/network-video-recorder.webp"] },
+  { id:"p24", sku:"SD-SEG-0003", nombre:"DVR Hikvision 8 canales + 1 TB", marca:"Hikvision", categoria:"seguridad", precio:189, precioAnterior:219, stock:9, descripcion:"Grabador digital de 8 canales con disco de 1 TB incluido y acceso remoto.", specs:["Canales: 8","Disco: 1 TB incluido","Compresión: H.265+","Acceso remoto: Hik-Connect","Salidas: HDMI y VGA"], garantia:12, rating:4.6, tags:["oferta"], img:"/public/img/network-video-recorder.webp", gal:["/public/img/network-video-recorder.webp","/public/img/cctv-surveillance-camera.webp","/public/img/dome-camera-security.webp"] },
+  { id:"p25", sku:"SD-SEG-0004", nombre:"Kit 4 cámaras Hikvision + DVR + instalación", marca:"Hikvision", categoria:"seguridad", precio:399, precioAnterior:459, stock:5, descripcion:"Kit completo de videovigilancia con 4 cámaras, DVR, disco y configuración en tu teléfono.", specs:["Cámaras: 4 exterior 2 MP","DVR: 4 canales con disco 1 TB","Cableado: 30 m por cámara","Acceso: app móvil","Incluye: fuente y conectores"], garantia:12, rating:4.9, tags:["mas-vendido","oferta"], img:"/public/img/cctv-surveillance-camera.webp", gal:["/public/img/cctv-surveillance-camera.webp","/public/img/dome-camera-security.webp","/public/img/network-video-recorder.webp"] },
+  { id:"p26", sku:"SD-SEG-0005", nombre:"Cámara WiFi TP-Link Tapo C200 interior", marca:"TP-Link", categoria:"seguridad", precio:29, precioAnterior:39, stock:35, descripcion:"Cámara interior con movimiento horizontal y vertical, audio bidireccional.", specs:["Resolución: 1080p","Movimiento: 360° horizontal","Audio: bidireccional","Visión nocturna: 9 m","Almacenamiento: microSD hasta 128 GB"], garantia:12, rating:4.5, tags:["oferta","entrega-inmediata"], img:"/public/img/dome-camera-security.webp", gal:["/public/img/dome-camera-security.webp","/public/img/cctv-surveillance-camera.webp","/public/img/network-video-recorder.webp"] },
 
   // --- Alarmas y contra intrusos ---
-  { id:"p27", sku:"SD-ALA-0001", nombre:"Kit de alarma inalámbrica 8 zonas", marca:"Paradox", categoria:"alarmas", precio:159, precioAnterior:189, stock:10, descripcion:"Central de alarma con sensores, sirena y control remoto. Aviso al teléfono.", specs:["Zonas: 8 inalámbricas","Sensores: 4 movimiento + 2 puertas","Sirena: interior 110 dB","Control remoto incluido","Notificación: app y SMS"], garantia:12, rating:4.6, tags:["mas-vendido","oferta"], img:IMG("photo-1558002038-1055907df827"), gal:[IMG("photo-1558002038-1055907df827")] },
-  { id:"p28", sku:"SD-ALA-0002", nombre:"Sensor de movimiento PIR inalámbrico", marca:"Paradox", categoria:"alarmas", precio:25, precioAnterior:null, stock:30, descripcion:"Sensor de presencia con detección infrarroja y batería de larga duración.", specs:["Alcance: 12 m","Ángulo: 90°","Batería: litio 3 V","Frecuencia: 433 MHz","Montaje: pared o esquina"], garantia:12, rating:4.4, tags:[], img:IMG("photo-1558002038-1055907df827"), gal:[IMG("photo-1558002038-1055907df827")] },
-  { id:"p29", sku:"SD-ALA-0003", nombre:"Sirena exterior con luz estroboscópica", marca:"Seco-Larm", categoria:"alarmas", precio:39, precioAnterior:49, stock:18, descripcion:"Sirena de exterior resistente a la lluvia con flash de aviso.", specs:["Potencia: 120 dB","Luz: estroboscópica LED","Protección: IP54","Alimentación: 12 V","Carcasa: ABS reforzada"], garantia:12, rating:4.3, tags:["oferta"], img:IMG("photo-1558002038-1055907df827"), gal:[IMG("photo-1558002038-1055907df827")] },
-  { id:"p30", sku:"SD-ALA-0004", nombre:"Detector de humo y gas autónomo", marca:"Kidde", categoria:"alarmas", precio:29, precioAnterior:null, stock:22, descripcion:"Detector de humo con alarma sonora y batería. Instalación sin cables.", specs:["Tipo: fotoeléctrico","Alarma: 85 dB","Batería: 10 años","Certificación: UL","Montaje: techo"], garantia:12, rating:4.6, tags:["nuevo"], img:IMG("photo-1558002038-1055907df827"), gal:[IMG("photo-1558002038-1055907df827")] },
-  { id:"p31", sku:"SD-ALA-0005", nombre:"Cerradura inteligente con huella digital", marca:"Tuya", categoria:"alarmas", precio:129, precioAnterior:159, stock:8, descripcion:"Abre la puerta con huella, código, tarjeta o app. Registro de accesos.", specs:["Aperturas: huella, PIN, tarjeta, app","Capacidad: 100 huellas","Batería: 4 pilas AA","Respaldo: llave mecánica","Conectividad: Bluetooth/WiFi"], garantia:12, rating:4.5, tags:["oferta"], img:IMG("photo-1558002038-1055907df827"), gal:[IMG("photo-1558002038-1055907df827")] },
+  { id:"p27", sku:"SD-ALA-0001", nombre:"Kit de alarma inalámbrica 8 zonas", marca:"Paradox", categoria:"alarmas", precio:159, precioAnterior:189, stock:10, descripcion:"Central de alarma con sensores, sirena y control remoto. Aviso al teléfono.", specs:["Zonas: 8 inalámbricas","Sensores: 4 movimiento + 2 puertas","Sirena: interior 110 dB","Control remoto incluido","Notificación: app y SMS"], garantia:12, rating:4.6, tags:["mas-vendido","oferta"], img:"/public/img/burglar-alarm-control-panel.webp", gal:["/public/img/burglar-alarm-control-panel.webp","/public/img/passive-infrared-sensor.webp","/public/img/smoke-detector.webp"] },
+  { id:"p28", sku:"SD-ALA-0002", nombre:"Sensor de movimiento PIR inalámbrico", marca:"Paradox", categoria:"alarmas", precio:25, precioAnterior:null, stock:30, descripcion:"Sensor de presencia con detección infrarroja y batería de larga duración.", specs:["Alcance: 12 m","Ángulo: 90°","Batería: litio 3 V","Frecuencia: 433 MHz","Montaje: pared o esquina"], garantia:12, rating:4.4, tags:[], img:"/public/img/passive-infrared-sensor.webp", gal:["/public/img/passive-infrared-sensor.webp","/public/img/burglar-alarm-control-panel.webp"] },
+  { id:"p29", sku:"SD-ALA-0003", nombre:"Sirena exterior con luz estroboscópica", marca:"Seco-Larm", categoria:"alarmas", precio:39, precioAnterior:49, stock:18, descripcion:"Sirena de exterior resistente a la lluvia con flash de aviso.", specs:["Potencia: 120 dB","Luz: estroboscópica LED","Protección: IP54","Alimentación: 12 V","Carcasa: ABS reforzada"], garantia:12, rating:4.3, tags:["oferta"], img:"/public/img/burglar-alarm-control-panel.webp", gal:["/public/img/burglar-alarm-control-panel.webp","/public/img/passive-infrared-sensor.webp","/public/img/smoke-detector.webp"] },
+  { id:"p30", sku:"SD-ALA-0004", nombre:"Detector de humo y gas autónomo", marca:"Kidde", categoria:"alarmas", precio:29, precioAnterior:null, stock:22, descripcion:"Detector de humo con alarma sonora y batería. Instalación sin cables.", specs:["Tipo: fotoeléctrico","Alarma: 85 dB","Batería: 10 años","Certificación: UL","Montaje: techo"], garantia:12, rating:4.6, tags:["nuevo"], img:"/public/img/smoke-detector.webp", gal:["/public/img/smoke-detector.webp","/public/img/burglar-alarm-control-panel.webp","/public/img/electronic-door-lock.webp"] },
+  { id:"p31", sku:"SD-ALA-0005", nombre:"Cerradura inteligente con huella digital", marca:"Tuya", categoria:"alarmas", precio:129, precioAnterior:159, stock:8, descripcion:"Abre la puerta con huella, código, tarjeta o app. Registro de accesos.", specs:["Aperturas: huella, PIN, tarjeta, app","Capacidad: 100 huellas","Batería: 4 pilas AA","Respaldo: llave mecánica","Conectividad: Bluetooth/WiFi"], garantia:12, rating:4.5, tags:["oferta"], img:"/public/img/electronic-door-lock.webp", gal:["/public/img/electronic-door-lock.webp","/public/img/burglar-alarm-control-panel.webp"] },
 
   // --- Electrodomesticos ---
-  { id:"p32", sku:"SD-ELE-0001", nombre:"Refrigerador Midea 9 pies cúbicos no frost", marca:"Midea", categoria:"electrodomesticos", precio:529, precioAnterior:599, stock:6, descripcion:"Refrigerador de dos puertas con sistema no frost y bajo consumo.", specs:["Capacidad: 9 pies cúbicos","Sistema: no frost","Consumo: clase A","Iluminación: LED interior","Estantes: vidrio templado"], garantia:12, rating:4.5, tags:["mas-vendido","oferta"], img:IMG("photo-1571175443880-49e1d25b2bc5"), gal:[IMG("photo-1571175443880-49e1d25b2bc5"),IMG("photo-1584568694244-14fbdf83bd30")] },
-  { id:"p33", sku:"SD-ELE-0002", nombre:"Lavadora automática 10 kg Midea", marca:"Midea", categoria:"electrodomesticos", precio:439, precioAnterior:null, stock:7, descripcion:"Lavadora de carga superior con 8 programas y tambor de acero inoxidable.", specs:["Capacidad: 10 kg","Tipo: carga superior","Programas: 8","Velocidad: 700 rpm","Tambor: acero inoxidable"], garantia:12, rating:4.4, tags:["nuevo"], img:IMG("photo-1584568694244-14fbdf83bd30"), gal:[IMG("photo-1584568694244-14fbdf83bd30")] },
-  { id:"p34", sku:"SD-ELE-0003", nombre:"Olla arrocera 1.8 L con vaporera", marca:"Imusa", categoria:"electrodomesticos", precio:35, precioAnterior:44, stock:26, descripcion:"Olla arrocera con función de vapor y mantener caliente. Un clásico del hogar cubano.", specs:["Capacidad: 1.8 L","Funciones: cocinar y mantener caliente","Incluye: vaporera y cuchara","Recubrimiento: antiadherente","Consumo: 700 W"], garantia:6, rating:4.6, tags:["oferta","entrega-inmediata"], img:IMG("photo-1585659722983-3a675dabf23d"), gal:[IMG("photo-1585659722983-3a675dabf23d")] },
-  { id:"p35", sku:"SD-ELE-0004", nombre:"Microondas Midea 20 L digital", marca:"Midea", categoria:"electrodomesticos", precio:119, precioAnterior:139, stock:11, descripcion:"Microondas compacto con 6 programas y descongelación por peso.", specs:["Capacidad: 20 L","Potencia: 700 W","Programas: 6","Panel: digital","Interior: fácil limpieza"], garantia:12, rating:4.3, tags:["oferta"], img:IMG("photo-1585659722983-3a675dabf23d"), gal:[IMG("photo-1585659722983-3a675dabf23d")] },
-  { id:"p36", sku:"SD-ELE-0005", nombre:"Cocina eléctrica 2 hornillas 2000 W", marca:"Imusa", categoria:"electrodomesticos", precio:45, precioAnterior:null, stock:19, descripcion:"Cocina eléctrica portátil ideal para apartamentos y habitaciones.", specs:["Hornillas: 2","Potencia: 2000 W","Control: termostato","Base: antideslizante","Voltaje: 110 V"], garantia:6, rating:4.2, tags:["entrega-inmediata"], img:IMG("photo-1585659722983-3a675dabf23d"), gal:[IMG("photo-1585659722983-3a675dabf23d")] },
-  { id:"p37", sku:"SD-ELE-0006", nombre:"Batidora de mano 5 velocidades", marca:"Imusa", categoria:"electrodomesticos", precio:22, precioAnterior:29, stock:28, descripcion:"Batidora ligera con cuchillas de acero inoxidable y vaso medidor.", specs:["Velocidades: 5","Potencia: 300 W","Cuchillas: acero inoxidable","Incluye: vaso 500 ml","Fácil limpieza"], garantia:6, rating:4.4, tags:["oferta"], img:IMG("photo-1585659722983-3a675dabf23d"), gal:[IMG("photo-1585659722983-3a675dabf23d")] },
+  { id:"p32", sku:"SD-ELE-0001", nombre:"Refrigerador Midea 9 pies cúbicos no frost", marca:"Midea", categoria:"electrodomesticos", precio:529, precioAnterior:599, stock:6, descripcion:"Refrigerador de dos puertas con sistema no frost y bajo consumo.", specs:["Capacidad: 9 pies cúbicos","Sistema: no frost","Consumo: clase A","Iluminación: LED interior","Estantes: vidrio templado"], garantia:12, rating:4.5, tags:["mas-vendido","oferta"], img:"/public/img/refrigerator.webp", gal:["/public/img/refrigerator.webp","/public/img/washing-machine.webp","/public/img/microwave-oven-kitchen.webp"] },
+  { id:"p33", sku:"SD-ELE-0002", nombre:"Lavadora automática 10 kg Midea", marca:"Midea", categoria:"electrodomesticos", precio:439, precioAnterior:null, stock:7, descripcion:"Lavadora de carga superior con 8 programas y tambor de acero inoxidable.", specs:["Capacidad: 10 kg","Tipo: carga superior","Programas: 8","Velocidad: 700 rpm","Tambor: acero inoxidable"], garantia:12, rating:4.4, tags:["nuevo"], img:"/public/img/washing-machine.webp", gal:["/public/img/washing-machine.webp","/public/img/refrigerator.webp"] },
+  { id:"p34", sku:"SD-ELE-0003", nombre:"Olla arrocera 1.8 L con vaporera", marca:"Imusa", categoria:"electrodomesticos", precio:35, precioAnterior:44, stock:26, descripcion:"Olla arrocera con función de vapor y mantener caliente. Un clásico del hogar cubano.", specs:["Capacidad: 1.8 L","Funciones: cocinar y mantener caliente","Incluye: vaporera y cuchara","Recubrimiento: antiadherente","Consumo: 700 W"], garantia:6, rating:4.6, tags:["oferta","entrega-inmediata"], img:"/public/img/rice-cooker.webp", gal:["/public/img/rice-cooker.webp","/public/img/microwave-oven-kitchen.webp","/public/img/cookware-set-pots.webp"] },
+  { id:"p35", sku:"SD-ELE-0004", nombre:"Microondas Midea 20 L digital", marca:"Midea", categoria:"electrodomesticos", precio:119, precioAnterior:139, stock:11, descripcion:"Microondas compacto con 6 programas y descongelación por peso.", specs:["Capacidad: 20 L","Potencia: 700 W","Programas: 6","Panel: digital","Interior: fácil limpieza"], garantia:12, rating:4.3, tags:["oferta"], img:"/public/img/microwave-oven-kitchen.webp", gal:["/public/img/microwave-oven-kitchen.webp","/public/img/rice-cooker.webp","/public/img/refrigerator.webp"] },
+  { id:"p36", sku:"SD-ELE-0005", nombre:"Cocina eléctrica 2 hornillas 2000 W", marca:"Imusa", categoria:"electrodomesticos", precio:45, precioAnterior:null, stock:19, descripcion:"Cocina eléctrica portátil ideal para apartamentos y habitaciones.", specs:["Hornillas: 2","Potencia: 2000 W","Control: termostato","Base: antideslizante","Voltaje: 110 V"], garantia:6, rating:4.2, tags:["entrega-inmediata"], img:"/public/img/microwave-oven-kitchen.webp", gal:["/public/img/microwave-oven-kitchen.webp","/public/img/rice-cooker.webp","/public/img/refrigerator.webp"] },
+  { id:"p37", sku:"SD-ELE-0006", nombre:"Batidora de mano 5 velocidades", marca:"Imusa", categoria:"electrodomesticos", precio:22, precioAnterior:29, stock:28, descripcion:"Batidora ligera con cuchillas de acero inoxidable y vaso medidor.", specs:["Velocidades: 5","Potencia: 300 W","Cuchillas: acero inoxidable","Incluye: vaso 500 ml","Fácil limpieza"], garantia:6, rating:4.4, tags:["oferta"], img:"/public/img/cookware-set-pots.webp", gal:["/public/img/cookware-set-pots.webp","/public/img/rice-cooker.webp","/public/img/water-filter-tap.webp"] },
 
   // --- Material de oficina ---
-  { id:"p38", sku:"SD-OFI-0001", nombre:"Organizador de escritorio multiusos", marca:"Genérico", categoria:"oficina", precio:14, precioAnterior:null, stock:40, descripcion:"Organizador con bandejas para documentos, bolígrafos y accesorios.", specs:["Materiales: ABS y metal","Bandejas: 4 niveles","Compartimentos: 6","Color: negro","Antideslizante"], garantia:3, rating:4.2, tags:["entrega-inmediata"], img:IMG("photo-1456513080510-7bf3a84b82f8"), gal:[IMG("photo-1456513080510-7bf3a84b82f8")] },
-  { id:"p39", sku:"SD-OFI-0002", nombre:"Carpetas archivadoras con palanca (paquete 10)", marca:"Genérico", categoria:"oficina", precio:18, precioAnterior:23, stock:35, descripcion:"Paquete de 10 carpetas con palanca y lomo ancho para archivo.", specs:["Cantidad: 10 unidades","Formato: carta/A4","Mecanismo: palanca","Lomo: 7 cm","Material: cartón forrado"], garantia:0, rating:4.3, tags:["oferta"], img:IMG("photo-1568205612837-017257d2310a"), gal:[IMG("photo-1568205612837-017257d2310a")] },
-  { id:"p40", sku:"SD-OFI-0003", nombre:"Calculadora de escritorio 12 dígitos", marca:"Casio", categoria:"oficina", precio:16, precioAnterior:null, stock:30, descripcion:"Calculadora grande con pantalla inclinada y teclas grandes.", specs:["Dígitos: 12","Pantalla: LCD inclinada","Alimentación: solar y pila","Funciones: porcentaje, memoria","Teclas: grandes"], garantia:6, rating:4.5, tags:[], img:IMG("photo-1554224155-6726b3ff858f"), gal:[IMG("photo-1554224155-6726b3ff858f")] },
-  { id:"p41", sku:"SD-OFI-0004", nombre:"Grapadora metálica + caja de grapas", marca:"Maped", categoria:"oficina", precio:9, precioAnterior:12, stock:50, descripcion:"Grapadora de metal para uso intensivo, incluye caja de grapas.", specs:["Capacidad: 25 hojas","Material: metal","Incluye: 1000 grapas","Calibre: 24/6","Base antideslizante"], garantia:3, rating:4.4, tags:["oferta"], img:IMG("photo-1456513080510-7bf3a84b82f8"), gal:[IMG("photo-1456513080510-7bf3a84b82f8")] },
-  { id:"p42", sku:"SD-OFI-0005", nombre:"Pizarra blanca 90x60 cm con marcadores", marca:"Genérico", categoria:"oficina", precio:32, precioAnterior:null, stock:14, descripcion:"Pizarra blanca para reuniones y clases, incluye marcadores y borrador.", specs:["Medidas: 90x60 cm","Superficie: laminada","Marco: aluminio","Incluye: 3 marcadores y borrador","Montaje: pared"], garantia:6, rating:4.3, tags:["nuevo"], img:IMG("photo-1524758631624-e2822e304c36"), gal:[IMG("photo-1524758631624-e2822e304c36")] },
+  { id:"p38", sku:"SD-OFI-0001", nombre:"Organizador de escritorio multiusos", marca:"Genérico", categoria:"oficina", precio:14, precioAnterior:null, stock:40, descripcion:"Organizador con bandejas para documentos, bolígrafos y accesorios.", specs:["Materiales: ABS y metal","Bandejas: 4 niveles","Compartimentos: 6","Color: negro","Antideslizante"], garantia:3, rating:4.2, tags:["entrega-inmediata"], img:"/public/img/stapler-office.webp", gal:["/public/img/stapler-office.webp","/public/img/desk-calculator.webp","/public/img/school-notebook-exercise-book.webp"] },
+  { id:"p39", sku:"SD-OFI-0002", nombre:"Carpetas archivadoras con palanca (paquete 10)", marca:"Genérico", categoria:"oficina", precio:18, precioAnterior:23, stock:35, descripcion:"Paquete de 10 carpetas con palanca y lomo ancho para archivo.", specs:["Cantidad: 10 unidades","Formato: carta/A4","Mecanismo: palanca","Lomo: 7 cm","Material: cartón forrado"], garantia:0, rating:4.3, tags:["oferta"], img:"/public/img/stapler-office.webp", gal:["/public/img/stapler-office.webp","/public/img/desk-calculator.webp","/public/img/school-notebook-exercise-book.webp"] },
+  { id:"p40", sku:"SD-OFI-0003", nombre:"Calculadora de escritorio 12 dígitos", marca:"Casio", categoria:"oficina", precio:16, precioAnterior:null, stock:30, descripcion:"Calculadora grande con pantalla inclinada y teclas grandes.", specs:["Dígitos: 12","Pantalla: LCD inclinada","Alimentación: solar y pila","Funciones: porcentaje, memoria","Teclas: grandes"], garantia:6, rating:4.5, tags:[], img:"/public/img/desk-calculator.webp", gal:["/public/img/desk-calculator.webp","/public/img/stapler-office.webp"] },
+  { id:"p41", sku:"SD-OFI-0004", nombre:"Grapadora metálica + caja de grapas", marca:"Maped", categoria:"oficina", precio:9, precioAnterior:12, stock:50, descripcion:"Grapadora de metal para uso intensivo, incluye caja de grapas.", specs:["Capacidad: 25 hojas","Material: metal","Incluye: 1000 grapas","Calibre: 24/6","Base antideslizante"], garantia:3, rating:4.4, tags:["oferta"], img:"/public/img/stapler-office.webp", gal:["/public/img/stapler-office.webp","/public/img/desk-calculator.webp","/public/img/school-notebook-exercise-book.webp"] },
+  { id:"p42", sku:"SD-OFI-0005", nombre:"Pizarra blanca 90x60 cm con marcadores", marca:"Genérico", categoria:"oficina", precio:32, precioAnterior:null, stock:14, descripcion:"Pizarra blanca para reuniones y clases, incluye marcadores y borrador.", specs:["Medidas: 90x60 cm","Superficie: laminada","Marco: aluminio","Incluye: 3 marcadores y borrador","Montaje: pared"], garantia:6, rating:4.3, tags:["nuevo"], img:"/public/img/stapler-office.webp", gal:["/public/img/stapler-office.webp","/public/img/desk-calculator.webp","/public/img/school-notebook-exercise-book.webp"] },
 
   // --- Material escolar ---
-  { id:"p43", sku:"SD-ESC-0001", nombre:"Libreta universitaria 100 hojas (paquete 5)", marca:"Genérico", categoria:"escolar", precio:7, precioAnterior:null, stock:90, descripcion:"Paquete de 5 libretas universitarias rayadas con espiral.", specs:["Cantidad: 5 unidades","Hojas: 100 por libreta","Rayado: línea","Encuadernación: espiral","Formato: 21x27.5 cm"], garantia:0, rating:4.4, tags:["entrega-inmediata"], img:IMG("photo-1588072432836-e10032774350"), gal:[IMG("photo-1588072432836-e10032774350")] },
-  { id:"p44", sku:"SD-ESC-0002", nombre:"Mochila escolar reforzada 25 L", marca:"Genérico", categoria:"escolar", precio:29, precioAnterior:39, stock:24, descripcion:"Mochila con espaldar acolchado y varios compartimentos para útiles.", specs:["Capacidad: 25 L","Compartimentos: 3","Material: poliéster resistente","Espaldar: acolchado","Incluye: bolsillo para botella"], garantia:6, rating:4.5, tags:["oferta","mas-vendido"], img:IMG("photo-1544244015-0df4b3ffc6b0"), gal:[IMG("photo-1544244015-0df4b3ffc6b0")] },
-  { id:"p45", sku:"SD-ESC-0003", nombre:"Set de lápices de colores 24 piezas", marca:"Faber-Castell", categoria:"escolar", precio:11, precioAnterior:14, stock:45, descripcion:"Lápices de colores suaves y resistentes para dibujo y coloreado.", specs:["Colores: 24","Tipo: madera","Mina: resistente","Incluye: sacapuntas","Presentación: estuche"], garantia:0, rating:4.6, tags:["oferta"], img:IMG("photo-1503676260728-1c00da094a0b"), gal:[IMG("photo-1503676260728-1c00da094a0b")] },
-  { id:"p46", sku:"SD-ESC-0004", nombre:"Calculadora científica 240 funciones", marca:"Casio", categoria:"escolar", precio:19, precioAnterior:null, stock:26, descripcion:"Calculadora para secundaria, preuniversitario y universidad.", specs:["Funciones: 240","Pantalla: 2 líneas","Alimentación: solar y pila","Fundas: incluida","Permitida en exámenes"], garantia:6, rating:4.7, tags:["nuevo"], img:IMG("photo-1554224155-6726b3ff858f"), gal:[IMG("photo-1554224155-6726b3ff858f")] },
-  { id:"p47", sku:"SD-ESC-0005", nombre:"Juego de geometría 4 piezas", marca:"Maped", categoria:"escolar", precio:6, precioAnterior:null, stock:60, descripcion:"Regla, escuadras y transportador de plástico resistente.", specs:["Piezas: 4","Material: plástico","Incluye: regla 30 cm","Escuadras: 45° y 60°","Transportador: 180°"], garantia:0, rating:4.3, tags:["entrega-inmediata"], img:IMG("photo-1562408590-e32931084e23"), gal:[IMG("photo-1562408590-e32931084e23")] },
+  { id:"p43", sku:"SD-ESC-0001", nombre:"Libreta universitaria 100 hojas (paquete 5)", marca:"Genérico", categoria:"escolar", precio:7, precioAnterior:null, stock:90, descripcion:"Paquete de 5 libretas universitarias rayadas con espiral.", specs:["Cantidad: 5 unidades","Hojas: 100 por libreta","Rayado: línea","Encuadernación: espiral","Formato: 21x27.5 cm"], garantia:0, rating:4.4, tags:["entrega-inmediata"], img:"/public/img/school-notebook-exercise-book.webp", gal:["/public/img/school-notebook-exercise-book.webp","/public/img/ballpoint-pen.webp","/public/img/backpack-school.webp"] },
+  { id:"p44", sku:"SD-ESC-0002", nombre:"Mochila escolar reforzada 25 L", marca:"Genérico", categoria:"escolar", precio:29, precioAnterior:39, stock:24, descripcion:"Mochila con espaldar acolchado y varios compartimentos para útiles.", specs:["Capacidad: 25 L","Compartimentos: 3","Material: poliéster resistente","Espaldar: acolchado","Incluye: bolsillo para botella"], garantia:6, rating:4.5, tags:["oferta","mas-vendido"], img:"/public/img/backpack-school.webp", gal:["/public/img/backpack-school.webp","/public/img/school-notebook-exercise-book.webp","/public/img/ballpoint-pen.webp"] },
+  { id:"p45", sku:"SD-ESC-0003", nombre:"Set de lápices de colores 24 piezas", marca:"Faber-Castell", categoria:"escolar", precio:11, precioAnterior:14, stock:45, descripcion:"Lápices de colores suaves y resistentes para dibujo y coloreado.", specs:["Colores: 24","Tipo: madera","Mina: resistente","Incluye: sacapuntas","Presentación: estuche"], garantia:0, rating:4.6, tags:["oferta"], img:"/public/img/ballpoint-pen.webp", gal:["/public/img/ballpoint-pen.webp","/public/img/school-notebook-exercise-book.webp"] },
+  { id:"p46", sku:"SD-ESC-0004", nombre:"Calculadora científica 240 funciones", marca:"Casio", categoria:"escolar", precio:19, precioAnterior:null, stock:26, descripcion:"Calculadora para secundaria, preuniversitario y universidad.", specs:["Funciones: 240","Pantalla: 2 líneas","Alimentación: solar y pila","Fundas: incluida","Permitida en exámenes"], garantia:6, rating:4.7, tags:["nuevo"], img:"/public/img/desk-calculator.webp", gal:["/public/img/desk-calculator.webp","/public/img/stapler-office.webp"] },
+  { id:"p47", sku:"SD-ESC-0005", nombre:"Juego de geometría 4 piezas", marca:"Maped", categoria:"escolar", precio:6, precioAnterior:null, stock:60, descripcion:"Regla, escuadras y transportador de plástico resistente.", specs:["Piezas: 4","Material: plástico","Incluye: regla 30 cm","Escuadras: 45° y 60°","Transportador: 180°"], garantia:0, rating:4.3, tags:["entrega-inmediata"], img:"/public/img/school-notebook-exercise-book.webp", gal:["/public/img/school-notebook-exercise-book.webp","/public/img/ballpoint-pen.webp","/public/img/backpack-school.webp"] },
 
   // --- Energia renovable ---
-  { id:"p48", sku:"SD-SOL-0001", nombre:"Panel solar monocristalino 450 W", marca:"Jinko Solar", categoria:"solar", precio:159, precioAnterior:189, stock:20, descripcion:"Panel de 450 W de alta eficiencia para sistemas residenciales.", specs:["Potencia: 450 W","Tecnología: monocristalino","Voltaje: 24 V","Eficiencia: 21 %","Garantía de potencia: 25 años"], garantia:12, rating:4.8, tags:["mas-vendido","oferta"], img:IMG("photo-1509391366360-2e959784a276"), gal:[IMG("photo-1509391366360-2e959784a276"),IMG("photo-1508514177221-188b1cf16e9d")] },
-  { id:"p49", sku:"SD-SOL-0002", nombre:"Panel solar monocristalino 550 W", marca:"Trina Solar", categoria:"solar", precio:189, precioAnterior:null, stock:16, descripcion:"Panel de 550 W de última generación, mayor generación por metro cuadrado.", specs:["Potencia: 550 W","Tecnología: monocristalino PERC","Voltaje: 24 V","Eficiencia: 21.5 %","Marco: aluminio anodizado"], garantia:12, rating:4.9, tags:["nuevo","mas-vendido"], img:IMG("photo-1508514177221-188b1cf16e9d"), gal:[IMG("photo-1508514177221-188b1cf16e9d"),IMG("photo-1509391366360-2e959784a276")] },
-  { id:"p50", sku:"SD-SOL-0003", nombre:"Inversor híbrido 3 kVA 24 V onda pura", marca:"Must", categoria:"solar", precio:329, precioAnterior:379, stock:9, descripcion:"Inversor con cargador solar MPPT integrado. Alimenta la casa y carga baterías.", specs:["Potencia: 3 kVA / 2400 W","Onda: pura senoidal","Voltaje: 24 V","Cargador MPPT: 80 A","Pantalla LCD"], garantia:12, rating:4.6, tags:["mas-vendido","oferta"], img:IMG("photo-1497440001374-f26997328c1b"), gal:[IMG("photo-1497440001374-f26997328c1b")] },
-  { id:"p51", sku:"SD-SOL-0004", nombre:"Inversor híbrido 5 kVA 48 V onda pura", marca:"Growatt", categoria:"solar", precio:599, precioAnterior:689, stock:6, descripcion:"Inversor de mayor capacidad para casas y negocios con varios equipos.", specs:["Potencia: 5 kVA / 4000 W","Onda: pura senoidal","Voltaje: 48 V","MPPT integrado: 100 A","Comunicación: WiFi opcional"], garantia:12, rating:4.7, tags:["oferta"], img:IMG("photo-1497440001374-f26997328c1b"), gal:[IMG("photo-1497440001374-f26997328c1b")] },
-  { id:"p52", sku:"SD-SOL-0005", nombre:"Batería LiFePO4 12 V 100 Ah", marca:"Pylontech", categoria:"solar", precio:349, precioAnterior:null, stock:12, descripcion:"Batería de litio de larga vida para respaldo solar. Sin mantenimiento.", specs:["Voltaje: 12 V","Capacidad: 100 Ah (1.28 kWh)","Ciclos: más de 4000","Química: LiFePO4","BMS integrado"], garantia:24, rating:4.8, tags:["nuevo","mas-vendido"], img:IMG("photo-1601784551446-20c9e07cdbdb"), gal:[IMG("photo-1601784551446-20c9e07cdbdb")] },
-  { id:"p53", sku:"SD-SOL-0006", nombre:"Batería de litio 48 V 100 Ah (5 kWh)", marca:"Pylontech", categoria:"solar", precio:1299, precioAnterior:1499, stock:4, descripcion:"Batería de 5 kWh para sistemas de respaldo de toda la casa.", specs:["Voltaje: 48 V","Capacidad: 100 Ah (5.12 kWh)","Ciclos: más de 6000","Química: LiFePO4","Comunicación: BMS y CAN"], garantia:24, rating:4.9, tags:["oferta"], img:IMG("photo-1606813907291-d86efa9b94db"), gal:[IMG("photo-1606813907291-d86efa9b94db")] },
-  { id:"p54", sku:"SD-SOL-0007", nombre:"Controlador de carga MPPT 60 A", marca:"EPEver", categoria:"solar", precio:129, precioAnterior:149, stock:15, descripcion:"Controlador MPPT que aprovecha más energía de los paneles.", specs:["Corriente: 60 A","Tecnología: MPPT","Voltaje batería: 12/24/48 V","Máx. PV: 150 V","Pantalla LCD y USB"], garantia:12, rating:4.6, tags:["oferta"], img:IMG("photo-1508514177221-188b1cf16e9d"), gal:[IMG("photo-1508514177221-188b1cf16e9d")] },
-  { id:"p55", sku:"SD-SOL-0008", nombre:"Planta solar portátil 500 W con batería", marca:"Jackery", categoria:"solar", precio:499, precioAnterior:579, stock:7, descripcion:"Estación de energía portátil con panel solar plegable incluido.", specs:["Potencia: 500 W","Capacidad: 500 Wh","Salidas: AC, USB, 12 V","Panel solar: plegable incluido","Peso: 6.8 kg"], garantia:12, rating:4.7, tags:["oferta","mas-vendido"], img:IMG("photo-1609091839311-d5365f9ff1c5"), gal:[IMG("photo-1609091839311-d5365f9ff1c5")] },
-  { id:"p56", sku:"SD-SOL-0009", nombre:"Estructura de montaje para 2 paneles", marca:"Genérico", categoria:"solar", precio:79, precioAnterior:null, stock:18, descripcion:"Soporte de aluminio para techo inclinado o plano, resistente a la intemperie.", specs:["Capacidad: 2 paneles","Material: aluminio anodizado","Tornillería: inoxidable","Tipo: techo plano o inclinado","Resistente a viento"], garantia:12, rating:4.4, tags:[], img:IMG("photo-1509391366360-2e959784a276"), gal:[IMG("photo-1509391366360-2e959784a276")] },
-  { id:"p57", sku:"SD-SOL-0010", nombre:"Cable solar 6 mm² + conectores MC4 (kit)", marca:"Genérico", categoria:"solar", precio:39, precioAnterior:49, stock:25, descripcion:"Kit de cableado solar con conectores MC4 para instalación segura.", specs:["Cable: 6 mm² (10 m rojo + 10 m negro)","Aislamiento: doble","Conectores: 2 pares MC4","Temperatura: -40 a 90 °C","Certificación: TÜV"], garantia:6, rating:4.5, tags:["oferta"], img:IMG("photo-1610056494052-6a4f83a8368c"), gal:[IMG("photo-1610056494052-6a4f83a8368c")] },
-  { id:"p58", sku:"SD-SOL-0011", nombre:"Monitor de energía WiFi para sistema solar", marca:"Genérico", categoria:"solar", precio:69, precioAnterior:null, stock:20, descripcion:"Mide el consumo y la generación de tu sistema desde el teléfono.", specs:["Medición: voltaje, corriente, potencia","Conectividad: WiFi","App: monitoreo en tiempo real","Instalación: carril DIN","Precisión: ±1 %"], garantia:12, rating:4.3, tags:["nuevo"], img:IMG("photo-1518770660439-4636190af475"), gal:[IMG("photo-1518770660439-4636190af475")] },
-  { id:"p59", sku:"SD-SOL-0012", nombre:"Inversor de onda pura 1000 W 12 V", marca:"Genérico", categoria:"solar", precio:99, precioAnterior:119, stock:22, descripcion:"Inversor básico para encender TV, ventilador, router y cargadores.", specs:["Potencia: 1000 W","Onda: pura senoidal","Entrada: 12 V DC","Salida: 110 V AC","Protecciones: sobrecarga y térmica"], garantia:12, rating:4.4, tags:["oferta","entrega-inmediata"], img:IMG("photo-1434493789847-2f02dc6ca35d"), gal:[IMG("photo-1434493789847-2f02dc6ca35d")] },
+  { id:"p48", sku:"SD-SOL-0001", nombre:"Panel solar monocristalino 450 W", marca:"Jinko Solar", categoria:"solar", precio:159, precioAnterior:189, stock:20, descripcion:"Panel de 450 W de alta eficiencia para sistemas residenciales.", specs:["Potencia: 450 W","Tecnología: monocristalino","Voltaje: 24 V","Eficiencia: 21 %","Garantía de potencia: 25 años"], garantia:12, rating:4.8, tags:["mas-vendido","oferta"], img:"/public/img/solar-panel-photovoltaic-module.webp", gal:["/public/img/solar-panel-photovoltaic-module.webp","/public/img/lithium-iron-phosphate-battery.webp","/public/img/portable-power-station.webp"] },
+  { id:"p49", sku:"SD-SOL-0002", nombre:"Panel solar monocristalino 550 W", marca:"Trina Solar", categoria:"solar", precio:189, precioAnterior:null, stock:16, descripcion:"Panel de 550 W de última generación, mayor generación por metro cuadrado.", specs:["Potencia: 550 W","Tecnología: monocristalino PERC","Voltaje: 24 V","Eficiencia: 21.5 %","Marco: aluminio anodizado"], garantia:12, rating:4.9, tags:["nuevo","mas-vendido"], img:"/public/img/solar-panel-photovoltaic-module.webp", gal:["/public/img/solar-panel-photovoltaic-module.webp","/public/img/lithium-iron-phosphate-battery.webp","/public/img/portable-power-station.webp"] },
+  { id:"p50", sku:"SD-SOL-0003", nombre:"Inversor híbrido 3 kVA 24 V onda pura", marca:"Must", categoria:"solar", precio:329, precioAnterior:379, stock:9, descripcion:"Inversor con cargador solar MPPT integrado. Alimenta la casa y carga baterías.", specs:["Potencia: 3 kVA / 2400 W","Onda: pura senoidal","Voltaje: 24 V","Cargador MPPT: 80 A","Pantalla LCD"], garantia:12, rating:4.6, tags:["mas-vendido","oferta"], img:"/public/img/portable-power-station.webp", gal:["/public/img/portable-power-station.webp","/public/img/solar-panel-photovoltaic-module.webp","/public/img/lithium-iron-phosphate-battery.webp"] },
+  { id:"p51", sku:"SD-SOL-0004", nombre:"Inversor híbrido 5 kVA 48 V onda pura", marca:"Growatt", categoria:"solar", precio:599, precioAnterior:689, stock:6, descripcion:"Inversor de mayor capacidad para casas y negocios con varios equipos.", specs:["Potencia: 5 kVA / 4000 W","Onda: pura senoidal","Voltaje: 48 V","MPPT integrado: 100 A","Comunicación: WiFi opcional"], garantia:12, rating:4.7, tags:["oferta"], img:"/public/img/portable-power-station.webp", gal:["/public/img/portable-power-station.webp","/public/img/solar-panel-photovoltaic-module.webp","/public/img/lithium-iron-phosphate-battery.webp"] },
+  { id:"p52", sku:"SD-SOL-0005", nombre:"Batería LiFePO4 12 V 100 Ah", marca:"Pylontech", categoria:"solar", precio:349, precioAnterior:null, stock:12, descripcion:"Batería de litio de larga vida para respaldo solar. Sin mantenimiento.", specs:["Voltaje: 12 V","Capacidad: 100 Ah (1.28 kWh)","Ciclos: más de 4000","Química: LiFePO4","BMS integrado"], garantia:24, rating:4.8, tags:["nuevo","mas-vendido"], img:"/public/img/lithium-iron-phosphate-battery.webp", gal:["/public/img/lithium-iron-phosphate-battery.webp","/public/img/solar-panel-photovoltaic-module.webp","/public/img/portable-power-station.webp"] },
+  { id:"p53", sku:"SD-SOL-0006", nombre:"Batería de litio 48 V 100 Ah (5 kWh)", marca:"Pylontech", categoria:"solar", precio:1299, precioAnterior:1499, stock:4, descripcion:"Batería de 5 kWh para sistemas de respaldo de toda la casa.", specs:["Voltaje: 48 V","Capacidad: 100 Ah (5.12 kWh)","Ciclos: más de 6000","Química: LiFePO4","Comunicación: BMS y CAN"], garantia:24, rating:4.9, tags:["oferta"], img:"/public/img/lithium-iron-phosphate-battery.webp", gal:["/public/img/lithium-iron-phosphate-battery.webp","/public/img/solar-panel-photovoltaic-module.webp","/public/img/portable-power-station.webp"] },
+  { id:"p54", sku:"SD-SOL-0007", nombre:"Controlador de carga MPPT 60 A", marca:"EPEver", categoria:"solar", precio:129, precioAnterior:149, stock:15, descripcion:"Controlador MPPT que aprovecha más energía de los paneles.", specs:["Corriente: 60 A","Tecnología: MPPT","Voltaje batería: 12/24/48 V","Máx. PV: 150 V","Pantalla LCD y USB"], garantia:12, rating:4.6, tags:["oferta"], img:"/public/img/lithium-iron-phosphate-battery.webp", gal:["/public/img/lithium-iron-phosphate-battery.webp","/public/img/solar-panel-photovoltaic-module.webp","/public/img/portable-power-station.webp"] },
+  { id:"p55", sku:"SD-SOL-0008", nombre:"Planta solar portátil 500 W con batería", marca:"Jackery", categoria:"solar", precio:499, precioAnterior:579, stock:7, descripcion:"Estación de energía portátil con panel solar plegable incluido.", specs:["Potencia: 500 W","Capacidad: 500 Wh","Salidas: AC, USB, 12 V","Panel solar: plegable incluido","Peso: 6.8 kg"], garantia:12, rating:4.7, tags:["oferta","mas-vendido"], img:"/public/img/portable-power-station.webp", gal:["/public/img/portable-power-station.webp","/public/img/solar-panel-photovoltaic-module.webp","/public/img/lithium-iron-phosphate-battery.webp"] },
+  { id:"p56", sku:"SD-SOL-0009", nombre:"Estructura de montaje para 2 paneles", marca:"Genérico", categoria:"solar", precio:79, precioAnterior:null, stock:18, descripcion:"Soporte de aluminio para techo inclinado o plano, resistente a la intemperie.", specs:["Capacidad: 2 paneles","Material: aluminio anodizado","Tornillería: inoxidable","Tipo: techo plano o inclinado","Resistente a viento"], garantia:12, rating:4.4, tags:[], img:"/public/img/solar-panel-photovoltaic-module.webp", gal:["/public/img/solar-panel-photovoltaic-module.webp","/public/img/lithium-iron-phosphate-battery.webp","/public/img/portable-power-station.webp"] },
+  { id:"p57", sku:"SD-SOL-0010", nombre:"Cable solar 6 mm² + conectores MC4 (kit)", marca:"Genérico", categoria:"solar", precio:39, precioAnterior:49, stock:25, descripcion:"Kit de cableado solar con conectores MC4 para instalación segura.", specs:["Cable: 6 mm² (10 m rojo + 10 m negro)","Aislamiento: doble","Conectores: 2 pares MC4","Temperatura: -40 a 90 °C","Certificación: TÜV"], garantia:6, rating:4.5, tags:["oferta"], img:"/public/img/ethernet-cable-cat6.webp", gal:["/public/img/ethernet-cable-cat6.webp","/public/img/network-switch-ethernet.webp","/public/img/wifi-router.webp"] },
+  { id:"p58", sku:"SD-SOL-0011", nombre:"Monitor de energía WiFi para sistema solar", marca:"Genérico", categoria:"solar", precio:69, precioAnterior:null, stock:20, descripcion:"Mide el consumo y la generación de tu sistema desde el teléfono.", specs:["Medición: voltaje, corriente, potencia","Conectividad: WiFi","App: monitoreo en tiempo real","Instalación: carril DIN","Precisión: ±1 %"], garantia:12, rating:4.3, tags:["nuevo"], img:"/public/img/portable-power-station.webp", gal:["/public/img/portable-power-station.webp","/public/img/solar-panel-photovoltaic-module.webp","/public/img/lithium-iron-phosphate-battery.webp"] },
+  { id:"p59", sku:"SD-SOL-0012", nombre:"Inversor de onda pura 1000 W 12 V", marca:"Genérico", categoria:"solar", precio:99, precioAnterior:119, stock:22, descripcion:"Inversor básico para encender TV, ventilador, router y cargadores.", specs:["Potencia: 1000 W","Onda: pura senoidal","Entrada: 12 V DC","Salida: 110 V AC","Protecciones: sobrecarga y térmica"], garantia:12, rating:4.4, tags:["oferta","entrega-inmediata"], img:"/public/img/portable-power-station.webp", gal:["/public/img/portable-power-station.webp","/public/img/solar-panel-photovoltaic-module.webp","/public/img/lithium-iron-phosphate-battery.webp"] },
 
   // --- Equipos de clima ---
-  { id:"p60", sku:"SD-CLI-0001", nombre:"Aire acondicionado split inverter 12000 BTU", marca:"Midea", categoria:"clima", precio:459, precioAnterior:529, stock:8, descripcion:"Split inverter de 12000 BTU, bajo consumo y modo ahorro. Ideal para dormitorios.", specs:["Capacidad: 12000 BTU","Tecnología: inverter","Eficiencia: A++","Gas: R410A","Nivel de ruido: 24 dB"], garantia:12, rating:4.7, tags:["mas-vendido","oferta"], img:IMG("photo-1603302576837-37561b2e2302"), gal:[IMG("photo-1603302576837-37561b2e2302"),IMG("photo-1585790050230-5dd28404ccb9")] },
-  { id:"p61", sku:"SD-CLI-0002", nombre:"Aire acondicionado split inverter 18000 BTU", marca:"Midea", categoria:"clima", precio:679, precioAnterior:779, stock:5, descripcion:"Split inverter de 18000 BTU para salas y locales amplios.", specs:["Capacidad: 18000 BTU","Tecnología: inverter","Eficiencia: A+","Gas: R410A","Función: calefacción y frío"], garantia:12, rating:4.6, tags:["oferta"], img:IMG("photo-1585790050230-5dd28404ccb9"), gal:[IMG("photo-1585790050230-5dd28404ccb9")] },
-  { id:"p62", sku:"SD-CLI-0003", nombre:"Ventilador de torre 3 velocidades", marca:"Honeywell", categoria:"clima", precio:59, precioAnterior:69, stock:16, descripcion:"Ventilador de torre silencioso con oscilación y temporizador.", specs:["Velocidades: 3","Oscilación: 90°","Temporizador: 8 h","Control: remoto","Altura: 1 m"], garantia:12, rating:4.3, tags:["oferta"], img:IMG("photo-1615663245857-ac93bb7c39e7"), gal:[IMG("photo-1615663245857-ac93bb7c39e7")] },
-  { id:"p63", sku:"SD-CLI-0004", nombre:"Ventilador de techo 52\" con luz", marca:"Genérico", categoria:"clima", precio:79, precioAnterior:null, stock:12, descripcion:"Ventilador de techo con iluminación LED y control de velocidad.", specs:["Diámetro: 52 pulgadas","Aspas: 3","Luz: LED integrada","Control: cadena y remoto","Voltaje: 110 V"], garantia:12, rating:4.4, tags:["nuevo"], img:IMG("photo-1615663245857-ac93bb7c39e7"), gal:[IMG("photo-1615663245857-ac93bb7c39e7")] },
-  { id:"p64", sku:"SD-CLI-0005", nombre:"Ventilador industrial de pedestal 24\"", marca:"Genérico", categoria:"clima", precio:119, precioAnterior:139, stock:9, descripcion:"Ventilador de alto flujo para talleres, almacenes y negocios.", specs:["Diámetro: 24 pulgadas","Flujo: alto caudal","Aspas: metal","Altura: ajustable","Ruedas: incluidas"], garantia:12, rating:4.2, tags:["oferta"], img:IMG("photo-1615663245857-ac93bb7c39e7"), gal:[IMG("photo-1615663245857-ac93bb7c39e7")] },
-  { id:"p65", sku:"SD-CLI-0006", nombre:"Deshumidificador 12 L portátil", marca:"Genérico", categoria:"clima", precio:169, precioAnterior:null, stock:10, descripcion:"Reduce la humedad en cuartos, closets y locales cerrados.", specs:["Capacidad: 12 L/día","Depósito: 2 L","Nivel de ruido: 40 dB","Apagado automático","Peso: 9 kg"], garantia:12, rating:4.3, tags:["nuevo"], img:IMG("photo-1585790050230-5dd28404ccb9"), gal:[IMG("photo-1585790050230-5dd28404ccb9")] },
+  { id:"p60", sku:"SD-CLI-0001", nombre:"Aire acondicionado split inverter 12000 BTU", marca:"Midea", categoria:"clima", precio:459, precioAnterior:529, stock:8, descripcion:"Split inverter de 12000 BTU, bajo consumo y modo ahorro. Ideal para dormitorios.", specs:["Capacidad: 12000 BTU","Tecnología: inverter","Eficiencia: A++","Gas: R410A","Nivel de ruido: 24 dB"], garantia:12, rating:4.7, tags:["mas-vendido","oferta"], img:"/public/img/split-air-conditioner.webp", gal:["/public/img/split-air-conditioner.webp","/public/img/dehumidifier.webp","/public/img/ceiling-fan.webp"] },
+  { id:"p61", sku:"SD-CLI-0002", nombre:"Aire acondicionado split inverter 18000 BTU", marca:"Midea", categoria:"clima", precio:679, precioAnterior:779, stock:5, descripcion:"Split inverter de 18000 BTU para salas y locales amplios.", specs:["Capacidad: 18000 BTU","Tecnología: inverter","Eficiencia: A+","Gas: R410A","Función: calefacción y frío"], garantia:12, rating:4.6, tags:["oferta"], img:"/public/img/split-air-conditioner.webp", gal:["/public/img/split-air-conditioner.webp","/public/img/dehumidifier.webp","/public/img/ceiling-fan.webp"] },
+  { id:"p62", sku:"SD-CLI-0003", nombre:"Ventilador de torre 3 velocidades", marca:"Honeywell", categoria:"clima", precio:59, precioAnterior:69, stock:16, descripcion:"Ventilador de torre silencioso con oscilación y temporizador.", specs:["Velocidades: 3","Oscilación: 90°","Temporizador: 8 h","Control: remoto","Altura: 1 m"], garantia:12, rating:4.3, tags:["oferta"], img:"/public/img/ceiling-fan.webp", gal:["/public/img/ceiling-fan.webp","/public/img/split-air-conditioner.webp"] },
+  { id:"p63", sku:"SD-CLI-0004", nombre:"Ventilador de techo 52\" con luz", marca:"Genérico", categoria:"clima", precio:79, precioAnterior:null, stock:12, descripcion:"Ventilador de techo con iluminación LED y control de velocidad.", specs:["Diámetro: 52 pulgadas","Aspas: 3","Luz: LED integrada","Control: cadena y remoto","Voltaje: 110 V"], garantia:12, rating:4.4, tags:["nuevo"], img:"/public/img/ceiling-fan.webp", gal:["/public/img/ceiling-fan.webp","/public/img/split-air-conditioner.webp"] },
+  { id:"p64", sku:"SD-CLI-0005", nombre:"Ventilador industrial de pedestal 24\"", marca:"Genérico", categoria:"clima", precio:119, precioAnterior:139, stock:9, descripcion:"Ventilador de alto flujo para talleres, almacenes y negocios.", specs:["Diámetro: 24 pulgadas","Flujo: alto caudal","Aspas: metal","Altura: ajustable","Ruedas: incluidas"], garantia:12, rating:4.2, tags:["oferta"], img:"/public/img/ceiling-fan.webp", gal:["/public/img/ceiling-fan.webp","/public/img/split-air-conditioner.webp"] },
+  { id:"p65", sku:"SD-CLI-0006", nombre:"Deshumidificador 12 L portátil", marca:"Genérico", categoria:"clima", precio:169, precioAnterior:null, stock:10, descripcion:"Reduce la humedad en cuartos, closets y locales cerrados.", specs:["Capacidad: 12 L/día","Depósito: 2 L","Nivel de ruido: 40 dB","Apagado automático","Peso: 9 kg"], garantia:12, rating:4.3, tags:["nuevo"], img:"/public/img/dehumidifier.webp", gal:["/public/img/dehumidifier.webp","/public/img/split-air-conditioner.webp","/public/img/ceiling-fan.webp"] },
 
   // --- Herramientas de trabajo ---
-  { id:"p66", sku:"SD-HER-0001", nombre:"Taladro percutor 13 mm 700 W", marca:"Bosch", categoria:"herramientas", precio:79, precioAnterior:95, stock:18, descripcion:"Taladro percutor con velocidad variable para concreto, madera y metal.", specs:["Potencia: 700 W","Mandril: 13 mm","Velocidad: variable 0-3000 rpm","Función: percusión","Incluye: maletín y brocas"], garantia:12, rating:4.7, tags:["mas-vendido","oferta"], img:IMG("photo-1572981779307-38b8cabb2407"), gal:[IMG("photo-1572981779307-38b8cabb2407"),IMG("photo-1504148455328-c376907d081c")] },
-  { id:"p67", sku:"SD-HER-0002", nombre:"Juego de herramientas 108 piezas", marca:"Stanley", categoria:"herramientas", precio:99, precioAnterior:119, stock:14, descripcion:"Juego completo con llaves, dados, destornilladores y puntas.", specs:["Piezas: 108","Material: acero cromo vanadio","Incluye: maletín","Dados: 1/4 y 3/8 pulgadas","Acabado: cromado"], garantia:12, rating:4.6, tags:["oferta"], img:IMG("photo-1504148455328-c376907d081c"), gal:[IMG("photo-1504148455328-c376907d081c")] },
-  { id:"p68", sku:"SD-HER-0003", nombre:"Amoladora angular 115 mm 850 W", marca:"DeWalt", categoria:"herramientas", precio:89, precioAnterior:null, stock:13, descripcion:"Amoladora para corte y desbaste de metal y piedra.", specs:["Potencia: 850 W","Disco: 115 mm","Velocidad: 11000 rpm","Mango: auxiliar","Protección: guarda ajustable"], garantia:12, rating:4.6, tags:["nuevo"], img:IMG("photo-1581244277943-fe4a9c777189"), gal:[IMG("photo-1581244277943-fe4a9c777189")] },
-  { id:"p69", sku:"SD-HER-0004", nombre:"Multímetro digital con pinza amperimétrica", marca:"Uni-T", categoria:"herramientas", precio:45, precioAnterior:55, stock:20, descripcion:"Mide voltaje, corriente, resistencia y continuidad. Indispensable en electricidad.", specs:["Funciones: V, A, Ω, continuidad","Pantalla: LCD retroiluminada","Categoría: CAT III 600 V","Incluye: puntas y estuche","Apagado automático"], garantia:12, rating:4.5, tags:["oferta"], img:IMG("photo-1527864550417-7fd91fc51a46"), gal:[IMG("photo-1527864550417-7fd91fc51a46")] },
-  { id:"p70", sku:"SD-HER-0005", nombre:"Caja de herramientas metálica 19\"", marca:"Stanley", categoria:"herramientas", precio:35, precioAnterior:null, stock:22, descripcion:"Caja de metal con bandeja interior para organizar tus herramientas.", specs:["Medidas: 19 pulgadas","Material: metal","Bandeja: interior extraíble","Cierre: metal","Asa: plegable"], garantia:6, rating:4.4, tags:["entrega-inmediata"], img:IMG("photo-1426927308491-6380b6a9936f"), gal:[IMG("photo-1426927308491-6380b6a9936f")] },
-  { id:"p71", sku:"SD-HER-0006", nombre:"Sierra caladora 600 W con velocidad variable", marca:"Bosch", categoria:"herramientas", precio:69, precioAnterior:82, stock:11, descripcion:"Sierra caladora para cortes rectos y curvos en madera y metal.", specs:["Potencia: 600 W","Carrera: 3000 rpm","Velocidad: variable","Corte: madera y metal","Incluye: hoja y maletín"], garantia:12, rating:4.5, tags:["oferta"], img:IMG("photo-1530124566582-a618bc2615dc"), gal:[IMG("photo-1530124566582-a618bc2615dc")] },
+  { id:"p66", sku:"SD-HER-0001", nombre:"Taladro percutor 13 mm 700 W", marca:"Bosch", categoria:"herramientas", precio:79, precioAnterior:95, stock:18, descripcion:"Taladro percutor con velocidad variable para concreto, madera y metal.", specs:["Potencia: 700 W","Mandril: 13 mm","Velocidad: variable 0-3000 rpm","Función: percusión","Incluye: maletín y brocas"], garantia:12, rating:4.7, tags:["mas-vendido","oferta"], img:"/public/img/cordless-drill.webp", gal:["/public/img/cordless-drill.webp","/public/img/hand-tool-set.webp","/public/img/digital-multimeter.webp"] },
+  { id:"p67", sku:"SD-HER-0002", nombre:"Juego de herramientas 108 piezas", marca:"Stanley", categoria:"herramientas", precio:99, precioAnterior:119, stock:14, descripcion:"Juego completo con llaves, dados, destornilladores y puntas.", specs:["Piezas: 108","Material: acero cromo vanadio","Incluye: maletín","Dados: 1/4 y 3/8 pulgadas","Acabado: cromado"], garantia:12, rating:4.6, tags:["oferta"], img:"/public/img/hand-tool-set.webp", gal:["/public/img/hand-tool-set.webp","/public/img/cordless-drill.webp","/public/img/digital-multimeter.webp"] },
+  { id:"p68", sku:"SD-HER-0003", nombre:"Amoladora angular 115 mm 850 W", marca:"DeWalt", categoria:"herramientas", precio:89, precioAnterior:null, stock:13, descripcion:"Amoladora para corte y desbaste de metal y piedra.", specs:["Potencia: 850 W","Disco: 115 mm","Velocidad: 11000 rpm","Mango: auxiliar","Protección: guarda ajustable"], garantia:12, rating:4.6, tags:["nuevo"], img:"/public/img/hand-tool-set.webp", gal:["/public/img/hand-tool-set.webp","/public/img/cordless-drill.webp","/public/img/digital-multimeter.webp"] },
+  { id:"p69", sku:"SD-HER-0004", nombre:"Multímetro digital con pinza amperimétrica", marca:"Uni-T", categoria:"herramientas", precio:45, precioAnterior:55, stock:20, descripcion:"Mide voltaje, corriente, resistencia y continuidad. Indispensable en electricidad.", specs:["Funciones: V, A, Ω, continuidad","Pantalla: LCD retroiluminada","Categoría: CAT III 600 V","Incluye: puntas y estuche","Apagado automático"], garantia:12, rating:4.5, tags:["oferta"], img:"/public/img/digital-multimeter.webp", gal:["/public/img/digital-multimeter.webp","/public/img/hand-tool-set.webp","/public/img/cordless-drill.webp"] },
+  { id:"p70", sku:"SD-HER-0005", nombre:"Caja de herramientas metálica 19\"", marca:"Stanley", categoria:"herramientas", precio:35, precioAnterior:null, stock:22, descripcion:"Caja de metal con bandeja interior para organizar tus herramientas.", specs:["Medidas: 19 pulgadas","Material: metal","Bandeja: interior extraíble","Cierre: metal","Asa: plegable"], garantia:6, rating:4.4, tags:["entrega-inmediata"], img:"/public/img/hand-tool-set.webp", gal:["/public/img/hand-tool-set.webp","/public/img/cordless-drill.webp","/public/img/digital-multimeter.webp"] },
+  { id:"p71", sku:"SD-HER-0006", nombre:"Sierra caladora 600 W con velocidad variable", marca:"Bosch", categoria:"herramientas", precio:69, precioAnterior:82, stock:11, descripcion:"Sierra caladora para cortes rectos y curvos en madera y metal.", specs:["Potencia: 600 W","Carrera: 3000 rpm","Velocidad: variable","Corte: madera y metal","Incluye: hoja y maletín"], garantia:12, rating:4.5, tags:["oferta"], img:"/public/img/hand-tool-set.webp", gal:["/public/img/hand-tool-set.webp","/public/img/cordless-drill.webp","/public/img/digital-multimeter.webp"] },
 
   // --- Utiles del hogar ---
-  { id:"p72", sku:"SD-HOG-0001", nombre:"Juego de ollas antiadherentes 7 piezas", marca:"Imusa", categoria:"hogar", precio:69, precioAnterior:85, stock:15, descripcion:"Set de ollas y sartenes con recubrimiento antiadherente y tapas de vidrio.", specs:["Piezas: 7","Recubrimiento: antiadherente","Tapas: vidrio templado","Apta para: cocina eléctrica y gas","Mangos: baquelita"], garantia:6, rating:4.5, tags:["mas-vendido","oferta"], img:IMG("photo-1584622650111-993a426fbf0a"), gal:[IMG("photo-1584622650111-993a426fbf0a"),IMG("photo-1556909114-f6e7ad7d3136")] },
-  { id:"p73", sku:"SD-HOG-0002", nombre:"Set de vajilla 16 piezas porcelana", marca:"Genérico", categoria:"hogar", precio:49, precioAnterior:null, stock:18, descripcion:"Vajilla de porcelana para 4 personas, resistente al uso diario.", specs:["Piezas: 16","Material: porcelana","Comensales: 4","Incluye: platos y tazas","Apta: microondas"], garantia:3, rating:4.3, tags:["nuevo"], img:IMG("photo-1556909114-f6e7ad7d3136"), gal:[IMG("photo-1556909114-f6e7ad7d3136")] },
-  { id:"p74", sku:"SD-HOG-0003", nombre:"Organizador de cocina multinivel", marca:"Genérico", categoria:"hogar", precio:24, precioAnterior:31, stock:26, descripcion:"Organizador de plástico resistente para especias, frascos y utensilios.", specs:["Niveles: 3","Material: plástico ABS","Medidas: 40x26x20 cm","Color: blanco","Fácil limpieza"], garantia:3, rating:4.2, tags:["oferta"], img:IMG("photo-1556909114-f6e7ad7d3136"), gal:[IMG("photo-1556909114-f6e7ad7d3136")] },
-  { id:"p75", sku:"SD-HOG-0004", nombre:"Filtro purificador de agua de grifo", marca:"Genérico", categoria:"hogar", precio:29, precioAnterior:36, stock:30, descripcion:"Purificador de agua con carbón activado para mejorar sabor y calidad.", specs:["Tipo: grifo","Filtro: carbón activado","Vida útil: 1500 L","Instalación: sencilla","Material: ABS"], garantia:6, rating:4.4, tags:["oferta","entrega-inmediata"], img:IMG("photo-1584622650111-993a426fbf0a"), gal:[IMG("photo-1584622650111-993a426fbf0a")] },
-  { id:"p76", sku:"SD-HOG-0005", nombre:"Regleta con protección de voltaje 6 tomas", marca:"Genérico", categoria:"hogar", precio:19, precioAnterior:null, stock:40, descripcion:"Regleta con supresor de picos para proteger tus equipos de las variaciones.", specs:["Tomas: 6","Protección: supresor de picos","Cable: 1.5 m","Interruptor: con luz","Voltaje: 110 V"], garantia:6, rating:4.5, tags:["entrega-inmediata","mas-vendido"], img:IMG("photo-1558494949-ef010cbdcc31"), gal:[IMG("photo-1558494949-ef010cbdcc31")] },
-  { id:"p77", sku:"SD-HOG-0006", nombre:"Juego de sábanas 2 plazas 100 % algodón", marca:"Genérico", categoria:"hogar", precio:39, precioAnterior:49, stock:20, descripcion:"Juego de sábanas suaves de algodón para cama de 2 plazas.", specs:["Tamaño: 2 plazas","Material: algodón","Piezas: 4 (sábana, ajustable, 2 fundas)","Hilo: 200","Color: varios"], garantia:3, rating:4.3, tags:["oferta"], img:IMG("photo-1522708323590-d24dbb6b0267"), gal:[IMG("photo-1522708323590-d24dbb6b0267")] }
+  { id:"p72", sku:"SD-HOG-0001", nombre:"Juego de ollas antiadherentes 7 piezas", marca:"Imusa", categoria:"hogar", precio:69, precioAnterior:85, stock:15, descripcion:"Set de ollas y sartenes con recubrimiento antiadherente y tapas de vidrio.", specs:["Piezas: 7","Recubrimiento: antiadherente","Tapas: vidrio templado","Apta para: cocina eléctrica y gas","Mangos: baquelita"], garantia:6, rating:4.5, tags:["mas-vendido","oferta"], img:"/public/img/cookware-set-pots.webp", gal:["/public/img/cookware-set-pots.webp","/public/img/rice-cooker.webp","/public/img/water-filter-tap.webp"] },
+  { id:"p73", sku:"SD-HOG-0002", nombre:"Set de vajilla 16 piezas porcelana", marca:"Genérico", categoria:"hogar", precio:49, precioAnterior:null, stock:18, descripcion:"Vajilla de porcelana para 4 personas, resistente al uso diario.", specs:["Piezas: 16","Material: porcelana","Comensales: 4","Incluye: platos y tazas","Apta: microondas"], garantia:3, rating:4.3, tags:["nuevo"], img:"/public/img/cookware-set-pots.webp", gal:["/public/img/cookware-set-pots.webp","/public/img/rice-cooker.webp","/public/img/water-filter-tap.webp"] },
+  { id:"p74", sku:"SD-HOG-0003", nombre:"Organizador de cocina multinivel", marca:"Genérico", categoria:"hogar", precio:24, precioAnterior:31, stock:26, descripcion:"Organizador de plástico resistente para especias, frascos y utensilios.", specs:["Niveles: 3","Material: plástico ABS","Medidas: 40x26x20 cm","Color: blanco","Fácil limpieza"], garantia:3, rating:4.2, tags:["oferta"], img:"/public/img/cookware-set-pots.webp", gal:["/public/img/cookware-set-pots.webp","/public/img/rice-cooker.webp","/public/img/water-filter-tap.webp"] },
+  { id:"p75", sku:"SD-HOG-0004", nombre:"Filtro purificador de agua de grifo", marca:"Genérico", categoria:"hogar", precio:29, precioAnterior:36, stock:30, descripcion:"Purificador de agua con carbón activado para mejorar sabor y calidad.", specs:["Tipo: grifo","Filtro: carbón activado","Vida útil: 1500 L","Instalación: sencilla","Material: ABS"], garantia:6, rating:4.4, tags:["oferta","entrega-inmediata"], img:"/public/img/water-filter-tap.webp", gal:["/public/img/water-filter-tap.webp","/public/img/cookware-set-pots.webp","/public/img/power-strip-surge-protector.webp"] },
+  { id:"p76", sku:"SD-HOG-0005", nombre:"Regleta con protección de voltaje 6 tomas", marca:"Genérico", categoria:"hogar", precio:19, precioAnterior:null, stock:40, descripcion:"Regleta con supresor de picos para proteger tus equipos de las variaciones.", specs:["Tomas: 6","Protección: supresor de picos","Cable: 1.5 m","Interruptor: con luz","Voltaje: 110 V"], garantia:6, rating:4.5, tags:["entrega-inmediata","mas-vendido"], img:"/public/img/power-strip-surge-protector.webp", gal:["/public/img/power-strip-surge-protector.webp","/public/img/ups-uninterruptible-power-supply.webp"] },
+  { id:"p77", sku:"SD-HOG-0006", nombre:"Juego de sábanas 2 plazas 100 % algodón", marca:"Genérico", categoria:"hogar", precio:39, precioAnterior:49, stock:20, descripcion:"Juego de sábanas suaves de algodón para cama de 2 plazas.", specs:["Tamaño: 2 plazas","Material: algodón","Piezas: 4 (sábana, ajustable, 2 fundas)","Hilo: 200","Color: varios"], garantia:3, rating:4.3, tags:["oferta"], img:"/public/img/sin-foto.webp", gal:["/public/img/sin-foto.webp"] },
+  // --- Mas productos: ampliacion del catalogo ---
+  { id:"p78", sku:"SD-COM-0009", nombre:"Disco SSD Kingston A400 480 GB SATA", marca:"Kingston", categoria:"computo", precio:49, precioAnterior:65, stock:24, descripcion:"Unidad de estado solido SATA de 2.5 pulgadas. Multiplica la velocidad de tu PC o laptop frente al disco mecanico.", specs:["Capacidad: 480 GB","Interfaz: SATA III 6 Gb/s","Formato: 2.5 pulgadas","Lectura: hasta 500 MB/s","Garantia del fabricante: 3 anos"], garantia:12, rating:4.7, tags:["oferta","mas-vendido"], img:"/public/img/ssd-solid-state-drive.webp", gal:["/public/img/ssd-solid-state-drive.webp","/public/img/laptop-computer.webp"] },
+  { id:"p79", sku:"SD-COM-0010", nombre:"Memoria USB SanDisk Cruzer Blade 32 GB", marca:"SanDisk", categoria:"computo", precio:9, precioAnterior:null, stock:80, descripcion:"Pendrive compacto y resistente para llevar tus archivos, fotos y documentos a cualquier parte.", specs:["Capacidad: 32 GB","Interfaz: USB 2.0","Diseno: plegable sin tapa","Compatible: Windows, macOS, Linux","Garantia del fabricante: 2 anos"], garantia:6, rating:4.5, tags:["entrega-inmediata"], img:"/public/img/usb-flash-drive.webp", gal:["/public/img/usb-flash-drive.webp","/public/img/ssd-solid-state-drive.webp"] },
+  { id:"p80", sku:"SD-COM-0011", nombre:"Tablet Lenovo Tab M10 10.1\" 64 GB WiFi", marca:"Lenovo", categoria:"computo", precio:189, precioAnterior:229, stock:9, descripcion:"Tablet de 10.1 pulgadas para estudiar, ver series y navegar. Ideal para ninos y para leer.", specs:["Pantalla: 10.1 pulgadas HD","Almacenamiento: 64 GB ampliable","RAM: 4 GB","Bateria: 5000 mAh","Conectividad: WiFi"], garantia:12, rating:4.4, tags:["oferta","nuevo"], img:"/public/img/tablet-computer.webp", gal:["/public/img/tablet-computer.webp","/public/img/laptop-computer.webp"] },
+  { id:"p81", sku:"SD-COM-0012", nombre:"Camara web Full HD 1080p con microfono", marca:"Logitech", categoria:"computo", precio:35, precioAnterior:null, stock:18, descripcion:"Camara web 1080p con microfono incorporado para clases, reuniones y transmisiones.", specs:["Resolucion: 1920x1080","Microfono: integrado con reduccion de ruido","Montaje: pinza para pantalla o tripode","Conexion: USB-A","Compatibilidad: Windows, macOS, Linux"], garantia:6, rating:4.3, tags:["nuevo"], img:"/public/img/webcam.webp", gal:["/public/img/webcam.webp","/public/img/laptop-computer.webp"] },
+  { id:"p82", sku:"SD-COM-0013", nombre:"Audifonos con microfono para PC y celular", marca:"Logitech", categoria:"computo", precio:22, precioAnterior:29, stock:34, descripcion:"Audifonos con microfono ajustable y almohadillas comodas para estudiar o trabajar todo el dia.", specs:["Tipo: diadema supraaural","Microfono: ajustable con cancelacion","Conexion: jack 3.5 mm","Cable: 1.8 m","Compatibilidad: PC, laptop y movil"], garantia:6, rating:4.2, tags:["oferta","entrega-inmediata"], img:"/public/img/headphones.webp", gal:["/public/img/headphones.webp","/public/img/webcam.webp"] },
+  { id:"p83", sku:"SD-TEL-0008", nombre:"Cable HDMI 2.0 de 2 m 4K", marca:"Genérico", categoria:"telecom", precio:8, precioAnterior:null, stock:60, descripcion:"Cable HDMI de alta velocidad para conectar TV, monitor o proyector con imagen 4K.", specs:["Longitud: 2 m","Estandar: HDMI 2.0","Resolucion: hasta 4K a 60 Hz","Conector: dorado","Ancho de banda: 18 Gbps"], garantia:3, rating:4.4, tags:["entrega-inmediata"], img:"/public/img/sin-foto.webp", gal:["/public/img/sin-foto.webp"] },
+  { id:"p84", sku:"SD-TEL-0009", nombre:"Parlante Bluetooth portatil 10 W", marca:"Genérico", categoria:"telecom", precio:26, precioAnterior:34, stock:22, descripcion:"Parlante inalambrico resistente al agua, con bateria de larga duracion para llevar a cualquier parte.", specs:["Potencia: 10 W","Bluetooth: 5.0","Bateria: hasta 8 horas","Resistencia: salpicaduras IPX5","Entradas: microSD, USB y auxiliar"], garantia:6, rating:4.3, tags:["oferta"], img:"/public/img/bluetooth-speaker.webp", gal:["/public/img/bluetooth-speaker.webp","/public/img/headphones.webp"] },
+  { id:"p85", sku:"SD-ELE-0007", nombre:"Pava electrica 1.8 L acero inoxidable", marca:"Midea", categoria:"electrodomesticos", precio:21, precioAnterior:27, stock:30, descripcion:"Pava electrica de 1.8 litros con corte automatico y proteccion contra funcionamiento en seco.", specs:["Capacidad: 1.8 L","Potencia: 1500 W","Material: acero inoxidable","Corte: automatico al hervir","Proteccion: sin agua"], garantia:12, rating:4.5, tags:["oferta","mas-vendido"], img:"/public/img/electric-kettle.webp", gal:["/public/img/electric-kettle.webp","/public/img/microwave-oven-kitchen.webp"] },
+  { id:"p86", sku:"SD-ELE-0008", nombre:"Televisor LED 43 pulgadas Full HD", marca:"Midea", categoria:"electrodomesticos", precio:249, precioAnterior:299, stock:6, descripcion:"Televisor LED de 43 pulgadas Full HD con HDMI y USB. Se conecta a tu decodificador o a un TV Box.", specs:["Pantalla: 43 pulgadas","Resolucion: 1920x1080","Entradas: 2 HDMI, 2 USB, AV","Sonido: 2x8 W","Montaje: VESA 200x200"], garantia:12, rating:4.4, tags:["oferta","nuevo"], img:"/public/img/television-set.webp", gal:["/public/img/television-set.webp","/public/img/power-strip-surge-protector.webp"] },
+  { id:"p87", sku:"SD-CLI-0006", nombre:"Estabilizador de voltaje 1000 VA", marca:"Forza", categoria:"computo", precio:59, precioAnterior:null, stock:12, descripcion:"Estabilizador con regulacion automatica para proteger equipos de las variaciones de voltaje de la red.", specs:["Potencia: 1000 VA","Regulacion: automatica","Tomas: 4 de salida","Proteccion: sobrevoltaje y bajo voltaje","Indicador: LED de estado"], garantia:12, rating:4.5, tags:["entrega-inmediata"], img:"/public/img/power-strip-surge-protector.webp", gal:["/public/img/power-strip-surge-protector.webp","/public/img/ups-uninterruptible-power-supply.webp"] },
+  { id:"p88", sku:"SD-CLI-0007", nombre:"Lampara LED de emergencia recargable", marca:"Genérico", categoria:"clima", precio:12, precioAnterior:16, stock:45, descripcion:"Lampara LED recargable con bateria de litio. Se carga durante el dia y te alumbra en los apagones.", specs:["Tipo: LED recargable","Bateria: litio 1200 mAh","Autonomia: hasta 6 horas","Carga: USB o 220 V","Modos: alta, baja y linterna"], garantia:6, rating:4.6, tags:["oferta","mas-vendido"], img:"/public/img/led-lamp.webp", gal:["/public/img/led-lamp.webp","/public/img/portable-power-station.webp"] },
+  { id:"p89", sku:"SD-CLI-0008", nombre:"Linterna LED tactica recargable", marca:"Genérico", categoria:"clima", precio:15, precioAnterior:null, stock:38, descripcion:"Linterna LED de aluminio con bateria recargable, resistente al agua y con haz ajustable.", specs:["Alcance: hasta 200 m","Bateria: recargable 18650","Modos: alta, media, baja y estrobo","Resistencia: salpicaduras","Cuerpo: aluminio antideslizante"], garantia:6, rating:4.4, tags:["entrega-inmediata"], img:"/public/img/flashlight.webp", gal:["/public/img/flashlight.webp","/public/img/led-lamp.webp"] },
+  { id:"p90", sku:"SD-HER-0007", nombre:"Cinta metrica 5 m con traba", marca:"Stanley", categoria:"herramientas", precio:9, precioAnterior:null, stock:50, descripcion:"Cinta metrica de 5 metros con traba y cinta recubierta para medir sin que se doble.", specs:["Longitud: 5 m","Ancho: 25 mm","Traba: manual","Recubrimiento: nylon","Cuerpo: ABS con goma"], garantia:6, rating:4.5, tags:["entrega-inmediata"], img:"/public/img/tape-measure.webp", gal:["/public/img/tape-measure.webp","/public/img/hand-tool-set.webp"] },
+  { id:"p91", sku:"SD-HER-0008", nombre:"Juego de destornilladores de precision 45 en 1", marca:"Genérico", categoria:"herramientas", precio:17, precioAnterior:23, stock:26, descripcion:"Juego de destornilladores de precision con puntas intercambiables para telefonos, laptops y electronicos.", specs:["Piezas: 45 en 1","Puntas: planas, estrella, torx, hex","Material: acero S2","Mango: antideslizante con soporte","Estuche: rigido con cierre"], garantia:6, rating:4.6, tags:["oferta","nuevo"], img:"/public/img/screwdriver-set.webp", gal:["/public/img/screwdriver-set.webp","/public/img/hand-tool-set.webp"] },
+  { id:"p92", sku:"SD-ALR-0006", nombre:"Timbre inalambrico con 2 pulsadores", marca:"Genérico", categoria:"alarmas", precio:14, precioAnterior:null, stock:40, descripcion:"Timbre inalambrico con alcance de 100 metros y varios tonos. Se instala sin cables.", specs:["Alcance: hasta 100 m","Pulsadores: 2","Tonos: 52 melodias","Volumen: 5 niveles","Alimentacion: pilas o 220 V"], garantia:6, rating:4.3, tags:["entrega-inmediata"], img:"/public/img/doorbell.webp", gal:["/public/img/doorbell.webp","/public/img/burglar-alarm-control-panel.webp"] },
+  { id:"p93", sku:"SD-OFI-0006", nombre:"Balanza digital de cocina 5 kg", marca:"Genérico", categoria:"hogar", precio:16, precioAnterior:21, stock:28, descripcion:"Balanza digital de precision para cocinar y pesar porciones. Pantalla LCD y funcion tara.", specs:["Capacidad: 5 kg","Precision: 1 g","Unidades: g, kg, oz, lb","Funcion: tara","Bateria: 2 pilas AAA"], garantia:6, rating:4.4, tags:["oferta"], img:"/public/img/sin-foto.webp", gal:["/public/img/sin-foto.webp"] },
 ];
 
 // Etiquetas normalizadas para mostrar en las tarjetas
@@ -2322,6 +2541,10 @@ function icon(name, cls) {
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("aria-hidden", "true");
   svg.setAttribute("focusable", "false");
+  // Tamano por defecto del tamano de la letra. El CSS puede sobreescribirlo
+  // (las reglas de estilo ganan a los atributos de presentacion).
+  svg.setAttribute("width", "1em");
+  svg.setAttribute("height", "1em");
   if (cls) svg.setAttribute("class", cls);
   const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
   use.setAttribute("href", "#" + name);
@@ -2351,10 +2574,10 @@ function placeholderSVG(nombre) {
   const initials = String(nombre || "SD").trim().split(/\s+/).slice(0, 2).map(w => w[0] || "").join("").toUpperCase();
   const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450">' +
     '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
-    '<stop offset="0" stop-color="#1E3FBF"/><stop offset="1" stop-color="#22C7D6"/></linearGradient></defs>' +
-    '<rect width="600" height="450" fill="#0F1B5C"/>' +
+    '<stop offset="0" stop-color="#0A33B5"/><stop offset="1" stop-color="#15C4D4"/></linearGradient></defs>' +
+    '<rect width="600" height="450" fill="#0B1853"/>' +
     '<rect x="0" y="0" width="600" height="450" fill="url(#g)" opacity="0.25"/>' +
-    '<text x="300" y="250" font-family="Sora,Arial,sans-serif" font-size="120" font-weight="700" fill="#22C7D6" text-anchor="middle">' + escapeHTML(initials) + '</text>' +
+    '<text x="300" y="250" font-family="Sora,Arial,sans-serif" font-size="120" font-weight="700" fill="#3EF5E9" text-anchor="middle">' + escapeHTML(initials) + '</text>' +
     '</svg>';
   return "data:image/svg+xml," + encodeURIComponent(svg);
 }
@@ -2396,6 +2619,25 @@ function disponibilidad(stock) {
 // Normaliza texto para buscar (sin tildes, minusculas)
 function normalizar(str) {
   return String(str || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+// Recorta a "max" caracteres sin partir la ultima palabra. Se usa en las meta
+// descripciones, donde un corte a mitad de palabra queda mal en los resultados
+// de busqueda.
+function recortarPalabra(texto, max) {
+  const t = String(texto || "").trim();
+  if (t.length <= max) return t;
+  const corte = t.slice(0, Math.max(1, max - 1));
+  const ultimo = corte.lastIndexOf(" ");
+  return (ultimo > max * 0.5 ? corte.slice(0, ultimo) : corte).replace(/[,;:.]+$/, "") + "…";
+}
+
+// Titulo SEO con la marca al final y respetando el limite de caracteres.
+// Si el nucleo no cabe, se recorta el nucleo pero la marca siempre se conserva.
+function tituloSEO(nucleo, base, max) {
+  const sufijo = " | " + base;
+  if ((nucleo + sufijo).length <= max) return nucleo + sufijo;
+  return recortarPalabra(nucleo, Math.max(10, max - sufijo.length)) + sufijo;
 }
 
 // Debounce para el buscador
@@ -2752,7 +2994,7 @@ function calcularTotales() {
 function productCard(p, opts) {
   const o = opts || {};
   const disp = disponibilidad(p.stock);
-  const card = el("article", { class: "product" + (o.list ? " product--list" : ""), attrs: { "data-id": p.id } });
+  const card = el("article", { class: "product" + (o.list ? " product--list" : ""), attrs: { "data-id": p.id, "data-revelar": "" } });
 
   const media = el("div", { class: "product__media" });
   const enlace = el("a", { attrs: { href: "/producto/" + p.id, "data-nav": "detalle", "data-product": p.id, "aria-label": "Ver detalles de " + p.nombre } });
@@ -4054,7 +4296,12 @@ function actualizarSEO(vista, o) {
     const p = PROD_POR_ID[o.producto];
     if (p) {
       titulo = p.nombre + " · " + p.marca;
-      desc = "Compra " + p.nombre + " en Cuba por " + fmtUSD(p.precio) + ". " + p.descripcion.slice(0, 90) + " Garantía " + (p.garantia || 0) + " meses y envío a domicilio.";
+      // Corta en palabra completa y respeta el limite de ~160 caracteres,
+      // reservando sitio para el cierre de garantia y envio.
+      const cierre = " Garantía " + (p.garantia || 0) + " meses y envío a domicilio.";
+      const prefijo = "Compra " + p.nombre + " en Cuba por " + fmtUSD(p.precio) + ". ";
+      const hueco = Math.max(40, 159 - prefijo.length - cierre.length);
+      desc = prefijo + recortarPalabra(p.descripcion, hueco) + cierre;
       slug = "/producto/" + p.id;
     }
   } else {
@@ -4073,7 +4320,7 @@ function actualizarSEO(vista, o) {
     desc = descripciones[vista] || "Tienda de tecnología en Cuba: cómputo, energía solar, seguridad, clima y suministros.";
   }
 
-  document.title = titulo + " | " + base;
+  document.title = tituloSEO(titulo, base, 60);
   const metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) metaDesc.setAttribute("content", desc.slice(0, 158));
   const ogTitle = document.querySelector('meta[property="og:title"]');
@@ -5069,9 +5316,21 @@ function navegarDesdeURL(sinURL) {
 }
 
 // --- Arranque ---
+// Mide la altura real de la cabecera y la publica en --sticky-top. El header
+// mide mas que --header-h porque la barra de navegacion ocupa varias filas
+// segun el ancho, y los elementos pegajosos necesitan ese dato al dia.
+function medirCabecera() {
+  const cab = $("#cabecera");
+  if (!cab) return;
+  const h = Math.round(cab.getBoundingClientRect().height);
+  document.documentElement.style.setProperty("--sticky-top", h + "px");
+}
+
 function init() {
   // Tema antes de pintar nada
   aplicarTema();
+  // Altura de la cabecera antes de renderizar: la usan los elementos pegajosos
+  medirCabecera();
 
   // Datos dinamicos de la plantilla
   renderContenidoEstatico();
@@ -5127,8 +5386,74 @@ function init() {
   // Navegacion del historial
   window.addEventListener("popstate", () => navegarDesdeURL(true));
 
+  // La cabecera cambia de alto al cambiar el ancho o la fuente: remide siempre
+  medirCabecera();
+  if (window.ResizeObserver) new ResizeObserver(medirCabecera).observe($("#cabecera"));
+  window.addEventListener("resize", medirCabecera, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(medirCabecera);
+
+  // Efectos visuales: barra de progreso, cabecera al bajar y revelado al entrar
+  initEfectos();
+
   // Aviso honesto para quien mire la consola
-  console.info("%cSinergia Digital", "color:#1E3FBF;font-weight:700", "— demo de tienda en un solo archivo. Los datos de pago son de ejemplo (REEMPLAZAR). El front-end no valida pagos.");
+  console.info("%cSinergia Digital", "color:#0A33B5;font-weight:700", "— demo de tienda en un solo archivo. Los datos de pago son de ejemplo (REEMPLAZAR). El front-end no valida pagos.");
+}
+
+
+/* ---------- Efectos de interfaz ----------
+   Todo aqui degrada con elegancia: si el navegador no soporta algo, se
+   queda el aspecto estatico y no se rompe nada. */
+function initEfectos() {
+  const raiz = document.documentElement;
+  // Marca de que hay JS: el CSS solo oculta lo revelable cuando existe .js,
+  // asi que sin JavaScript el contenido se ve siempre.
+  raiz.classList.add("js");
+
+  // 1. Barra de progreso de lectura. Se usa la API de animacion por scroll si
+  //    existe (va en el hilo de composicion y no cuesta nada); si no, un
+  //    escuchador pasivo que ademas se limita con requestAnimationFrame.
+  const barra = document.getElementById("scrollProgress");
+  const soportaScrollTimeline = CSS && CSS.supports && CSS.supports("animation-timeline: scroll()");
+  if (barra && !soportaScrollTimeline) {
+    let pendiente = false;
+    const pinta = () => {
+      pendiente = false;
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const p = h > 0 ? Math.min(1, window.scrollY / h) : 0;
+      barra.style.transform = "scaleX(" + p.toFixed(4) + ")";
+    };
+    window.addEventListener("scroll", () => {
+      if (!pendiente) { pendiente = true; requestAnimationFrame(pinta); }
+    }, { passive: true });
+    window.addEventListener("resize", pinta, { passive: true });
+    pinta();
+  }
+
+  // 2. Sombra de la cabecera al bajar (mas presencia, sin marear)
+  const cab = document.getElementById("cabecera");
+  if (cab) {
+    const marca = () => cab.setAttribute("data-scrolled", window.scrollY > 8 ? "true" : "false");
+    window.addEventListener("scroll", marca, { passive: true });
+    marca();
+  }
+
+  // 3. Revelado al entrar en pantalla, con IntersectionObserver.
+  const reducido = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const objetivos = document.querySelectorAll("[data-revelar]");
+  if (!objetivos.length) return;
+  if (reducido || !("IntersectionObserver" in window)) {
+    objetivos.forEach(el => el.setAttribute("data-revelar", "visible"));
+    return;
+  }
+  const obs = new IntersectionObserver((entradas) => {
+    entradas.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.setAttribute("data-revelar", "visible");
+        obs.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+  objetivos.forEach(el => obs.observe(el));
 }
 
 // El script es "defer", asi que el DOM ya esta listo cuando corre.
