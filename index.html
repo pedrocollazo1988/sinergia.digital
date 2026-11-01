@@ -20,7 +20,7 @@
   archivos propios y usar nonce o hash. Ver autoevaluacion al final.
   ============================================================================
 -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://images.unsplash.com https://images.pexels.com; connect-src 'self'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src https://www.bc.gob.cu; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://images.unsplash.com https://images.pexels.com; connect-src 'self'; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <title>Tienda de tecnología en Cuba | Sinergia Digital</title>
@@ -596,6 +596,14 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 @media (min-width:900px){
   #filtersPanel{position:sticky;top:calc(var(--sticky-top,170px) + .8rem);max-height:calc(100vh - var(--sticky-top,170px) - 1.6rem);overflow-y:auto}
 }
+
+/* Widget de tasas del Banco Central de Cuba (pagina de metodos de pago) */
+.rate-widget{margin-top:1.4rem;padding:1.1rem}
+.rate-widget__head{flex-wrap:wrap;gap:.6rem;align-items:center}
+.rate-widget__head h3{margin:0;font-size:1.02rem}
+.rate-widget__note{margin:.5rem 0 .9rem;max-width:70ch}
+.rate-widget__frame{width:100%;height:520px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface)}
+@media (max-width:560px){.rate-widget__frame{height:440px}}
 
 /* Esqueleto de carga */
 .skeleton{background:linear-gradient(90deg,var(--surface-2) 25%,var(--border) 37%,var(--surface-2) 63%);background-size:400% 100%;animation:shimmer 1.3s infinite;border-radius:var(--radius)}
@@ -1398,6 +1406,29 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
       <div class="notice notice--warn" style="margin-top:1.4rem">
         <strong>El front-end no valida pagos.</strong> Esta página solo muestra instrucciones y guarda la referencia que tú envías. La confirmación real del abono la hace un operador de forma manual o un backend con las credenciales de cada pasarela. Nunca pongas claves de pasarela en el código del navegador.
       </div>
+
+      <!-- Tasa de cambio oficial del Banco Central de Cuba, incrustada desde
+           bc.gob.cu. El iframe lleva sandbox para que la pagina ajena no pueda
+           navegar la pestana principal. Si el BC bloquea la incrustacion, el
+           enlace "Abrir en el BC" y el bloque <noscript> son el respaldo. -->
+      <section class="rate-widget card" aria-labelledby="bcRateTitle">
+        <div class="between rate-widget__head">
+          <h3 id="bcRateTitle">Tasa de cambio oficial (Banco Central de Cuba)</h3>
+          <a class="btn btn--outline btn--sm" href="https://www.bc.gob.cu/widget/tasas-de-cambio" target="_blank" rel="noopener noreferrer">Abrir en el BC</a>
+        </div>
+        <p class="small muted rate-widget__note">USD y EUR con respecto al CUP, según el Banco Central de Cuba. Aviso: los precios de esta tienda se publican en USD y se convierten con la tasa propia de la web, que no tiene por qué coincidir con la oficial.</p>
+        <iframe
+          class="rate-widget__frame"
+          src="https://www.bc.gob.cu/widget/tasas-de-cambio"
+          title="Tasas de cambio oficiales del Banco Central de Cuba"
+          loading="lazy"
+          referrerpolicy="no-referrer"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+        ></iframe>
+        <noscript>
+          <p class="small">Tu navegador no muestra el widget. Consulta las tasas directamente en <a href="https://www.bc.gob.cu/widget/tasas-de-cambio" target="_blank" rel="noopener noreferrer">bc.gob.cu</a>.</p>
+        </noscript>
+      </section>
     </div>
   </section>
 
@@ -2054,9 +2085,13 @@ const CONFIG = {
   },
 
   // Tasas de cambio. REEMPLAZAR con las tasas del dia y su fecha.
+  // OJO: usdCup y usdtUsd son las tasas PROPIAS de la tienda, las que se usan
+  // para convertir los precios. No tienen por que coincidir con la tasa oficial
+  // del Banco Central de Cuba, que se muestra aparte en "Metodos de pago"
+  // incrustando el widget de bc.gob.cu.
   tasas: {
-    usdCup: 320,          // 1 USD = 320 CUP
-    usdtUsd: 0.98,        // 1 USDT = 0.98 USD
+    usdCup: 320,          // 1 USD = 320 CUP (tasa de la tienda, REEMPLAZAR)
+    usdtUsd: 0.98,        // 1 USDT = 0.98 USD (tasa de la tienda, REEMPLAZAR)
     fecha: "2026-11-01",  // fecha de actualizacion (YYYY-MM-DD)
     comisionPago: 0.03    // 3 % de recargo por gestión de pago (0 para desactivar)
   },
