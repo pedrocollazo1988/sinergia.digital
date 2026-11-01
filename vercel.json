@@ -4,7 +4,7 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/((?!api/|public/|.*\\..*).*)",
+      "source": "/((?!api/|public/).*)",
       "destination": "/index.html"
     }
   ],
@@ -56,7 +56,7 @@
       ]
     },
     {
-      "source": "/public/(logo-(mark|full)(-claro)?|favicon)-[0-9]+\\.(png|webp)",
+      "source": "/public/(logo|favicon)-(.*)",
       "headers": [
         {
           "key": "Cache-Control",
