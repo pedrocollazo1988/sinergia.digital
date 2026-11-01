@@ -15,6 +15,7 @@ Uso:  python3 check-assets.py        (codigo 1 si hay fallos)
 """
 import os
 import re
+import subprocess
 import sys
 
 RAIZ = os.path.dirname(os.path.abspath(__file__))
@@ -29,18 +30,42 @@ def leer(nombre):
 
 
 def referencias(html):
-    """Saca todas las rutas locales citadas en src/href/url()/srcset."""
+    """Saca todas las rutas locales citadas en el HTML.
+
+    No basta con mirar src/href/url(): el catalogo guarda las imagenes en
+    propiedades JS (`img:"/public/img/x.webp"`, `gal:[...]`), asi que una
+    revision limitada a los atributos HTML deja pasar la mayoria. Aqui se
+    recogen TODAS las cadenas entrecomilladas que empiecen por "/", mas las
+    de url() y srcset.
+    """
     refs = set()
-    for m in re.finditer(r'(?:src|href)="(/[^"?#]+)"', html):
+    for m in re.finditer(r'''["'`](/(?!/)[^"'`\s]*)["'`]''', html):
         refs.add(m.group(1))
-    for m in re.finditer(r'url\(["\']?(/[^"\')?#\s]+)', html):
+    for m in re.finditer(r'url\(["\']?(/(?!/)[^"\')?#\s]+)', html):
         refs.add(m.group(1))
     for m in re.finditer(r'srcset="([^"]+)"', html):
         for parte in m.group(1).split(","):
             url = parte.strip().split()[0]
             if url.startswith("/"):
                 refs.add(url.split("?")[0])
-    return refs
+    # Fuera anclas, y sin la query ni el fragmento.
+    return {r.split("#")[0].split("?")[0] for r in refs if r != "/"}
+
+
+def versionados():
+    """Devuelve el conjunto de archivos que git va a desplegar, o None.
+
+    Es la comprobacion que importa: el 404 del 2026-11-01 lo causo un PNG que
+    estaba en el disco pero NO en git, asi que nunca llego al despliegue. Mirar
+    el sistema de archivos no lo habria detectado.
+    """
+    try:
+        salida = subprocess.run(
+            ["git", "ls-files"], cwd=RAIZ, capture_output=True, text=True, check=True
+        ).stdout
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    return {linea.strip() for linea in salida.splitlines() if linea.strip()}
 
 
 def main():
@@ -54,11 +79,37 @@ def main():
             referenciados |= referencias(html)
 
     publicos = sorted(r for r in referenciados if r.startswith("/public/"))
-    ausentes = [r for r in publicos if not os.path.exists(os.path.join(RAIZ, r.lstrip("/")))]
+
+    # Preferimos comprobar contra git: es lo que se despliega de verdad.
+    en_git = versionados()
+    if en_git is None:
+        print("aviso: no es un repositorio git; se comprueba contra el disco")
+        existe = lambda r: os.path.exists(os.path.join(RAIZ, r.lstrip("/")))
+        etiqueta = "no existe en el disco"
+    else:
+        existe = lambda r: r.lstrip("/") in en_git
+        etiqueta = "no esta versionado (no llegara al despliegue)"
+
+    ausentes = [r for r in publicos if not existe(r)]
     print(f"recursos en /public/: {len(publicos)} referenciados, {len(ausentes)} ausentes")
     for r in ausentes:
-        print(f"  FALTA {r}  (el navegador recibira un 404)")
+        print(f"  FALTA {r}  ({etiqueta}; el navegador recibira un 404)")
     fallos += len(ausentes)
+
+    # 1b) Archivos bajo public/ presentes en el disco pero sin versionar: no
+    #     rompen nada por si solos, pero suelen indicar un asset olvidado.
+    if en_git is not None:
+        en_disco = {
+            os.path.relpath(os.path.join(d, f), RAIZ).replace(os.sep, "/")
+            for d, _, fs in os.walk(os.path.join(RAIZ, "public"))
+            for f in fs
+        }
+        sin_versionar = sorted(a for a in en_disco if a not in en_git)
+        if sin_versionar:
+            print(f"archivos en public/ sin versionar: {len(sin_versionar)}")
+            for a in sin_versionar[:10]:
+                print(f"  SIN VERSIONAR {a}")
+            fallos += len(sin_versionar)
 
     # 2) Proporcion de las variantes 1x/2x de cada logo.
     try:
