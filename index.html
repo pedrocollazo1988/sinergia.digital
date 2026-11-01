@@ -427,20 +427,30 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .header__bar{display:flex;align-items:center;gap:clamp(.5rem,2vw,1.2rem);min-height:var(--header-h)}
 .brand{display:flex;align-items:center;gap:.6rem;flex:0 0 auto;text-decoration:none!important}
 /* Logotipo real. Se pinta como fondo para poder cambiar de variante con el
-   tema. El tamano es fijo para no provocar saltos de maquetacion (CLS). */
+   tema. El tamano es fijo para no provocar saltos de maquetacion (CLS).
+   Se declara primero el PNG y despues image-set: si el navegador no entiende
+   image-set, se queda con el PNG (mejora progresiva sin @supports). */
 .brand__logo{
   width:42px;height:42px;flex:0 0 auto;
-  background-image:url("/public/logo-mark-256.png");
+  background-image:url("/public/logo-mark-128.png");
   background-size:contain;background-position:center;background-repeat:no-repeat;
+}
+.brand__logo{
+  background-image:image-set(url("/public/logo-mark-128.webp") 1x, url("/public/logo-mark-256.png") 2x);
 }
 /* Variante clara (texto y azul aclarados) sobre fondos oscuros */
 [data-theme="dark"] .brand__logo,
-.footer .brand__logo{background-image:url("/public/logo-mark-claro-256.png")}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]) .brand__logo{background-image:url("/public/logo-mark-claro-256.png")}
+.footer .brand__logo{background-image:url("/public/logo-mark-claro-128.png")}
+[data-theme="dark"] .brand__logo,
+.footer .brand__logo{
+  background-image:image-set(url("/public/logo-mark-claro-128.webp") 1x, url("/public/logo-mark-claro-256.png") 2x);
 }
-/* La marca del pie ya es clara por si misma */
-.footer .brand__logo{background-image:url("/public/logo-mark-claro-256.png")}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .brand__logo{background-image:url("/public/logo-mark-claro-128.png")}
+  :root:not([data-theme="light"]) .brand__logo{
+    background-image:image-set(url("/public/logo-mark-claro-128.webp") 1x, url("/public/logo-mark-claro-256.png") 2x);
+  }
+}
 .brand__name{font-weight:800;font-size:1.12rem;letter-spacing:-.02em;color:var(--navy);line-height:1}
 .brand__tag{display:block;font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan-text);margin-top:2px}
 [data-theme="dark"] .brand__name{color:var(--text)}
