@@ -352,6 +352,10 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .btn--tg{background:#2AABEE;color:#062a3d}
 .btn--sm{padding:.42rem .8rem;font-size:.86rem}
 .btn--block{width:100%}
+/* Los iconos dentro de un boton nunca deben estirarse: toman el tamano de la
+   letra. Sin esta regla, el SVG (que no trae width/height) se expande al
+   contenedor flex y sale gigante. */
+.btn svg{width:1em;height:1em;flex:0 0 auto}
 .btn--lg{padding:.9rem 1.5rem;font-size:1.03rem}
 
 .badge{
@@ -437,11 +441,13 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .header__actions{display:flex;align-items:center;gap:.35rem;margin-left:auto}
 .iconbtn{
   position:relative;display:inline-flex;align-items:center;justify-content:center;
-  width:42px;height:42px;border-radius:var(--radius-pill);color:var(--text);
+  width:42px;height:42px;flex:0 0 auto;border-radius:var(--radius-pill);color:var(--text);
   transition:background var(--t-fast),color var(--t-fast);
 }
 .iconbtn:hover{background:var(--surface-2);color:var(--blue)}
-.iconbtn svg{width:21px;height:21px}
+/* flex:0 0 auto en el padre es imprescindible: sin el, la barra de acciones
+   comprime el boton, el SVG se encoge a lo ancho y deja de ser cuadrado. */
+.iconbtn svg{width:21px;height:21px;flex:0 0 auto}
 .iconbtn__count{
   position:absolute;top:2px;right:2px;min-width:18px;height:18px;padding:0 4px;
   display:grid;place-items:center;background:var(--cyan);color:#04202a;border-radius:var(--radius-pill);
@@ -457,13 +463,16 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .nav__list{display:flex;gap:.15rem;list-style:none;margin:0;padding:0;overflow-x:auto;scrollbar-width:thin}
 .nav__list::-webkit-scrollbar{height:4px}
 .nav__list::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:4px}
+/* Con 11 enlaces el menu no cabe en pantallas medianas. En vez de cortarlo,
+   se reparte en varias filas; la barra de scroll solo aparece en movil. */
+@media (min-width:1024px){.nav__list{flex-wrap:wrap;overflow-x:visible}}
 .nav__link{
-  display:inline-flex;align-items:center;gap:.4rem;padding:.65rem .8rem;font-weight:600;font-size:.9rem;
+  display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .68rem;font-weight:600;font-size:.86rem;
   color:var(--text-soft);border-bottom:3px solid transparent;white-space:nowrap;text-decoration:none!important;
 }
 .nav__link:hover{color:var(--blue)}
 .nav__link[aria-current="page"]{color:var(--blue);border-bottom-color:var(--cyan)}
-.nav__toggle{display:flex;align-items:center;gap:.4rem;padding:.65rem .8rem;font-weight:600;font-size:.9rem;color:var(--text-soft)}
+.nav__toggle{display:flex;align-items:center;gap:.35rem;padding:.55rem .68rem;font-weight:600;font-size:.86rem;color:var(--text-soft)}
 .nav__mega{
   position:absolute;left:0;right:0;top:100%;z-index:880;background:var(--surface);
   border-bottom:1px solid var(--border);box-shadow:var(--shadow-lg);padding:1.2rem 0;
@@ -498,8 +507,18 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .hero__art{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:16/11;background:var(--surface-2)}
 .hero__art img{width:100%;height:100%;object-fit:cover}
 .hero__dots{display:flex;gap:.4rem;justify-content:center;padding-bottom:1rem}
-.hero__dot{width:10px;height:10px;border-radius:50%;background:var(--border-strong);transition:transform var(--t-fast),background var(--t-fast)}
-.hero__dot[aria-current="true"]{background:var(--blue);transform:scale(1.25)}
+/* El punto se ve de 10px, pero el boton mide 24px para que se pueda pulsar
+   con el dedo (minimo tactil recomendado por WCAG 2.5.8). El circulo se
+   dibuja con un pseudo-elemento para no agrandar el punto visible. */
+.hero__dot{
+  width:24px;height:24px;display:grid;place-items:center;
+  background:none;border:0;padding:0;cursor:pointer;border-radius:50%;
+}
+.hero__dot::before{
+  content:"";width:10px;height:10px;border-radius:50%;background:var(--border-strong);
+  transition:transform var(--t-fast),background var(--t-fast);
+}
+.hero__dot[aria-current="true"]::before{background:var(--blue);transform:scale(1.25)}
 
 .benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.8rem}
 .benefit{display:flex;gap:.75rem;align-items:flex-start;padding:1rem;border-radius:var(--radius);background:var(--surface);border:1px solid var(--border)}
@@ -563,6 +582,20 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .product--list .product__media{flex:0 0 34%;aspect-ratio:4/3}
 .product--list .product__body{padding:1rem}
 @media (max-width:560px){.product--list{flex-direction:column}.product--list .product__media{flex:none;width:100%}}
+
+/* Catalogo: los filtros van en una barra lateral en escritorio y se apilan
+   arriba en pantallas estrechas. El grid vive aqui (no inline) para que la
+   media query pueda sobreescribirlo. */
+#catalogLayout{display:grid;gap:1.4rem;grid-template-columns:1fr}
+@media (min-width:900px){
+  #catalogLayout{grid-template-columns:262px 1fr}
+}
+/* Barra lateral de filtros pegajosa bajo el header en escritorio. El header
+   mide mas que --header-h porque la barra de navegacion ocupa varias filas. */
+#filtersPanel{align-self:start}
+@media (min-width:900px){
+  #filtersPanel{position:sticky;top:calc(var(--sticky-top,170px) + .8rem);max-height:calc(100vh - var(--sticky-top,170px) - 1.6rem);overflow-y:auto}
+}
 
 /* Esqueleto de carga */
 .skeleton{background:linear-gradient(90deg,var(--surface-2) 25%,var(--border) 37%,var(--surface-2) 63%);background-size:400% 100%;animation:shimmer 1.3s infinite;border-radius:var(--radius)}
@@ -1178,7 +1211,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
         <p id="catalogLead" class="lead">Explora más de 60 productos con precios en USD, CUP y USDT, envío a domicilio y garantía.</p>
       </div>
 
-      <div style="display:grid;gap:1.4rem;grid-template-columns:1fr" id="catalogLayout">
+      <div id="catalogLayout">
         <!-- Panel de filtros -->
         <aside class="card" id="filtersPanel" style="padding:1.1rem;align-self:start" aria-label="Filtros de catálogo">
           <div class="between" style="margin-bottom:.8rem">
@@ -2322,6 +2355,10 @@ function icon(name, cls) {
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("aria-hidden", "true");
   svg.setAttribute("focusable", "false");
+  // Tamano por defecto del tamano de la letra. El CSS puede sobreescribirlo
+  // (las reglas de estilo ganan a los atributos de presentacion).
+  svg.setAttribute("width", "1em");
+  svg.setAttribute("height", "1em");
   if (cls) svg.setAttribute("class", cls);
   const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
   use.setAttribute("href", "#" + name);
@@ -5069,9 +5106,21 @@ function navegarDesdeURL(sinURL) {
 }
 
 // --- Arranque ---
+// Mide la altura real de la cabecera y la publica en --sticky-top. El header
+// mide mas que --header-h porque la barra de navegacion ocupa varias filas
+// segun el ancho, y los elementos pegajosos necesitan ese dato al dia.
+function medirCabecera() {
+  const cab = $("#cabecera");
+  if (!cab) return;
+  const h = Math.round(cab.getBoundingClientRect().height);
+  document.documentElement.style.setProperty("--sticky-top", h + "px");
+}
+
 function init() {
   // Tema antes de pintar nada
   aplicarTema();
+  // Altura de la cabecera antes de renderizar: la usan los elementos pegajosos
+  medirCabecera();
 
   // Datos dinamicos de la plantilla
   renderContenidoEstatico();
@@ -5126,6 +5175,12 @@ function init() {
 
   // Navegacion del historial
   window.addEventListener("popstate", () => navegarDesdeURL(true));
+
+  // La cabecera cambia de alto al cambiar el ancho o la fuente: remide siempre
+  medirCabecera();
+  if (window.ResizeObserver) new ResizeObserver(medirCabecera).observe($("#cabecera"));
+  window.addEventListener("resize", medirCabecera, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(medirCabecera);
 
   // Aviso honesto para quien mire la consola
   console.info("%cSinergia Digital", "color:#1E3FBF;font-weight:700", "— demo de tienda en un solo archivo. Los datos de pago son de ejemplo (REEMPLAZAR). El front-end no valida pagos.");
