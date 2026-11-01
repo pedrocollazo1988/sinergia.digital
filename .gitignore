@@ -1,0 +1,13 @@
+# Piezas de construcción (se concatenan en index.html)
+.build/
+
+# Memoria local del agente
+.openhands/
+
+# Archivos temporales y de sistema
+*.log
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
+.agent_tmp/

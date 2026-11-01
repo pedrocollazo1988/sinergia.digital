@@ -1,0 +1,29 @@
+# robots.txt para Sinergia Digital
+# REEMPLAZAR el dominio si no es www.sinergia.digital
+
+User-agent: *
+Allow: /
+
+# No rastrear rutas de estado o parametros de ordenacion
+Disallow: /checkout
+Disallow: /carrito
+Disallow: /*?orden=
+Disallow: /*?min=
+Disallow: /*?max=
+Disallow: /*&orden=
+
+# Rastreo amable: no cargar demasiado el servidor
+Crawl-delay: 2
+
+# Sitemap
+Sitemap: https://www.sinergia.digital/sitemap.xml
+
+# --- Bots de IA: decide tu politica ---
+# Descomenta las lineas siguientes si NO quieres que los rastreadores de IA
+# usen tu contenido para entrenamiento.
+# User-agent: GPTBot
+# Disallow: /
+# User-agent: CCBot
+# Disallow: /
+# User-agent: Google-Extended
+# Disallow: /
