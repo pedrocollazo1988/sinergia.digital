@@ -1,7 +1,9 @@
 # ============================================================================
 # Sinergia Digital - .htaccess para Apache (Hostinger, cPanel, etc.)
 # Cabeceras de seguridad que el navegador SOLO respeta si vienen del servidor.
-# Reemplaza www.sinergia.digital por tu dominio real.
+# Este archivo solo se usa en hosting Apache propio (Hostinger, cPanel).
+# En Vercel no se usa: alli las cabeceras van en vercel.json.
+# Reemplaza ejemplo.com por tu dominio real si lo conectas.
 # ============================================================================
 
 # ---------- 1. HTTPS obligatorio ----------
@@ -12,11 +14,11 @@
   RewriteCond %{HTTPS} !=on
   RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
-  # Fuerza el dominio CON www, que es el que declaran el canonical, el
-  # og:url y el sitemap. Si prefieres el dominio sin www, cambia las tres
-  # referencias (canonical, og:url, sitemap.xml) Y este bloque a la vez.
-  RewriteCond %{HTTP_HOST} !^www\. [NC]
-  RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
+  # Fuerza el dominio CON www. Desactivado: ahora mismo no hay dominio propio
+  # y el canonical apunta a la URL de Vercel. Activalo (y cambia el canonical,
+  # el og:url y el sitemap a la vez) cuando conectes tu dominio.
+  #RewriteCond %{HTTP_HOST} !^www\. [NC]
+  #RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
 
   # URLs limpias: cualquier ruta que no sea un archivo o carpeta real
   # se sirve con index.html (la app usa History API).

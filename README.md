@@ -102,7 +102,7 @@ Abre `index.html`, busca `REEMPLAZAR` (hay 28 marcadores) y cambia:
 
 ### Otros
 - `index.html`: `<link rel="canonical">`, `og:url`, `og:image`, los `hreflang` y el `@id`
-  del JSON-LD usan `https://www.sinergia.digital` — cámbialo por tu dominio.
+  del JSON-LD usan `https://sinergiadigital-pedrocollazo1988.vercel.app` — cámbialo por tu dominio.
 - `robots.txt` y `sitemap.xml`: mismo dominio.
 - Las imágenes de producto apuntan a **Unsplash**. Para producción, súbelas a tu propio
   hosting (mejora privacidad, velocidad y evita dependencias externas).

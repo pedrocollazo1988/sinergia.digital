@@ -1,5 +1,5 @@
 # robots.txt para Sinergia Digital
-# REEMPLAZAR el dominio si no es www.sinergia.digital
+# Dominio: URL del despliegue de Vercel. Cambiala cuando conectes un dominio propio.
 
 User-agent: *
 Allow: /
@@ -16,7 +16,7 @@ Disallow: /*&orden=
 Crawl-delay: 2
 
 # Sitemap
-Sitemap: https://www.sinergia.digital/sitemap.xml
+Sitemap: https://sinergiadigital-pedrocollazo1988.vercel.app/sitemap.xml
 
 # --- Bots de IA: decide tu politica ---
 # Descomenta las lineas siguientes si NO quieres que los rastreadores de IA
