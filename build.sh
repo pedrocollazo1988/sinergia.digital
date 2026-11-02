@@ -16,6 +16,7 @@ part06_footer.html
 part07_js_config.html
 part08a_products.html
 part08b_products.html
+part08c_catalogo_externo.html
 part09_content.html
 part10_utils.html
 part11_state_render.html
