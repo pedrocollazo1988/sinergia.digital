@@ -25,9 +25,15 @@ y solo se usa para el ticket; si no carga, el ticket cae en `window.print()`.
 
 ### Despliegue en Vercel (el que se usa)
 1. Sube el repo a GitHub y conéctalo en Vercel (**Add New → Project**).
-2. Framework Preset: **Other**. Build command: *(vacío)*. Output: `.`
+2. Framework Preset: **Other**. Build command: *(vacío)*.
 3. Vercel detecta `vercel.json` y aplica cabeceras, rewrites y caché.
 4. El dominio queda en HTTPS automático.
+
+> **El Directorio de Salida debe ser la raíz del repo.** Si lo dejas en
+> `public`, Vercel sirve el contenido de esa carpeta como si fuera la raiz y
+> `index.html`, `robots.txt` y `sitemap.xml` dan 404 (`NOT_FOUND`). Por eso
+> `vercel.json` fija `"outputDirectory": "."`, que sobreescribe ese ajuste
+> del panel. No lo quites.
 
 ### (Alternativa) Netlify
 1. **Add new site → Import an existing project**, elige el repo.
