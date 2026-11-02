@@ -20,7 +20,7 @@
   archivos propios y usar nonce o hash. Ver autoevaluacion al final.
   ============================================================================
 -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://cdn.dummyjson.com https://wsrv.nl; connect-src 'self' https://dummyjson.com; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://cdn.dummyjson.com; connect-src 'self' https://dummyjson.com https://api.bc.gob.cu; form-action 'self'; manifest-src 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <title>Tienda de tecnología en Cuba | Sinergia Digital</title>
@@ -2509,50 +2509,43 @@ const TAG_LABEL = {
 };
 
 /* ============================================================================
-   CATALOGO DE EJEMPLO DESDE UNA API PUBLICA
+   CATALOGO DESDE LA API PUBLICA (DummyJSON)
    ----------------------------------------------------------------------------
-   Trae productos de muestra desde DummyJSON (API publica, sin clave ni registro)
-   y los mezcla con el catalogo local. El catalogo local NO se borra: queda como
-   respaldo, asi que si la API no responde o el cliente esta sin conexion la
-   tienda se ve igual y no queda ningun hueco.
+   Trae los productos de la API publica de DummyJSON (sin clave ni registro) y
+   los usa como catalogo de la tienda. NO se guarda nada en el navegador: cada
+   visita pide los datos frescos. Si la API no responde, se queda el catalogo
+   local como respaldo para que la tienda nunca aparezca vacia.
 
-   Imagenes: las de DummyJSON son PNG de ~65 KB (y hasta 2 MB en tamano
-   completo). Se piden a wsrv.nl, que las devuelve en WebP y a 400 px (~8 KB).
-   Eso baja el peso de la rejilla unas 8 veces, que es lo que mas se nota en
-   una conexion lenta. Si el proxy no responde, la <img> cae al original por el
-   onerror que ya tienen todas las tarjetas.
+   Imagenes: se usan las miniaturas WebP que sirve la propia API
+   (cdn.dummyjson.com, unos 5 KB cada una). Antes se pasaban por un proxy
+   externo (wsrv.nl) y en redes lentas o restringidas ese proxy fallaba y
+   dejaba los huecos. La URL directa es mas corta, no depende de terceros y ya
+   viene optimizada por la API.
 
-   Privacidad: no se envia ningun dato del cliente a la API, solo se leen
-   productos. La respuesta se guarda en cache 24 h para no pedirla en cada
-   visita.
+   Cobertura: la API solo tiene catalogo real de unas pocas familias (laptops,
+   tablets, telefonos, accesorios moviles, electrodomesticos de cocina y muebles
+   /decoracion). Las categorias de la tienda que la API no cubre se quedan con
+   el catalogo local, que si tiene productos reales de ese rubro. Asi ninguna
+   categoria aparece vacia.
    ========================================================================== */
 const CATALOGO_EXTERNO = {
-  // Base de DummyJSON (API publica, sin clave ni registro).
   apiBase: "https://dummyjson.com/products/category/",
-  proxy: "https://wsrv.nl/?url=",
-  cacheClave: "sd_catalogo_externo",
-  cacheHoras: 24,
-  // Una peticion por categoria y no una sola con limit=60: pidiendo los
-  // primeros 60 productos, DummyJSON devuelve sobre todo perfumes y ropa, que
-  // no encajan en esta tienda. Pidiendo por categoria se trae lo que si sirve.
+  porCategoria: 5,       // 5 productos por categoria, como se pidio
+  maxFuentes: 3,         // cuantas fuentes de la API se prueban por categoria
+  // Categoria de la tienda -> fuentes de la API, en orden de preferencia.
   mapa: {
-    "laptops": "computo",
-    "tablets": "computo",
-    "smartphones": "telecom",
-    "mobile-accessories": "telecom",
-    "kitchen-accessories": "hogar",
-    "home-decoration": "hogar",
-    "furniture": "hogar"
+    "computo":           ["laptops", "tablets"],
+    "telecom":           ["smartphones", "mobile-accessories"],
+    "electrodomesticos": ["kitchen-accessories"],
+    "hogar":             ["home-decoration", "furniture"]
   }
 };
 
-// Pasa una URL de imagen remota por el optimizador. Las rutas locales y los
-// data: se dejan intactos (ya estan optimizadas y no salen del sitio).
+// Las imagenes de la API ya vienen listas para usar. Las rutas locales y los
+// data: se dejan intactas.
 function optimizarImagen(url) {
   if (!url || typeof url !== "string") return "/public/img/sin-foto.webp";
-  if (url.charAt(0) === "/" || url.indexOf("data:") === 0) return url;
-  const limpia = url.replace(/^https?:\/\//, "");
-  return CATALOGO_EXTERNO.proxy + encodeURIComponent(limpia) + "&w=400&output=webp&q=72";
+  return url;
 }
 
 // Convierte un producto de la API al formato interno de la tienda.
@@ -2593,9 +2586,16 @@ function mapearProductoExterno(p, categoriaLocal) {
   };
 }
 
-// Añade los productos externos al catalogo en memoria. Evita duplicados por id.
+// Sustituye el catalogo local por el de la API en las categorias que la API
+// cubre. Las categorias que la API no cubre se quedan con el catalogo local.
 function aplicarCatalogoExterno(lista) {
   if (!Array.isArray(lista) || !lista.length) return 0;
+  const cubiertas = new Set(lista.map(p => p.categoria));
+  for (let i = PRODUCTOS.length - 1; i >= 0; i--) {
+    if (cubiertas.has(PRODUCTOS[i].categoria) && String(PRODUCTOS[i].id).indexOf("ext") !== 0) {
+      PRODUCTOS.splice(i, 1);
+    }
+  }
   const yaEsta = new Set(PRODUCTOS.map(p => p.id));
   let anadidos = 0;
   lista.forEach(p => {
@@ -2604,53 +2604,171 @@ function aplicarCatalogoExterno(lista) {
   return anadidos;
 }
 
-// Lee la cache local si sigue vigente.
-function leerCacheCatalogo() {
-  try {
-    const bruto = Store.get(CATALOGO_EXTERNO.cacheClave, null);
-    if (!bruto || !bruto.t || !Array.isArray(bruto.lista)) return null;
-    const horas = (Date.now() - bruto.t) / 36e5;
-    if (horas > CATALOGO_EXTERNO.cacheHoras) return null;
-    return bruto.lista;
-  } catch (e) { return null; }
+// Pide una fuente (categoria de la API) y devuelve los productos crudos.
+async function pedirFuente(cat, signal) {
+  const resp = await fetch(CATALOGO_EXTERNO.apiBase + encodeURIComponent(cat) + "?limit=12", { signal: signal, headers: { "Accept": "application/json" } });
+  if (!resp.ok) return [];
+  const datos = await resp.json();
+  return Array.isArray(datos.products) ? datos.products : [];
 }
 
-function guardarCacheCatalogo(lista) {
-  try { Store.set(CATALOGO_EXTERNO.cacheClave, { t: Date.now(), lista: lista }); } catch (e) {}
-}
-
-// Descarga el catalogo. Nunca lanza: si algo falla, la tienda sigue con el
-// catalogo local y no se muestra ningun error al cliente.
+// Descarga el catalogo y lo aplica. Nunca lanza: si algo falla, la tienda sigue
+// con el catalogo local y no se muestra ningun error al cliente.
 async function cargarCatalogoExterno() {
-  let lista = leerCacheCatalogo();
-  if (!lista) {
-    try {
-      const ctrl = new AbortController();
-      const reloj = setTimeout(() => ctrl.abort(), 10000); // no dejar la carga colgada
-      const pedidos = Object.keys(CATALOGO_EXTERNO.mapa).map(async (cat) => {
-        const resp = await fetch(CATALOGO_EXTERNO.apiBase + encodeURIComponent(cat) + "?limit=12", { signal: ctrl.signal, headers: { "Accept": "application/json" } });
-        if (!resp.ok) return [];
-        const datos = await resp.json();
-        const crudos = Array.isArray(datos.products) ? datos.products : [];
-        return crudos.map(p => mapearProductoExterno(p, CATALOGO_EXTERNO.mapa[cat]));
-      });
-      const grupos = await Promise.all(pedidos);
-      clearTimeout(reloj);
-      lista = grupos.reduce((acc, g) => acc.concat(g), []);
-      if (lista.length) guardarCacheCatalogo(lista);
-    } catch (e) {
-      return 0; // sin conexion o API caida: se queda el catalogo local
+  try {
+    const ctrl = new AbortController();
+    const reloj = setTimeout(() => ctrl.abort(), 12000);
+    const categorias = Object.keys(CATALOGO_EXTERNO.mapa);
+    const grupos = await Promise.all(categorias.map(async (catLocal) => {
+      const fuentes = CATALOGO_EXTERNO.mapa[catLocal].slice(0, CATALOGO_EXTERNO.maxFuentes);
+      const salida = [];
+      const vistos = new Set();
+      for (const cat of fuentes) {
+        if (salida.length >= CATALOGO_EXTERNO.porCategoria) break;
+        let crudos = [];
+        try { crudos = await pedirFuente(cat, ctrl.signal); } catch (e) { crudos = []; }
+        for (const p of crudos) {
+          if (salida.length >= CATALOGO_EXTERNO.porCategoria) break;
+          if (!p || vistos.has(p.id)) continue;
+          vistos.add(p.id);
+          salida.push(mapearProductoExterno(p, catLocal));
+        }
+      }
+      return salida;
+    }));
+    clearTimeout(reloj);
+    const lista = grupos.reduce((acc, g) => acc.concat(g), []);
+    const n = aplicarCatalogoExterno(lista);
+    if (n > 0) {
+      renderInicio();
+      renderContadores();
+      renderProductosActuales();
+      renderDrawer();
+      if (State.vistaActual === "catalogo") renderCatalogo();
     }
+    return n;
+  } catch (e) {
+    return 0; // sin conexion o API caida: se queda el catalogo local
   }
-  const n = aplicarCatalogoExterno(lista);
-  if (n > 0) {
-    renderInicio();
-    renderContadores();
-    renderProductosActuales();
-    renderDrawer();
-    if (State.vistaActual === "catalogo") renderCatalogo();
+}
+
+/* ============================================================================
+   TASAS DE CAMBIO OFICIALES (API DEL BANCO CENTRAL DE CUBA)
+   ----------------------------------------------------------------------------
+   Lee las tasas del dia del Banco Central por su API publica:
+   https://api.bc.gob.cu/v1/tasas-de-cambio/activas  (JSON, sin clave)
+
+   Se pide desde el navegador del cliente, asi que llega igual desde Cuba. Si
+   el BC no responde (mantenimiento, red del cliente), se muestran los valores
+   de CONFIG.tasas y el aviso queda marcado como "sin conexion", para no dar
+   por bueno un dato viejo.
+
+   La API devuelve TRES valores por moneda:
+     tasaOficial  -> "Seg. I"   (p. ej. USD 24.00)
+     tasaPublica  -> "Seg. II"  (p. ej. USD 120.00)
+     tasaEspecial -> "Seg. III" (p. ej. USD 768.00)
+
+   La web del BC encabeza su tabla con "Tasas oficiales USD 768.0000", que
+   corresponde al campo tasaEspecial. Por eso el valor que se muestra por
+   defecto es el especial: es el que el cliente ve en bc.gob.cu. Para cambiar
+   cual se muestra basta con poner "oficial" o "publica" en `campo`.
+
+   Ojo: esto es informativo. Los precios de la tienda se convierten con
+   CONFIG.tasas.usdCup, que es la tasa comercial de la tienda y no tiene por
+   que coincidir con la del BC (la propia pagina de pagos ya lo advierte).
+   ========================================================================== */
+const TASAS_BC = {
+  // Se pide primero al puente propio (/api/tasas), que corre en el mismo
+  // dominio: asi no depende de que el BC mande cabeceras CORS. Si el puente no
+  // esta disponible (por ejemplo en local sin servidor), se intenta la API del
+  // BC directamente. El primero que responda con datos validos se usa.
+  urls: ["/api/tasas", "https://api.bc.gob.cu/v1/tasas-de-cambio/activas"],
+  monedas: ["USD", "EUR", "CAD"],
+  campo: "especial",     // "oficial" | "publica" | "especial"
+  timeoutMs: 9000
+};
+
+// Da formato a una fecha ISO del BC como dd/mm/aaaa.
+function fechaCortaBC(iso) {
+  if (!iso || typeof iso !== "string") return "";
+  const p = iso.slice(0, 10).split("-");
+  return p.length === 3 ? p[2] + "/" + p[1] + "/" + p[0] : "";
+}
+
+// Pinta las tasas en la barra superior. datos = { USD:{oficial:...}, ... }
+function pintarTasasBC(datos, fecha, sinConexion) {
+  const linea = $("#topbarRates");
+  if (!linea) return;
+  linea.textContent = "";
+  linea.setAttribute("data-bc", "1"); // evita que renderContenidoEstatico() lo pise
+  if (!datos || !datos.USD) {
+    // Respaldo: los valores de CONFIG, avisando de que no son del dia.
+    linea.appendChild(document.createTextNode("Tasa de referencia: 1 USD = " + CONFIG.tasas.usdCup + " CUP"));
+    const av = document.createElement("span");
+    av.className = "small";
+    av.textContent = "(sin conexión con el BC)";
+    linea.appendChild(document.createTextNode(" "));
+    linea.appendChild(av);
+    return;
   }
-  return n;
+  const partes = [];
+  const campo = TASAS_BC.campo || "especial";
+  TASAS_BC.monedas.forEach(cod => {
+    if (!datos[cod]) return;
+    const b = document.createElement("b");
+    b.textContent = Number(datos[cod][campo] || 0).toFixed(2);
+    const span = document.createElement("span");
+    span.appendChild(document.createTextNode("1 " + cod + " = "));
+    span.appendChild(b);
+    span.appendChild(document.createTextNode(" CUP"));
+    partes.push(span);
+  });
+  partes.forEach((s, i) => {
+    if (i > 0) linea.appendChild(document.createTextNode(" · "));
+    linea.appendChild(s);
+  });
+  const fechaTxt = document.createElement("span");
+  fechaTxt.className = "small";
+  fechaTxt.textContent = "(tasa del BC, " + (fecha || "—") + ")";
+  linea.appendChild(document.createTextNode(" "));
+  linea.appendChild(fechaTxt);
+}
+
+// Pide las tasas a una URL concreta y devuelve la lista, o null si falla.
+async function pedirTasas(url) {
+  const ctrl = new AbortController();
+  const reloj = setTimeout(() => ctrl.abort(), TASAS_BC.timeoutMs);
+  try {
+    const resp = await fetch(url, { signal: ctrl.signal, headers: { "Accept": "application/json" } });
+    if (!resp.ok) return null;
+    const datos = await resp.json();
+    const lista = Array.isArray(datos && datos.tasas) ? datos.tasas : [];
+    return lista.length ? lista : null;
+  } catch (e) {
+    return null;
+  } finally {
+    clearTimeout(reloj);
+  }
+}
+
+// Descarga las tasas y las pinta. Prueba el puente propio y, si falla, la API
+// del BC directamente. Nunca lanza.
+async function cargarTasasBC() {
+  for (const url of TASAS_BC.urls) {
+    const lista = await pedirTasas(url);
+    if (!lista) continue;
+    const porMoneda = {};
+    let fecha = "";
+    lista.forEach(t => {
+      const cod = String(t.codigoMoneda || "").toUpperCase();
+      if (!cod) return;
+      porMoneda[cod] = { oficial: Number(t.tasaOficial) || 0, publica: Number(t.tasaPublica) || 0, especial: Number(t.tasaEspecial) || 0 };
+      if (!fecha && t.fechaDia) fecha = fechaCortaBC(t.fechaDia);
+    });
+    if (porMoneda.USD) { pintarTasasBC(porMoneda, fecha, false); return lista.length; }
+  }
+  pintarTasasBC(null); // sin conexion: se muestran los valores de CONFIG
+  return 0;
 }
 
 // Marcas para la franja de "Marcas que trabajamos"
@@ -4630,12 +4748,20 @@ function renderTablaEnvios() {
 
 // Rellena las secciones estaticas que dependen de CONFIG
 function renderContenidoEstatico() {
-  // Tasas en la barra superior
+  // Tasas en la barra superior y en la pagina de pagos. Si cargarTasasBC() ya
+  // puso las oficiales en el encabezado, esas no se tocan; el resto (la linea
+  // de la pagina de pagos) se rellena igual con los valores de CONFIG.
+  const lineaTasas = $("#topbarRates");
+  const bcCargado = !!(lineaTasas && lineaTasas.getAttribute("data-bc"));
   $$("[data-rate]").forEach(n => {
+    if (bcCargado && lineaTasas.contains(n)) return;
     const k = n.getAttribute("data-rate");
     n.textContent = k === "usd-cup" ? String(CONFIG.tasas.usdCup) : String(CONFIG.tasas.usdtUsd);
   });
-  $$("[data-rate-date]").forEach(n => { n.textContent = "(actualizado: " + fmtDate(CONFIG.tasas.fecha) + ")"; });
+  $$("[data-rate-date]").forEach(n => {
+    if (bcCargado && lineaTasas.contains(n)) return;
+    n.textContent = "(actualizado: " + fmtDate(CONFIG.tasas.fecha) + ")";
+  });
 
   // FAQ
   const faqList = $("#faqList");
@@ -5721,7 +5847,11 @@ function initEfectos() {
 // El script es "defer", asi que el DOM ya esta listo cuando corre.
 init();
 
-// Catalogo de ejemplo desde la API publica. Se lanza despues de init() y sin
+// Tasas oficiales del Banco Central: se piden al arrancar y se pintan en la
+// barra superior. Si no hay conexion, queda el respaldo de CONFIG.tasas.
+cargarTasasBC();
+
+// Catalogo desde la API publica. Se lanza despues de init() y sin
 // await: la tienda ya esta pintada con el catalogo local, asi que si la API
 // tarda o falla no se bloquea nada ni se ve un hueco.
 cargarCatalogoExterno();
