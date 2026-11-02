@@ -420,7 +420,21 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .topbar{background:var(--navy);color:#dbe6ff;font-size:.8rem}
 .topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;min-height:34px;flex-wrap:wrap}
 .topbar a{color:#fff}
-.topbar__rate{font-variant-numeric:tabular-nums}
+
+/* Tasas en la barra superior: resumen desplegable con el widget oficial del BC.
+   El <summary> mantiene el aspecto de la barra; el panel cuelga debajo a todo
+   el ancho para que el iframe se vea comodo. */
+.topbar__rates{position:relative;margin:0}
+.topbar__rates>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:.35rem;font-variant-numeric:tabular-nums;border-radius:var(--radius-pill);padding:.15rem .55rem;border:1px solid rgba(219,230,255,.28);color:#dbe6ff}
+.topbar__rates>summary::-webkit-details-marker{display:none}
+.topbar__rates>summary::after{content:"▾";font-size:.7em;transition:transform .18s ease}
+.topbar__rates[open]>summary::after{transform:rotate(180deg)}
+.topbar__rates>summary:hover,.topbar__rates>summary:focus-visible{background:rgba(219,230,255,.12);color:#fff}
+.topbar__rates b{color:#fff}
+.topbar__panel{position:absolute;right:0;top:calc(100% + .5rem);z-index:1080;width:min(680px,92vw);background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:.9rem}
+.topbar__panel-head{flex-wrap:wrap;gap:.5rem;align-items:center}
+.topbar__frame{width:100%;height:520px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface-2);display:block}
+@media (max-width:700px){.topbar__panel{right:auto;left:0}.topbar__frame{height:420px}}
 
 /* ---------- 4. CABECERA ---------- */
 .header{position:sticky;top:0;z-index:900;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
@@ -1043,10 +1057,35 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 <div class="topbar" role="region" aria-label="Información de la tienda">
   <div class="wrap">
     <p style="margin:0">Envíos a toda Cuba · Garantía en todos los productos · Pago seguro</p>
-    <p class="topbar__rate" style="margin:0" id="topbarRates">
-      Tasa: 1 USD = <b data-rate="usd-cup">—</b> CUP · 1 USDT = <b data-rate="usdt-usd">—</b> USD
-      <span class="small" data-rate-date>(actualizado: —)</span>
-    </p>
+    <!-- La tasa propia de la tienda (la que convierte los precios) va en el
+         resumen. Al desplegarlo se muestra el widget OFICIAL del Banco Central
+         de Cuba incrustado, para poder comparar ambas tasas sin salir de la
+         pagina. El iframe va con sandbox para que la pagina ajena no pueda
+         navegar la pestana principal; el enlace de respaldo queda dentro. -->
+    <details class="topbar__rates" id="topbarRates">
+      <summary aria-label="Ver tasas de cambio y widget oficial del Banco Central de Cuba">
+        Tasa: 1 USD = <b data-rate="usd-cup">—</b> CUP · 1 USDT = <b data-rate="usdt-usd">—</b> USD
+        <span class="small" data-rate-date>(actualizado: —)</span>
+      </summary>
+      <div class="topbar__panel" role="region" aria-label="Tasas de cambio oficiales del Banco Central de Cuba">
+        <div class="between topbar__panel-head">
+          <strong>Tasa oficial del Banco Central de Cuba</strong>
+          <a class="btn btn--outline btn--sm" href="https://www.bc.gob.cu/widget/tasas-de-cambio" target="_blank" rel="noopener noreferrer">Abrir en el BC</a>
+        </div>
+        <p class="xsmall muted" style="margin:.35rem 0 .5rem">USD y EUR con respecto al CUP, según el BC. Los precios de la tienda se convierten con la tasa propia de la web, que puede no coincidir con la oficial.</p>
+        <iframe
+          class="topbar__frame"
+          src="https://www.bc.gob.cu/widget/tasas-de-cambio"
+          title="Tasas de cambio oficiales del Banco Central de Cuba"
+          loading="lazy"
+          referrerpolicy="no-referrer"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+        ></iframe>
+        <noscript>
+          <p class="small">Tu navegador no muestra el widget. Consulta las tasas en <a href="https://www.bc.gob.cu/widget/tasas-de-cambio" target="_blank" rel="noopener noreferrer">bc.gob.cu</a>.</p>
+        </noscript>
+      </div>
+    </details>
   </div>
 </div>
 
@@ -2932,6 +2971,11 @@ const State = {
   orden: "relevance",
   pagina: 1,
   vistaActual: "inicio",
+  // Producto que se esta viendo en la vista de detalle. Se guarda para poder
+  // volver a pintarla cuando cambia algo global (por ejemplo, la moneda).
+  productoActual: null,
+  // Producto abierto en la vista rapida (modal), si hay alguno.
+  productoVistaRapida: null,
   filtros: { categoria: "", marca: "", min: null, max: null, stock: false, oferta: false, nuevo: false, rating: 0, q: "", tag: "" },
   cliente: null,
   entrega: { metodo: "domicilio", provincia: "", municipio: "", costo: 0, plazo: "" },
@@ -3617,8 +3661,17 @@ function renderProductosActuales() {
     case "ofertas": renderOfertas(); break;
     case "favoritos": renderFavoritos(); break;
     case "comparar": renderComparar(); break;
-    case "detalle": break;
+    // La vista de detalle tambien depende de la moneda: antes se dejaba sin
+    // repintar y los precios se quedaban en la moneda anterior al cambiarla.
+    case "detalle":
+      if (State.productoActual) renderDetalle(State.productoActual);
+      break;
     default: break;
+  }
+  // La vista rapida (modal) muestra precios: si esta abierta, se repinta.
+  const modalQuick = $("#modalQuick");
+  if (State.productoVistaRapida && modalQuick && !modalQuick.hidden) {
+    pintarVistaRapida(State.productoVistaRapida);
   }
 }
 
@@ -4278,8 +4331,16 @@ function mostrarVista(nombre, opciones) {
   else if (vista === "carrito") renderCarritoPagina();
   else if (vista === "checkout") { renderCheckoutSummary(); irPaso(1); }
   else if (vista === "inicio") renderInicio();
-  else if (vista === "detalle") renderDetalle(o.producto);
+  else if (vista === "detalle") {
+    // Se recuerda el producto para poder repintar la vista si cambia la moneda.
+    State.productoActual = o.producto || null;
+    renderDetalle(o.producto);
+  }
   actualizarBotonesFav(); actualizarBotonesCmp();
+
+  // La tabla de envios vive en una vista estatica y sus importes dependen de la
+  // moneda: se repinta al entrar para que no quede con la moneda anterior.
+  renderTablaEnvios();
 
   // SEO: titulo, meta y URL
   actualizarSEO(vista, o);
@@ -4375,6 +4436,22 @@ function quitarJSONLDProducto() {
   if (s) s.remove();
 }
 
+// Costos de envio por provincia. Se aisló en su propia funcion porque los
+// importes cambian con la moneda elegida y hay que repintarlos al cambiarla.
+function renderTablaEnvios() {
+  const shipTable = $("#shipTable");
+  if (!shipTable) return;
+  shipTable.innerHTML = "";
+  PROVINCIAS.forEach(pv => {
+    const info = CONFIG.envios[pv];
+    const tr = el("tr");
+    tr.appendChild(el("td", { text: pv }));
+    tr.appendChild(el("td", { class: "num", text: precioEnMoneda(info.costo) }));
+    tr.appendChild(el("td", { class: "num", text: info.plazo }));
+    shipTable.appendChild(tr);
+  });
+}
+
 // Rellena las secciones estaticas que dependen de CONFIG
 function renderContenidoEstatico() {
   // Tasas en la barra superior
@@ -4392,19 +4469,8 @@ function renderContenidoEstatico() {
   const termList = $("#termsList");
   if (termList) { termList.innerHTML = ""; TERMINOS.forEach((f, i) => termList.appendChild(acordeon(f, i === 0))); }
 
-  // Tabla de envios
-  const shipTable = $("#shipTable");
-  if (shipTable) {
-    shipTable.innerHTML = "";
-    PROVINCIAS.forEach(pv => {
-      const info = CONFIG.envios[pv];
-      const tr = el("tr");
-      tr.appendChild(el("td", { text: pv }));
-      tr.appendChild(el("td", { class: "num", text: fmtUSD(info.costo) }));
-      tr.appendChild(el("td", { class: "num", text: info.plazo }));
-      shipTable.appendChild(tr);
-    });
-  }
+  // Tabla de envios (los costos se muestran en la moneda elegida)
+  renderTablaEnvios();
 
   // Datos de negocio
   const aboutBiz = $("#aboutBiz");
@@ -4803,6 +4869,8 @@ function cerrarModal(id) {
 function cerrarTodosLosModales() {
   $$(".overlay").forEach(m => { m.hidden = true; });
   document.body.style.overflow = "";
+  // El modal de vista rapida ya no esta visible: no hay que repintarlo.
+  State.productoVistaRapida = null;
 }
 function abrirCajon(id) {
   const d = $("#" + id);
@@ -4839,9 +4907,20 @@ function cerrarMenuMovil() {
 
 // Vista rapida de producto en modal
 function abrirVistaRapida(id) {
+  if (!pintarVistaRapida(id)) return;
+  abrirModal("modalQuick");
+}
+
+// Pinta el contenido de la vista rapida. Separado de abrirVistaRapida para
+// poder repintarlo cuando cambia la moneda sin volver a abrir el modal.
+// Devuelve true si se pudo pintar.
+function pintarVistaRapida(id) {
   const p = PROD_POR_ID[id];
   const cont = $("#quickBody");
-  if (!p || !cont) return;
+  if (!p || !cont) return false;
+  // Se recuerda el producto para poder repintarlo si cambia la moneda. El
+  // repintado solo ocurre mientras el modal este visible (ver mas abajo).
+  State.productoVistaRapida = id;
   cont.innerHTML = "";
   const grid = el("div", { class: "grid2", attrs: { style: "align-items:start" } });
   const media = el("div");
@@ -4872,7 +4951,7 @@ function abrirVistaRapida(id) {
   info.appendChild(row);
   grid.appendChild(info);
   cont.appendChild(grid);
-  abrirModal("modalQuick");
+  return true;
 }
 
 /* ==========================================================================
@@ -5178,10 +5257,17 @@ function aplicarTema() {
 function refrescarTodo() {
   renderProductosActuales();
   renderDrawer();
+  // La tabla de envios y los textos con importes dependen de la moneda: se
+  // repintan siempre, no solo al estar en la vista de envios.
+  renderTablaEnvios();
   if (State.vistaActual === "carrito") renderCarritoPagina();
   if (State.vistaActual === "checkout") { renderCheckoutSummary(); renderPagos(); }
   if (State.vistaActual === "inicio") renderInicio();
   if (State.vistaActual === "soluciones") renderContenidoEstatico();
+  // Las herramientas en modal tambien muestran importes. Si estan abiertas se
+  // vuelven a calcular para que el presupuesto salga en la moneda elegida.
+  const modalSolar = $("#modalSolar");
+  if (modalSolar && !modalSolar.hidden) calcularSolar();
   actualizarBotonesFav(); actualizarBotonesCmp();
 }
 
