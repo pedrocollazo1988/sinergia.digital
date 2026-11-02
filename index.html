@@ -969,7 +969,14 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 .nav__link:hover::after,.nav__link[aria-current="page"]::after,
 .footer__bottom a:hover::after{transform:scaleX(1)}
 
-/* 6. Las imagenes de producto, un poco mas vivas al pasar el raton */
+/* 6. Entrada de las tarjetas de producto. Es una animacion CSS pura: se
+   ejecuta al insertar la tarjeta y termina en opacity:1 pase lo que pase, asi
+   que una tarjeta nunca puede quedarse invisible (a diferencia del revelado
+   por scroll, que necesitaba que el observer llegara a dispararse). */
+.product{animation:entraProducto .45s cubic-bezier(.4,0,.2,1) both}
+@keyframes entraProducto{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* Las imagenes de producto, un poco mas vivas al pasar el raton */
 .product__media img{transition:transform .45s cubic-bezier(.4,0,.2,1)}
 .product:hover .product__media img{transform:scale(1.05)}
 .product{transition:transform .25s cubic-bezier(.4,0,.2,1),box-shadow .25s ease}
@@ -983,6 +990,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
   background-size:200% 100%;animation:shimmer 1.4s linear infinite}
 
 @media (prefers-reduced-motion: reduce){
+  .product{animation:none}
   .scroll-progress{animation:none;transform:scaleX(0)}
   .grad-vivo{animation:none}
   .card--brillo::before{animation:none;background:linear-gradient(120deg,var(--cyan),var(--violet))}
@@ -3332,7 +3340,7 @@ function calcularTotales() {
 function productCard(p, opts) {
   const o = opts || {};
   const disp = disponibilidad(p.stock);
-  const card = el("article", { class: "product" + (o.list ? " product--list" : ""), attrs: { "data-id": p.id, "data-revelar": "" } });
+  const card = el("article", { class: "product" + (o.list ? " product--list" : ""), attrs: { "data-id": p.id } });
 
   const media = el("div", { class: "product__media" });
   const enlace = el("a", { attrs: { href: "/producto/" + p.id, "data-nav": "detalle", "data-product": p.id, "aria-label": "Ver detalles de " + p.nombre } });
@@ -5826,22 +5834,32 @@ function initEfectos() {
   }
 
   // 3. Revelado al entrar en pantalla, con IntersectionObserver.
+  //    Se deja en una funcion reutilizable porque las tarjetas de producto se
+  //    vuelven a pintar muchas veces (filtros, cambio de moneda, catalogo de la
+  //    API...). Si el observador solo se aplicara al arrancar, todo lo pintado
+  //    despues se quedaria con opacity:0 y no se veria nunca.
   const reducido = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const objetivos = document.querySelectorAll("[data-revelar]");
-  if (!objetivos.length) return;
   if (reducido || !("IntersectionObserver" in window)) {
-    objetivos.forEach(el => el.setAttribute("data-revelar", "visible"));
-    return;
+    // Sin animacion: se muestra todo de una vez.
+    window.revelarPendientes = function () {
+      document.querySelectorAll("[data-revelar]:not([data-revelar='visible'])").forEach(el => el.setAttribute("data-revelar", "visible"));
+    };
+  } else {
+    const obs = new IntersectionObserver((entradas) => {
+      entradas.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.setAttribute("data-revelar", "visible");
+          obs.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    // Observa solo lo que aun no se ha revelado; es seguro llamarla tras cada
+    // repintado (los ya revelados se ignoran y no se vuelven a observar).
+    window.revelarPendientes = function () {
+      document.querySelectorAll("[data-revelar]:not([data-revelar='visible'])").forEach(el => obs.observe(el));
+    };
   }
-  const obs = new IntersectionObserver((entradas) => {
-    entradas.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.setAttribute("data-revelar", "visible");
-        obs.unobserve(e.target);
-      }
-    });
-  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
-  objetivos.forEach(el => obs.observe(el));
+  window.revelarPendientes();
 }
 
 // El script es "defer", asi que el DOM ya esta listo cuando corre.
