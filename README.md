@@ -53,19 +53,26 @@ y solo se usa para el ticket; si no carga, el ticket cae en `window.print()`.
 
 ## 3. Valores que DEBES reemplazar en `CONFIG`
 
-Abre `index.html`, busca `REEMPLAZAR` (hay 28 marcadores) y cambia:
+Abre `index.html`, busca `REEMPLAZAR` y cambia lo que quede. **Los datos del
+negocio ya están puestos** (NIT, dirección, teléfono, coordenadas); lo que sigue
+marcado son las redes sociales, el correo y el horario.
 
-### Datos del negocio (`CONFIG.negocio`)
-- `nombre`, `eslogan`
-- `nit` — NIT real de la empresa
-- `direccion`, `municipio`, `provincia`
-- `telefono` (`+53XXXXXXXX`) y `whatsapp` (**solo dígitos**, sin `+` ni espacios)
-- `telegramUsuario` (sin `@`)
-- `correo`
-- `horario` y `horarioCorto`
-- `coordenadas` — latitud y longitud de la tienda (para el mapa)
-- `sitio` — dominio final, con `https://`
-- `redes.facebook`, `redes.instagram`, `redes.telegram`
+### Datos del negocio (`CONFIG.negocio`) — ya rellenados
+- `nit` = `50004158364`
+- `direccion` = `Calle 29 No. 5408 e/ 54 y 56`, `municipio` = `provincia` = `Artemisa`
+- `codigoPostal` = `33800`
+- `telefono` = `+5359888821`, `whatsapp` = `5359888821` (**solo dígitos**)
+- `coordenadas` = `22.8136, -82.7633` (Artemisa)
+- **Falta**: `telegramUsuario`, `correo`, `horario`, `sitio` y
+  `redes.facebook` / `redes.instagram` / `redes.telegram`
+
+> **Aviso**: el NIT, la dirección y el teléfono también están escritos a mano en
+> los **datos estructurados JSON-LD** de la cabecera (Google los lee de ahí, no de
+> `CONFIG`). Si cambias un dato en `CONFIG`, cámbialo también en el JSON-LD o
+> Google mostrará el viejo. Búscalo al principio de `index.html`.
+
+> **Envíos**: `CONFIG.envios` cobra **3 USD en Artemisa** (entrega local) y 8 en
+> La Habana. La tabla es de ejemplo; ajústala a tus costos reales de mensajería.
 
 ### Tasas de cambio (`CONFIG.tasas`)
 - `usdCup` — 1 USD en CUP

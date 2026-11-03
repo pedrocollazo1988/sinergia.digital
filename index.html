@@ -86,7 +86,7 @@
       "url": "https://sinergiadigital-pedrocollazo1988.vercel.app/",
       "logo": "https://sinergiadigital-pedrocollazo1988.vercel.app/public/logo-full-1200.png",
       "email": "ventas@sinergia.digital",
-      "telephone": "+5355550000",
+      "telephone": "+5359888821",
       "sameAs": [
         "https://www.facebook.com/sinergiadigital",
         "https://www.instagram.com/sinergiadigital",
@@ -94,9 +94,10 @@
       ],
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Calle 23 #456, Vedado",
-        "addressLocality": "Plaza de la Revolución",
-        "addressRegion": "La Habana",
+        "streetAddress": "Calle 29 No. 5408 e/ 54 y 56",
+        "addressLocality": "Artemisa",
+        "addressRegion": "Artemisa",
+        "postalCode": "33800",
         "addressCountry": "CU"
       }
     },
@@ -106,7 +107,7 @@
       "name": "Sinergia Digital",
       "image": "https://sinergiadigital-pedrocollazo1988.vercel.app/public/og-image.jpg",
       "url": "https://sinergiadigital-pedrocollazo1988.vercel.app/",
-      "telephone": "+5355550000",
+      "telephone": "+5359888821",
       "priceRange": "$$",
       "currenciesAccepted": "USD, CUP, EUR, USDT",
       "paymentAccepted": "Tropipay, QvaPay, Enzona, Transfermóvil, USDT, Visa, Mastercard",
@@ -116,14 +117,14 @@
       ],
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Calle 23 #456, Vedado",
-        "addressLocality": "Plaza de la Revolución",
-        "addressRegion": "La Habana",
-        "postalCode": "10400",
+        "streetAddress": "Calle 29 No. 5408 e/ 54 y 56",
+        "addressLocality": "Artemisa",
+        "addressRegion": "Artemisa",
+        "postalCode": "33800",
         "addressCountry": "CU"
       },
-      "geo": { "@type": "GeoCoordinates", "latitude": 23.1136, "longitude": -82.3666 },
-      "hasMap": "https://www.openstreetmap.org/?mlat=23.1136&mlon=-82.3666#map=16/23.1136/-82.3666"
+      "geo": { "@type": "GeoCoordinates", "latitude": 22.8136, "longitude": -82.7633 },
+      "hasMap": "https://www.openstreetmap.org/?mlat=22.8136&mlon=-82.7633#map=16/22.8136/-82.7633"
     },
     {
       "@type": "WebSite",
@@ -1284,7 +1285,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 <noscript>
   <div class="wrap">
     <div class="notice notice--info" style="margin:1rem 0">
-      <strong>JavaScript está desactivado.</strong> Puede consultar el catálogo por categorías con los enlaces de abajo y escribirnos por WhatsApp al <a href="https://wa.me/5355550000" rel="noopener noreferrer">+53 5555 0000</a>. Para comprar en línea, active JavaScript.
+      <strong>JavaScript está desactivado.</strong> Puede consultar el catálogo por categorías con los enlaces de abajo y escribirnos por WhatsApp al <a href="https://wa.me/5359888821" rel="noopener noreferrer">+53 5988 8821</a>. Para comprar en línea, active JavaScript.
     </div>
   </div>
   <nav class="wrap" aria-label="Catálogo sin JavaScript">
@@ -1801,7 +1802,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
         <div>
           <div class="card" style="padding:1.1rem;margin-bottom:1rem">
             <h2 style="font-size:1.1rem">Recogida en tienda</h2>
-            <p class="small">Puedes retirar tu pedido en nuestra tienda del Vedado, sin costo de envío. <strong>Debes presentar el número de pedido y tu carnet de identidad.</strong> Solo una persona puede retirar por cada número de pedido.</p>
+            <p class="small">Puedes retirar tu pedido en nuestra tienda de Artemisa, sin costo de envío. <strong>Debes presentar el número de pedido y tu carnet de identidad.</strong> Solo una persona puede retirar por cada número de pedido.</p>
             <p class="small muted" id="pickupInfo"></p>
           </div>
           <div class="card" style="padding:1.1rem">
@@ -1895,11 +1896,11 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
           <h2 style="font-size:1.1rem">Datos de la empresa</h2>
           <div class="kv" id="aboutBiz"></div>
           <h2 style="font-size:1.1rem;margin-top:1rem">Nuestra tienda</h2>
-          <div class="map" role="img" aria-label="Mapa de ubicación de la tienda en el Vedado, La Habana">
+          <div class="map" role="img" aria-label="Mapa de ubicación de la tienda en Artemisa, Cuba">
             <svg aria-hidden="true"><use href="#i-map"/></svg>
             <div>
               <p class="small" style="margin:0" id="aboutAddress"></p>
-              <p class="xsmall muted" style="margin:.4rem 0 0">Coordenadas aproximadas: 23.1136, -82.3666. Abre la ubicación en tu app de mapas con el enlace de contacto.</p>
+              <p class="xsmall muted" style="margin:.4rem 0 0" id="aboutGeo"></p>
             </div>
           </div>
         </div>
@@ -2421,19 +2422,20 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
    ========================================================================== */
 const CONFIG = {
   negocio: {
-    nombre: "Sinergia Digital",                    // REEMPLAZAR
+    nombre: "Sinergia Digital",
     eslogan: "Tecnología en Cuba",
-    nit: "1234567890123",                          // REEMPLAZAR: NIT real
-    direccion: "Calle 23 #456, Vedado",            // REEMPLAZAR
-    municipio: "Plaza de la Revolución",           // REEMPLAZAR
-    provincia: "La Habana",                        // REEMPLAZAR
-    telefono: "+5355550000",                       // REEMPLAZAR
-    whatsapp: "5355550000",                        // REEMPLAZAR: sin +, sin espacios
+    nit: "50004158364",
+    direccion: "Calle 29 No. 5408 e/ 54 y 56",
+    municipio: "Artemisa",
+    provincia: "Artemisa",
+    codigoPostal: "33800",
+    telefono: "+5359888821",
+    whatsapp: "5359888821",                        // sin +, sin espacios
     telegramUsuario: "sinergiadigital",            // REEMPLAZAR: sin @
     correo: "ventas@sinergia.digital",             // REEMPLAZAR
     horario: "Lunes a viernes 9:00-18:00, sábados 9:00-13:00", // REEMPLAZAR
     horarioCorto: "Lun-Vie 9-18, Sáb 9-13",
-    coordenadas: { lat: 23.1136, lng: -82.3666 },  // REEMPLAZAR
+    coordenadas: { lat: 22.8136, lng: -82.7633 },  // Artemisa (ciudad)
     sitio: "https://sinergiadigital-pedrocollazo1988.vercel.app", // URL del despliegue de Vercel
     redes: {
       facebook: "https://www.facebook.com/sinergiadigital",   // REEMPLAZAR
@@ -2465,8 +2467,8 @@ const CONFIG = {
   // Costos de envio por provincia (USD). Cada municipio hereda el costo de su provincia.
   envios: {
     "Pinar del Río":        { costo: 9,  plazo: "3-5 días hábiles", municipios: ["Pinar del Río","Consolación del Sur","Guane","La Palma","Los Palacios","Mantua","Minas de Matahambre","San Juan y Martínez","San Luis","Sandino","Viñales"] },
-    "Artemisa":             { costo: 8,  plazo: "2-4 días hábiles", municipios: ["Artemisa","Alquízar","Bauta","Caimito","Candelaria","Guanajay","Güira de Melena","Mariel","San Antonio de los Baños","San Cristóbal","Bahía Honda"] },
-    "La Habana":            { costo: 5,  plazo: "Mismo día o 24 h", municipios: ["Playa","Plaza de la Revolución","Centro Habana","La Habana Vieja","Regla","La Habana del Este","Guanabacoa","San Miguel del Padrón","Diez de Octubre","Cerro","Marianao","La Lisa","Boyeros","Arroyo Naranjo","Cotorro"] },
+    "Artemisa":             { costo: 3,  plazo: "Mismo día o 24 h", municipios: ["Artemisa","Alquízar","Bauta","Caimito","Candelaria","Guanajay","Güira de Melena","Mariel","San Antonio de los Baños","San Cristóbal","Bahía Honda"] },
+    "La Habana":            { costo: 8,  plazo: "2-4 días hábiles", municipios: ["Playa","Plaza de la Revolución","Centro Habana","La Habana Vieja","Regla","La Habana del Este","Guanabacoa","San Miguel del Padrón","Diez de Octubre","Cerro","Marianao","La Lisa","Boyeros","Arroyo Naranjo","Cotorro"] },
     "Mayabeque":            { costo: 8,  plazo: "2-4 días hábiles", municipios: ["San José de las Lajas","Jaruco","Santa Cruz del Norte","Madruga","Nueva Paz","San Nicolás","Güines","Melena del Sur","Batabanó","Quivicán","Bejucal"] },
     "Matanzas":             { costo: 10, plazo: "3-5 días hábiles", municipios: ["Matanzas","Cárdenas","Martí","Colón","Perico","Jovellanos","Pedro Betancourt","Limonar","Unión de Reyes","Ciénaga de Zapata","Jagüey Grande","Calimete","Los Arabos"] },
     "Villa Clara":          { costo: 11, plazo: "3-6 días hábiles", municipios: ["Santa Clara","Camajuaní","Cifuentes","Corralillo","Encrucijada","Manicaragua","Placetas","Quemado de Güines","Ranchuelo","Remedios","Sagua la Grande","Santo Domingo"] },
@@ -2512,10 +2514,10 @@ const CONFIG = {
                  usuario: "sinergiadigital", enlace: "https://qvapay.com/pay/sinergiadigital",
                  nota: "Pago real con saldo QvaPay. También puedes crear un enlace con la API de QvaPay y pegar aquí la URL." },
     enzona:    { nombre: "Enzona",    disponible: true,  modo: "produccion", moneda: "CUP",
-                 usuario: "sinergiadigital", telefono: "55550000", titular: "Sinergia Digital",
+                 usuario: "sinergiadigital", telefono: "59888821", titular: "Sinergia Digital",
                  nota: "Transferencia real por Enzona. El importe se muestra ya convertido a CUP." },
     transfer:  { nombre: "Transfermóvil", disponible: true, modo: "produccion", moneda: "CUP",
-                 tarjeta: "9229560000000000", telefono: "55550000", titular: "Sinergia Digital",
+                 tarjeta: "9229560000000000", telefono: "59888821", titular: "Sinergia Digital",
                  nota: "Transferencia real por Transfermóvil. El importe se muestra ya convertido a CUP." },
     usdt:      { nombre: "USDT / criptomonedas", disponible: true, modo: "manual", moneda: "USDT",
                  walletTrc20: "TXnk9Qm4Vw7bYz3sLd8pR6cH2fJ5aN1eUv", walletBep20: "0x9F3b7C2dA1e45B6c8D0f2A4e7B9c1D3f5A8e0C2b",
@@ -3259,6 +3261,19 @@ function normalizarTelefonoCuba(v) {
   let d = String(v || "").replace(/\D/g, "");
   if (d.length === 10 && d.indexOf("53") === 0) d = d.slice(2);
   return d;
+}
+// Da formato cubano legible a un movil de 8 cifras: 59888821 -> "+53 5988 8821".
+function formatearTelefonoCuba(v) {
+  const d = normalizarTelefonoCuba(v);
+  return d.length === 8 ? "+53 " + d.slice(0, 4) + " " + d.slice(4) : "+53 " + d;
+}
+// Direccion del negocio. En Cuba la ciudad puede ser municipio y provincia a la
+// vez (Artemisa), asi que no se repite el nombre cuando coincide.
+function direccionCompleta(conProvincia) {
+  const n = CONFIG.negocio;
+  const base = n.direccion + ", " + n.municipio;
+  if (!conProvincia || !n.provincia || n.provincia === n.municipio) return base;
+  return base + ", " + n.provincia;
 }
 const esTelefonoCuba = v => /^5\d{7}$/.test(normalizarTelefonoCuba(v));
 const esCorreo = v => /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(String(v || "").trim());
@@ -4637,7 +4652,7 @@ function jsPDFDisponible() {
 function resumenTexto(o) {
   const L = [];
   L.push("PEDIDO " + o.numero);
-  L.push(CONFIG.negocio.nombre + " · " + CONFIG.negocio.telefono);
+  L.push(CONFIG.negocio.nombre + " · " + formatearTelefonoCuba(CONFIG.negocio.telefono));
   L.push("Fecha: " + fmtDateTime(o.fecha));
   L.push("Estado: " + o.estado);
   L.push("");
@@ -4698,8 +4713,8 @@ function construirTicketPDF(o) {
     doc.text(CONFIG.negocio.nombre, M + 16, 14);
     doc.setFontSize(9); doc.setFont("helvetica", "normal");
     doc.text(CONFIG.negocio.eslogan + " · NIT " + CONFIG.negocio.nit, M + 16, 19);
-    doc.text(CONFIG.negocio.direccion + ", " + CONFIG.negocio.municipio + ", " + CONFIG.negocio.provincia, M + 16, 23.5);
-    doc.text("Tel: " + CONFIG.negocio.telefono + " · " + CONFIG.negocio.correo, M + 16, 27.5);
+    doc.text(direccionCompleta(true), M + 16, 23.5);
+    doc.text("Tel: " + formatearTelefonoCuba(CONFIG.negocio.telefono) + " · " + CONFIG.negocio.correo, M + 16, 27.5);
     y = 40;
 
     doc.setTextColor(15, 27, 92);
@@ -4772,7 +4787,7 @@ function construirTicketPDF(o) {
     doc.line(M, y, W - M, y);
     doc.setFontSize(8); doc.setTextColor(110, 115, 130);
     doc.text("Este comprobante no sustituye la factura fiscal. La confirmación del pago la realiza un operador de forma manual.", M, y + 5);
-    doc.text(CONFIG.negocio.nombre + " · " + CONFIG.negocio.horario + " · WhatsApp " + CONFIG.negocio.telefono, M, y + 9.5);
+    doc.text(CONFIG.negocio.nombre + " · " + CONFIG.negocio.horario + " · WhatsApp " + formatearTelefonoCuba(CONFIG.negocio.telefono), M, y + 9.5);
     doc.text("Gracias por comprar en " + CONFIG.negocio.nombre + ".", M, y + 14);
 
   return doc;
@@ -4811,7 +4826,7 @@ function mostrarTicket(o) {
   const ht = el("div");
   ht.appendChild(el("h2", { attrs: { style: "margin:0;font-size:1.2rem" }, text: CONFIG.negocio.nombre }));
   ht.appendChild(el("p", { class: "small muted", attrs: { style: "margin:0" }, text: "NIT " + CONFIG.negocio.nit + " · " + CONFIG.negocio.telefono }));
-  ht.appendChild(el("p", { class: "small muted", attrs: { style: "margin:0" }, text: CONFIG.negocio.direccion + ", " + CONFIG.negocio.municipio }));
+  ht.appendChild(el("p", { class: "small muted", attrs: { style: "margin:0" }, text: direccionCompleta(false) }));
   head.appendChild(ht);
   const hnum = el("div", { attrs: { style: "margin-left:auto;text-align:right" } });
   hnum.appendChild(el("strong", { text: "Pedido " + o.numero }));
@@ -5149,29 +5164,31 @@ function renderContenidoEstatico() {
     aboutBiz.innerHTML = "";
     aboutBiz.appendChild(kvRow("Nombre", CONFIG.negocio.nombre));
     aboutBiz.appendChild(kvRow("NIT", CONFIG.negocio.nit));
-    aboutBiz.appendChild(kvRow("Dirección", CONFIG.negocio.direccion + ", " + CONFIG.negocio.municipio));
+    aboutBiz.appendChild(kvRow("Dirección", direccionCompleta(false)));
     aboutBiz.appendChild(kvRow("Provincia", CONFIG.negocio.provincia));
-    aboutBiz.appendChild(kvRow("Teléfono", CONFIG.negocio.telefono));
+    aboutBiz.appendChild(kvRow("Teléfono", formatearTelefonoCuba(CONFIG.negocio.telefono)));
     aboutBiz.appendChild(kvRow("Correo", CONFIG.negocio.correo));
     aboutBiz.appendChild(kvRow("Horario", CONFIG.negocio.horario));
   }
   const aboutAddress = $("#aboutAddress");
-  if (aboutAddress) aboutAddress.textContent = CONFIG.negocio.direccion + ", " + CONFIG.negocio.municipio + ", " + CONFIG.negocio.provincia;
+  if (aboutAddress) aboutAddress.textContent = direccionCompleta(true);
+  const aboutGeo = $("#aboutGeo");
+  if (aboutGeo) aboutGeo.textContent = "Coordenadas aproximadas: " + CONFIG.negocio.coordenadas.lat + ", " + CONFIG.negocio.coordenadas.lng + ". Abre la ubicación en tu app de mapas con el enlace de contacto.";
 
   const contactInfo = $("#contactInfo");
   if (contactInfo) {
     contactInfo.innerHTML = "";
-    contactInfo.appendChild(kvRow("WhatsApp", "+53 " + CONFIG.negocio.telefono.replace(/^\+53/, "")));
+    contactInfo.appendChild(kvRow("WhatsApp", formatearTelefonoCuba(CONFIG.negocio.telefono)));
     contactInfo.appendChild(kvRow("Telegram", "@" + CONFIG.negocio.telegramUsuario));
     contactInfo.appendChild(kvRow("Correo", CONFIG.negocio.correo));
-    contactInfo.appendChild(kvRow("Dirección", CONFIG.negocio.direccion + ", " + CONFIG.negocio.municipio));
+    contactInfo.appendChild(kvRow("Dirección", direccionCompleta(false)));
     contactInfo.appendChild(kvRow("Horario", CONFIG.negocio.horario));
   }
 
   const pickupInfo = $("#pickupInfo");
-  if (pickupInfo) pickupInfo.textContent = CONFIG.negocio.direccion + ", " + CONFIG.negocio.municipio + ", " + CONFIG.negocio.provincia + ". Horario: " + CONFIG.negocio.horario + ".";
+  if (pickupInfo) pickupInfo.textContent = direccionCompleta(true) + ". Horario: " + CONFIG.negocio.horario + ".";
   const pickupAddressText = $("#pickupAddressText");
-  if (pickupAddressText) pickupAddressText.textContent = CONFIG.negocio.direccion + ", " + CONFIG.negocio.municipio + ", " + CONFIG.negocio.provincia;
+  if (pickupAddressText) pickupAddressText.textContent = direccionCompleta(true);
   const pickupHoursText = $("#pickupHoursText");
   if (pickupHoursText) pickupHoursText.textContent = CONFIG.negocio.horario;
 
@@ -5195,9 +5212,9 @@ function renderContenidoEstatico() {
   const ftg = $("#footerTelegram"); if (ftg) ftg.setAttribute("href", "https://t.me/" + CONFIG.negocio.telegramUsuario);
   const fem = $("#footerEmail"); if (fem) fem.setAttribute("href", "mailto:" + CONFIG.negocio.correo);
   const fh = $("#footerHours"); if (fh) fh.textContent = "Horario: " + CONFIG.negocio.horarioCorto;
-  const fa = $("#footerAddress"); if (fa) fa.textContent = CONFIG.negocio.direccion + ", " + CONFIG.negocio.municipio;
+  const fa = $("#footerAddress"); if (fa) fa.textContent = direccionCompleta(false);
   const fnit = $("#footerNit"); if (fnit) fnit.textContent = "NIT " + CONFIG.negocio.nit;
-  const flegal = $("#footerAddressLegal"); if (flegal) flegal.textContent = CONFIG.negocio.direccion + ", " + CONFIG.negocio.municipio + ", " + CONFIG.negocio.provincia;
+  const flegal = $("#footerAddressLegal"); if (flegal) flegal.textContent = direccionCompleta(true);
   const feml = $("#footerEmailLegal"); if (feml) feml.setAttribute("href", "mailto:" + CONFIG.negocio.correo);
   const fy = $("#footerYear"); if (fy) fy.textContent = String(new Date().getFullYear());
 
