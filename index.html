@@ -265,7 +265,9 @@
   --radius:14px;
   --radius-lg:22px;
   --radius-pill:999px;
-  --maxw:1240px;
+  /* El contenido ocupa todo el ancho de la pantalla. Antes se recortaba a
+     1240px y quedaba una franja vacia a los lados en monitores grandes. */
+  --maxw:100%;
   --font:"Sora","Exo 2",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
   --t-fast:.15s ease;
@@ -540,17 +542,15 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .menu-toggle{display:inline-flex}
 
 /* ---------- 4b. BARRA LATERAL DE NAVEGACION ---------- */
-/* Dos comportamientos con la MISMA pieza:
-   - Escritorio (>=1024px): columna visible y fija a la izquierda del contenido.
-     El boton de la cabecera se oculta, porque el menu ya esta a la vista.
-   - Movil/tableta: la columna se convierte en cajon que entra desde la
-     izquierda al pulsar el boton de la cabecera.
-   El HTML es el mismo en ambos casos y es estatico, para el SEO. */
+/* La navegacion vive en un cajon desplegable a CUALQUIER ancho: ocupa el borde
+   izquierdo y esta fuera de pantalla hasta que el boton de la cabecera
+   (#menuToggle) lo abre. No reserva columna, asi que el contenido central usa
+   todo el ancho disponible. El HTML se mantiene estatico para el SEO. */
 .layout{display:block}
 @media (min-width:1024px){
   .layout{
-    display:grid;grid-template-columns:264px minmax(0,1fr);
-    gap:clamp(16px,2.4vw,34px);max-width:var(--maxw);margin-inline:auto;
+    display:grid;grid-template-columns:minmax(0,1fr);
+    gap:clamp(16px,2.4vw,34px);
     padding-inline:clamp(14px,3vw,28px);
   }
   .layout > main{min-width:0}
@@ -559,7 +559,7 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
   .layout main .wrap{max-width:none;padding-inline:0}
 }
 
-/* --- Movil/tableta: el cajon deslizante --- */
+/* El cajon: misma pieza a cualquier ancho. */
 .sidebar{
   position:fixed;top:0;left:0;bottom:0;z-index:1450;
   width:min(86vw,330px);max-width:330px;
@@ -582,23 +582,6 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
   opacity:0;visibility:hidden;transition:opacity .24s ease,visibility .24s ease;
 }
 .sidebar__backdrop[data-open="true"]{opacity:1;visibility:visible}
-
-/* --- Escritorio: la misma pieza, como columna fija y siempre visible --- */
-@media (min-width:1024px){
-  .sidebar{
-    position:sticky;top:calc(var(--sticky-top,96px) + 1rem);
-    left:auto;bottom:auto;z-index:auto;
-    width:auto;max-width:none;
-    align-self:start;max-height:calc(100vh - var(--sticky-top,96px) - 2rem);
-    padding:.7rem;background:var(--surface);border:1px solid var(--border);
-    border-radius:var(--radius);box-shadow:var(--shadow);scrollbar-width:thin;
-    /* Sin desplazamiento ni ocultado: es contenido normal de la columna. */
-    transform:none;visibility:visible;transition:none;
-  }
-  /* En escritorio el menu esta a la vista, asi que sobran el boton y el fondo.
-     El "Cerrar" del cajon tambien sobra: no hay nada que cerrar. */
-  .menu-toggle,.sidebar__backdrop,.sidebar__head{display:none}
-}
 .sidebar__title{
   margin:.4rem .55rem .3rem;font-size:.68rem;font-weight:800;letter-spacing:.12em;
   text-transform:uppercase;color:var(--text-mute);
@@ -1304,17 +1287,11 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 </noscript>
 
 <div class="layout">
-  <!-- Barra lateral de navegacion, con dos comportamientos y la misma pieza:
-       en escritorio es una columna fija a la izquierda del contenido; en movil
-       se convierte en cajon que entra desde la izquierda al pulsar el boton de
-       la cabecera (#menuToggle). Estatica en el HTML para que los rastreadores
-       la vean sin ejecutar JavaScript. -->
+  <!-- Barra lateral de navegacion: SIEMPRE desplegable. El boton de la cabecera
+       (#menuToggle) abre este cajon, que entra desde la izquierda por encima del
+       contenido. Estatica en el HTML para que los rastreadores la vean sin JS. -->
   <div class="sidebar__backdrop" id="sidebarBackdrop" data-open="false"></div>
-  <!-- Sin role/aria-modal en el HTML: solo son correctos cuando el menu actua
-       como cajon modal (movil). El JS los pone o los quita segun el ancho; asi,
-       si el JS no corre, no se le dice al lector de pantalla que el resto de la
-       pagina esta inerte. -->
-  <aside class="sidebar" id="sidebarNav" aria-label="Navegación principal" data-open="false">
+  <aside class="sidebar" id="sidebarNav" role="dialog" aria-modal="true" aria-label="Navegación principal" data-open="false">
     <div class="sidebar__head">
       <strong>Menú</strong>
       <button class="iconbtn" type="button" id="sidebarClose" aria-label="Cerrar menú"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
@@ -5613,28 +5590,9 @@ function cerrarCajon(id) {
   if (focoPrevio && focoPrevio.focus) focoPrevio.focus();
   focoPrevio = null;
 }
-function menuLateralEsCajon() {
-  return window.matchMedia("(max-width:1023.98px)").matches;
-}
-// El mismo <aside> es cajon modal en movil y columna normal en escritorio. El
-// role/aria-modal solo valen para el cajon: en escritorio dirian que el resto de
-// la pagina esta inerte, cuando es navegacion corriente.
-function sincronizarAriaMenu() {
-  const n = $("#sidebarNav");
-  if (!n) return;
-  if (menuLateralEsCajon()) {
-    n.setAttribute("role", "dialog");
-    n.setAttribute("aria-modal", "true");
-  } else {
-    n.removeAttribute("role");
-    n.removeAttribute("aria-modal");
-  }
-}
 function abrirMenuLateral() {
   const n = $("#sidebarNav");
   if (!n) return;
-  // En escritorio el menu ya esta a la vista como columna: no hay cajon que abrir.
-  if (!menuLateralEsCajon()) return;
   focoPrevio = document.activeElement;
   n.setAttribute("data-open", "true");
   $("#sidebarBackdrop").setAttribute("data-open", "true");
@@ -5656,13 +5614,6 @@ function cerrarMenuLateral() {
   document.body.style.overflow = "";
   if (focoPrevio && focoPrevio.isConnected) { focoPrevio.focus(); focoPrevio = null; }
 }
-// Al pasar de movil a escritorio con el cajon abierto, la columna queda visible
-// pero el bloqueo de scroll seguiria puesto: hay que soltarlo. Ademas se ajusta
-// el role/aria-modal al modo activo.
-window.addEventListener("resize", () => {
-  if (!menuLateralEsCajon()) cerrarMenuLateral();
-  sincronizarAriaMenu();
-});
 
 // Vista rapida de producto en modal
 function abrirVistaRapida(id) {
@@ -6172,8 +6123,6 @@ function init() {
   aplicarTema();
   // Altura de la cabecera antes de renderizar: la usan los elementos pegajosos
   medirCabecera();
-  // El menu lateral es cajon o columna segun el ancho: ajusta su role.
-  sincronizarAriaMenu();
 
   // Datos dinamicos de la plantilla
   renderContenidoEstatico();

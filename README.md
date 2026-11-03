@@ -20,8 +20,10 @@ y solo se usa para el ticket; si no carga, el ticket cae en `window.print()`.
 | `vercel.json` | Cabeceras, rewrites y caché. Es el único despliegue que se usa. |
 | `api/tasas.js` | Proxy de solo lectura hacia las tasas del Banco Central (evita CORS y no abre la CSP). |
 | `api/imagen.js` | Genera la imagen de una categoría con Pollinations.ai desde una lista cerrada de prompts. |
-| `lib/imagen-prompts.js` | Los textos que se le piden al generador de imágenes. Fuente única del script y del endpoint. |
+| `lib/imagen-prompts.js` | Los textos que se le piden al generador para las imágenes de la portada. Fuente única del script y del endpoint. |
+| `lib/imagen-productos.js` | Los textos de las fotos del catálogo (una por producto). Fuente única del generador por lotes. |
 | `herramientas/generar-imagenes.mjs` | Genera las imágenes de la portada y las guarda en `public/img/gen`. |
+| `herramientas/generar-productos.mjs` | Genera las fotos de producto y las guarda en `public/img`. Reanudable: se puede cortar y relanzar. |
 | `check-assets.py` | Comprueba que todo recurso local referenciado en el HTML existe. |
 
 ---
@@ -142,6 +144,12 @@ marcado son las redes sociales, el correo y el horario.
   en `public/img/gen` como WebP de ~10 KB. Para regenerarlas:
   `node herramientas/generar-imagenes.mjs`. El endpoint `/api/imagen?cat=<id>` las
   regenera al vuelo con caché de un año en el CDN.
+- **Fotos de producto generadas con IA**: las 89 fotos del catálogo también se crean con
+  Pollinations.ai (modelo FLUX) y viven en `public/img` como WebP de 640x480. Para
+  regenerarlas: `node herramientas/generar-productos.mjs`. El plan gratis limita a **una
+  imagen cada 45 s por IP**, así que una pasada completa tarda cerca de una hora; el script
+  es **reanudable** (lo ya generado se apunta en `herramientas/.generado-productos.txt`) y
+  se puede cortar y relanzar sin perder lo hecho.
 
 ---
 

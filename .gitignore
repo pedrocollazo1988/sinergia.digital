@@ -11,3 +11,7 @@ Thumbs.db
 __pycache__/
 *.pyc
 .agent_tmp/
+
+# Registro de imagenes ya generadas (herramientas/generar-productos.mjs)
+herramientas/.generado-productos.txt
+public/img/.generado.txt
