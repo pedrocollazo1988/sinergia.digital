@@ -146,6 +146,25 @@
         { "@type": "ListItem", "position": 2, "name": "Catálogo", "item": "https://sinergiadigital-pedrocollazo1988.vercel.app/catalogo" },
         { "@type": "ListItem", "position": 3, "name": "Ofertas", "item": "https://sinergiadigital-pedrocollazo1988.vercel.app/ofertas" }
       ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://sinergiadigital-pedrocollazo1988.vercel.app/#categorias",
+      "name": "Categorías de Sinergia Digital",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1,  "name": "Equipos de cómputo",              "url": "https://sinergiadigital-pedrocollazo1988.vercel.app/catalogo?cat=computo" },
+        { "@type": "ListItem", "position": 2,  "name": "Telecomunicaciones",              "url": "https://sinergiadigital-pedrocollazo1988.vercel.app/catalogo?cat=telecom" },
+        { "@type": "ListItem", "position": 3,  "name": "Insumos de impresión",            "url": "https://sinergiadigital-pedrocollazo1988.vercel.app/catalogo?cat=impresion" },
+        { "@type": "ListItem", "position": 4,  "name": "Cámaras de seguridad",            "url": "https://sinergiadigital-pedrocollazo1988.vercel.app/catalogo?cat=seguridad" },
+        { "@type": "ListItem", "position": 5,  "name": "Alarmas y sistemas contra intrusos", "url": "https://sinergiadigital-pedrocollazo1988.vercel.app/catalogo?cat=alarmas" },
+        { "@type": "ListItem", "position": 6,  "name": "Electrodomésticos",               "url": "https://sinergiadigital-pedrocollazo1988.vercel.app/catalogo?cat=electrodomesticos" },
+        { "@type": "ListItem", "position": 7,  "name": "Material de oficina",             "url": "https://sinergiadigital-pedrocollazo1988.vercel.app/catalogo?cat=oficina" },
+        { "@type": "ListItem", "position": 8,  "name": "Material escolar",                "url": "https://sinergiadigital-pedrocollazo1988.vercel.app/catalogo?cat=escolar" },
+        { "@type": "ListItem", "position": 9,  "name": "Energía renovable",               "url": "https://sinergiadigital-pedrocollazo1988.vercel.app/catalogo?cat=solar" },
+        { "@type": "ListItem", "position": 10, "name": "Equipos de clima",                "url": "https://sinergiadigital-pedrocollazo1988.vercel.app/catalogo?cat=clima" },
+        { "@type": "ListItem", "position": 11, "name": "Herramientas de trabajo",         "url": "https://sinergiadigital-pedrocollazo1988.vercel.app/catalogo?cat=herramientas" },
+        { "@type": "ListItem", "position": 12, "name": "Útiles del hogar",                "url": "https://sinergiadigital-pedrocollazo1988.vercel.app/catalogo?cat=hogar" }
+      ]
     }
   ]
 }
@@ -618,6 +637,55 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .cat svg{width:32px;height:32px;color:var(--blue-text)}
 .cat b{font-size:.86rem;font-weight:600;line-height:1.3}
 .cat small{color:var(--text-mute);font-size:.74rem}
+/* Carrusel de categorias (portada) */
+.catcar{position:relative}
+.catcar__track{display:flex;gap:.8rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:.2rem .2rem .9rem;scrollbar-width:thin}
+.catcar__track::-webkit-scrollbar{height:6px}
+.catcar__track::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:6px}
+.catcar__item{flex:0 0 clamp(148px,20vw,198px);scroll-snap-align:start;display:flex;flex-direction:column;border-radius:var(--radius);overflow:hidden;background:var(--surface);border:1px solid var(--border);color:var(--text);text-decoration:none!important;transition:transform var(--t-fast),box-shadow var(--t-fast),border-color var(--t-fast)}
+.catcar__item:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--cyan)}
+.catcar__media{position:relative;aspect-ratio:4/3;background:var(--surface-2);overflow:hidden}
+.catcar__media img{width:100%;height:100%;object-fit:cover}
+.catcar__body{display:flex;align-items:center;gap:.55rem;padding:.6rem .7rem}
+.catcar__body svg{width:22px;height:22px;flex:0 0 auto;color:var(--blue-text)}
+.catcar__body b{font-size:.85rem;font-weight:600;line-height:1.25}
+.catcar__body small{display:block;color:var(--text-mute);font-size:.72rem;font-weight:500}
+.catcar__nav{position:absolute;top:calc(50% - 1.7rem);width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;z-index:2}
+.catcar__nav:hover{border-color:var(--cyan)}
+.catcar__nav svg{width:20px;height:20px;color:var(--blue-text)}
+.catcar__nav--prev{left:-10px}
+.catcar__nav--next{right:-10px}
+@media (max-width:640px){.catcar__nav{display:none}}
+/* Bloques promocionales */
+.promos{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.promo{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:230px;border-radius:var(--radius-lg);overflow:hidden;padding:1.1rem;color:#fff;text-decoration:none!important;border:1px solid var(--border);background:var(--navy)}
+.promo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.promo::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,16,56,.04) 28%,rgba(8,16,56,.84) 100%)}
+.promo__body{position:relative;z-index:2}
+.promo__body b{display:block;font-size:1.16rem;font-weight:800;color:#fff}
+.promo__body small{display:block;color:#dbe6ff;font-size:.85rem;margin-top:.25rem}
+.promo__body .btn{margin-top:.75rem}
+/* Accesos rapidos */
+.quick{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(168px,1fr))}
+.quick__card{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:172px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);text-decoration:none!important;color:var(--text);background:var(--surface)}
+.quick__card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform .35s ease}
+.quick__card:hover img{transform:scale(1.06)}
+.quick__card::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,16,56,0) 34%,rgba(8,16,56,.86) 100%)}
+.quick__card b{position:relative;z-index:2;padding:1rem .9rem;font-size:1rem;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.02em;line-height:1.2}
+/* Testimonios */
+.tst{background:var(--grad-soft);border-block:1px solid var(--border)}
+.tst__track{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:.2rem .2rem 1rem;scrollbar-width:thin}
+.tst__track::-webkit-scrollbar{height:6px}
+.tst__track::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:6px}
+.tst__card{flex:0 0 clamp(258px,42vw,420px);scroll-snap-align:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.3rem 1.4rem;box-shadow:var(--shadow-sm);display:flex;flex-direction:column}
+.tst__quote{width:30px;height:30px;color:var(--cyan-text);margin-bottom:.4rem}
+.tst__card p{font-size:1.02rem;line-height:1.6;margin-bottom:1rem}
+.tst__who{display:flex;align-items:center;gap:.6rem;margin-top:auto}
+.tst__ava{width:40px;height:40px;border-radius:50%;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex:0 0 auto}
+.tst__who b{display:block;font-size:.9rem}
+.tst__who small{color:var(--text-mute);font-size:.78rem}
+.tst__stars{display:flex;gap:.1rem;margin-bottom:.5rem;color:#E8A33D}
+.tst__stars svg{width:15px;height:15px}
 
 .brands{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center}
 .brands span{padding:.5rem 1rem;border-radius:var(--radius-pill);background:var(--surface);border:1px solid var(--border);font-weight:700;color:var(--text-soft);font-size:.88rem;letter-spacing:.02em}
@@ -830,7 +898,8 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 .footer a{color:#c9d6f5}
 .footer a:hover{color:#fff}
 .footer__grid{display:grid;gap:1.6rem;padding:2.4rem 0;grid-template-columns:1fr}
-@media (min-width:760px){.footer__grid{grid-template-columns:1.4fr 1fr 1fr 1.2fr}}
+@media (min-width:640px){.footer__grid{grid-template-columns:1fr 1fr}}
+@media (min-width:1040px){.footer__grid{grid-template-columns:1.5fr 1fr 1fr 1fr 1.3fr}}
 .footer h3{color:#fff;font-size:.95rem;margin-bottom:.7rem;letter-spacing:.02em}
 .footer ul{list-style:none;padding:0;margin:0;display:grid;gap:.35rem;font-size:.88rem}
 .footer__brand .brand__name{color:#fff}
@@ -1071,6 +1140,9 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
     <symbol id="i-snow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2v20M3 7l18 10M21 7L3 17"/></symbol>
     <symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 21s7-6.3 7-11a7 7 0 10-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></symbol>
     <symbol id="i-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20V5M6 11l6-6 6 6"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24" fill="currentColor"><path d="M7.5 6C5 6 3 8 3 10.5S5 15 7.5 15c.2 0 .4 0 .5-.1-.3 1.6-1.4 2.9-3 3.6l.7 1.5c3.3-1.2 5.3-4 5.3-7.6V10.5C11 8 9.6 6 7.5 6zm9 0C14 6 12 8 12 10.5S14 15 16.5 15c.2 0 .4 0 .5-.1-.3 1.6-1.4 2.9-3 3.6l.7 1.5c3.3-1.2 5.3-4 5.3-7.6V10.5C20 8 18.6 6 16.5 6z"/></symbol>
     <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></symbol>
     <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></symbol>
     <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
@@ -1392,6 +1464,45 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
       </div>
     </div>
 
+    <!-- Categorias destacadas: carrusel con imagen -->
+    <div class="section section--tint">
+      <div class="wrap">
+        <div class="section-head between">
+          <div>
+            <h2>Compra por categoría</h2>
+            <p>Doce categorías pensadas para la vida en Cuba: desde un panel solar hasta una libreta escolar.</p>
+          </div>
+          <a class="btn btn--outline btn--sm" href="/catalogo" data-nav="catalogo">Ver todo el catálogo</a>
+        </div>
+        <div class="catcar" role="region" aria-label="Categorías de la tienda">
+          <button class="catcar__nav catcar__nav--prev" type="button" id="catCarPrev" aria-label="Categorías anteriores"><svg aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
+          <div class="catcar__track" id="homeCategories" tabindex="0"></div>
+          <button class="catcar__nav catcar__nav--next" type="button" id="catCarNext" aria-label="Más categorías"><svg aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bloques promocionales -->
+    <div class="wrap section">
+      <div class="promos" id="homePromos"></div>
+    </div>
+
+    <!-- Accesos rapidos -->
+    <div class="wrap section" style="padding-top:0">
+      <div class="quick" id="homeQuick"></div>
+    </div>
+
+    <!-- Testimonios -->
+    <div class="tst section">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Lo que dicen nuestros clientes</h2>
+          <p>Personas y negocios que ya compran con nosotros en toda Cuba.</p>
+        </div>
+        <div class="tst__track" id="homeTestimonials" tabindex="0"></div>
+      </div>
+    </div>
+
     <!-- Ofertas flash con cuenta regresiva -->
     <div class="wrap section">
       <div class="flash">
@@ -1408,17 +1519,6 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
         </div>
         <div class="products" id="flashProducts"></div>
         <div class="center"><a class="btn btn--outline" href="/ofertas" data-nav="ofertas">Ver todas las ofertas</a></div>
-      </div>
-    </div>
-
-    <!-- Categorias destacadas -->
-    <div class="section section--tint">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Compra por categoría</h2>
-          <p>Doce categorías pensadas para la vida en Cuba: desde un panel solar hasta una libreta escolar.</p>
-        </div>
-        <div class="cat-grid" id="homeCategories"></div>
       </div>
     </div>
 
@@ -2186,6 +2286,18 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
       <h3 style="margin-top:1rem">Pagos</h3>
       <p class="small" style="color:#9fb0da;margin:0">Tropipay · Ebioro · Antillas Capital · QvaPay · Enzona · Transfermóvil · USDT · Visa · Mastercard</p>
     </div>
+
+    <div>
+      <h3>Nuestra empresa</h3>
+      <ul>
+        <li class="small" style="color:#9fb0da" id="footerNit"></li>
+        <li class="small" style="color:#9fb0da" id="footerAddressLegal"></li>
+        <li><a href="#" id="footerEmailLegal">Correo electrónico</a></li>
+        <li><a href="/nosotros" data-nav="nosotros">Sobre nosotros</a></li>
+        <li><a href="/privacidad" data-nav="privacidad">Política de privacidad</a></li>
+        <li><a href="/terminos" data-nav="terminos">Términos de compra</a></li>
+      </ul>
+    </div>
   </div>
 
   <div class="wrap footer__bottom">
@@ -2454,6 +2566,50 @@ const CATEGORIAS = [
 
 // Mapa rapido id -> categoria
 const CATEGORIA_POR_ID = CATEGORIAS.reduce((acc, c) => (acc[c.id] = c, acc), {});
+
+// Imagen local que representa cada categoria en el carrusel de la portada.
+// Son fotos ya usadas en el catalogo (locales, de Wikimedia Commons), asi que
+// no se anade ninguna peticion nueva ni se sale del dominio.
+const CATEGORIA_IMAGEN = {
+  computo: "/public/img/laptop-computer.webp",
+  telecom: "/public/img/wifi-router.webp",
+  impresion: "/public/img/multifunction-printer-office.webp",
+  seguridad: "/public/img/cctv-surveillance-camera.webp",
+  alarmas: "/public/img/burglar-alarm-control-panel.webp",
+  electrodomesticos: "/public/img/refrigerator.webp",
+  oficina: "/public/img/ream-paper-a4.webp",
+  escolar: "/public/img/backpack-school.webp",
+  solar: "/public/img/solar-panel-photovoltaic-module.webp",
+  clima: "/public/img/split-air-conditioner.webp",
+  herramientas: "/public/img/cordless-drill.webp",
+  hogar: "/public/img/cookware-set-pots.webp"
+};
+
+// Bloques promocionales de la portada.
+const PROMOS = [
+  { titulo: "Respaldo de energía", texto: "Paneles solares, inversores híbridos y baterías LiFePO4 dimensionados a tu consumo real.", img: "/public/img/portable-power-station.webp", cta: "Ver respaldo de energía", href: "/respaldo-energia", nav: "soluciones" },
+  { titulo: "Ofertas de la semana", texto: "Precios rebajados hasta agotar existencias. Ahorra en cómputo, clima, seguridad y más.", img: "/public/img/television-set.webp", cta: "Ver ofertas", href: "/ofertas", nav: "ofertas" },
+  { titulo: "Compra por volumen", texto: "MIPYMES, cooperativas y entidades: cotizaciones, factura y suministros recurrentes.", img: "/public/img/desktop-computer-tower.webp", cta: "Solicitar cotización", href: "/contacto", nav: "contacto" }
+];
+
+// Accesos rapidos: lo que mas se busca, con enlaces directos al catalogo.
+const QUICK = [
+  { titulo: "Más vendidos", img: "/public/img/laptop-computer.webp", href: "/catalogo?tag=mas-vendido" },
+  { titulo: "Novedades", img: "/public/img/tablet-computer.webp", href: "/catalogo?tag=nuevo" },
+  { titulo: "Ofertas flash", img: "/public/img/electric-kettle.webp", href: "/ofertas" },
+  { titulo: "Energía solar", img: "/public/img/solar-panel-photovoltaic-module.webp", href: "/catalogo?cat=solar" },
+  { titulo: "Seguridad", img: "/public/img/dome-camera-security.webp", href: "/catalogo?cat=seguridad" }
+];
+
+// Testimonios. SON DE EJEMPLO: hay que reemplazarlos por opiniones reales de
+// clientes (con su permiso) antes de publicar.
+const TESTIMONIOS = [
+  { texto: "Compré un sistema de respaldo para mi casa y quedé muy satisfecho: los equipos llegaron bien embalados y con garantía por escrito. El asesoramiento por WhatsApp fue excelente.", nombre: "Yunior G.", lugar: "Las Tunas" },
+  { texto: "Pedimos equipos de cómputo para la oficina y todo llegó con factura y a tiempo. La atención fue muy profesional de principio a fin.", nombre: "María L.", lugar: "La Habana" },
+  { texto: "Instalé cámaras y un split inverter comprados aquí. Los precios son competitivos y el soporte después de la compra marca la diferencia.", nombre: "José A.", lugar: "Matanzas" },
+  { texto: "Como emprendedora necesitaba suministros estables. Encuentro lo que busco, con buena calidad y una comunicación permanente ante cualquier duda.", nombre: "Elizabeth S.", lugar: "Camagüey" },
+  { texto: "El dimensionamiento solar que me hicieron se ajustó a mi consumo real. Ahora tengo energía estable incluso en los apagones.", nombre: "Erick B.", lugar: "Holguín" }
+];
 
 // Imagenes locales en /public/img, descargadas de Wikimedia Commons y
 // verificadas una a una (ver /creditos). Se sirven en local, en WebP y a 480 px,
@@ -3589,17 +3745,71 @@ function renderCatalogo() {
 
 // --- Inicio ---
 function renderInicio() {
-  // Categorias
+  // Carrusel de categorias
   const catGrid = $("#homeCategories");
   if (catGrid) {
     catGrid.innerHTML = "";
     CATEGORIAS.forEach(c => {
       const n = PRODUCTOS.filter(p => p.categoria === c.id).length;
-      const a = el("a", { class: "cat", attrs: { href: "/catalogo?cat=" + c.id, "data-nav": "catalogo", "data-cat": c.id } });
-      a.appendChild(icon(c.icono));
-      a.appendChild(el("b", { text: c.nombre }));
-      a.appendChild(el("small", { text: n + " productos" }));
+      const a = el("a", { class: "catcar__item", attrs: { href: "/catalogo?cat=" + c.id, "data-nav": "catalogo", "data-cat": c.id, role: "listitem" } });
+      const media = el("div", { class: "catcar__media" });
+      media.appendChild(productImage(CATEGORIA_IMAGEN[c.id] || "/public/img/sin-foto.webp", c.nombre + " en Sinergia Digital", 320, 240));
+      const body = el("div", { class: "catcar__body" });
+      body.appendChild(icon(c.icono));
+      const txt = el("span");
+      txt.appendChild(el("b", { text: c.nombre }));
+      txt.appendChild(el("small", { text: n + " productos" }));
+      body.appendChild(txt);
+      a.appendChild(media);
+      a.appendChild(body);
       catGrid.appendChild(a);
+    });
+  }
+  // Bloques promocionales
+  const promos = $("#homePromos");
+  if (promos) {
+    promos.innerHTML = "";
+    PROMOS.forEach(p => {
+      const a = el("a", { class: "promo", attrs: { href: p.href, "data-nav": p.nav } });
+      a.appendChild(productImage(p.img, p.titulo + " en Sinergia Digital", 600, 460));
+      const body = el("div", { class: "promo__body" });
+      body.appendChild(el("b", { text: p.titulo }));
+      body.appendChild(el("small", { text: p.texto }));
+      body.appendChild(el("span", { class: "btn btn--primary btn--sm", text: p.cta }));
+      a.appendChild(body);
+      promos.appendChild(a);
+    });
+  }
+  // Accesos rapidos
+  const quick = $("#homeQuick");
+  if (quick) {
+    quick.innerHTML = "";
+    QUICK.forEach(q => {
+      const a = el("a", { class: "quick__card", attrs: { href: q.href, "data-nav": "catalogo" } });
+      a.appendChild(productImage(q.img, q.titulo + " en Sinergia Digital", 400, 320));
+      a.appendChild(el("b", { text: q.titulo }));
+      quick.appendChild(a);
+    });
+  }
+  // Testimonios de clientes
+  const tst = $("#homeTestimonials");
+  if (tst) {
+    tst.innerHTML = "";
+    TESTIMONIOS.forEach(t => {
+      const card = el("figure", { class: "tst__card", attrs: { role: "listitem" } });
+      card.appendChild(icon("i-quote", "tst__quote"));
+      const estrellas = el("div", { class: "tst__stars", attrs: { "aria-label": "5 de 5 estrellas" } });
+      for (let i = 0; i < 5; i++) estrellas.appendChild(icon("i-star"));
+      card.appendChild(estrellas);
+      card.appendChild(el("blockquote", { class: "small", text: t.texto, attrs: { style: "margin:0;padding:0;border:0" } }));
+      const who = el("figcaption", { class: "tst__who" });
+      who.appendChild(el("span", { class: "tst__ava", text: (t.nombre || "?").charAt(0), attrs: { "aria-hidden": "true" } }));
+      const datos = el("span");
+      datos.appendChild(el("b", { text: t.nombre }));
+      datos.appendChild(el("small", { text: t.lugar }));
+      who.appendChild(datos);
+      card.appendChild(who);
+      tst.appendChild(card);
     });
   }
   // Ofertas flash
@@ -3612,6 +3822,14 @@ function renderInicio() {
   // Marcas
   const strip = $("#brandStrip");
   if (strip) { strip.innerHTML = ""; MARCAS.forEach(m => strip.appendChild(el("span", { text: m }))); }
+}
+
+// Desplaza un carrusel horizontal por el ancho de una tarjeta.
+function desplazarCarrusel(track, dir) {
+  if (!track) return;
+  const item = track.firstElementChild;
+  const paso = item ? item.getBoundingClientRect().width + 12 : track.clientWidth * 0.8;
+  track.scrollBy({ left: dir * paso, behavior: "smooth" });
 }
 
 // --- Ofertas ---
@@ -4978,6 +5196,9 @@ function renderContenidoEstatico() {
   const fem = $("#footerEmail"); if (fem) fem.setAttribute("href", "mailto:" + CONFIG.negocio.correo);
   const fh = $("#footerHours"); if (fh) fh.textContent = "Horario: " + CONFIG.negocio.horarioCorto;
   const fa = $("#footerAddress"); if (fa) fa.textContent = CONFIG.negocio.direccion + ", " + CONFIG.negocio.municipio;
+  const fnit = $("#footerNit"); if (fnit) fnit.textContent = "NIT " + CONFIG.negocio.nit;
+  const flegal = $("#footerAddressLegal"); if (flegal) flegal.textContent = CONFIG.negocio.direccion + ", " + CONFIG.negocio.municipio + ", " + CONFIG.negocio.provincia;
+  const feml = $("#footerEmailLegal"); if (feml) feml.setAttribute("href", "mailto:" + CONFIG.negocio.correo);
   const fy = $("#footerYear"); if (fy) fy.textContent = String(new Date().getFullYear());
 
   // Tarjetas de metodos de pago (pagina de pagos). Solo se muestran los que
@@ -5999,6 +6220,11 @@ function initEfectos() {
     };
   }
   window.revelarPendientes();
+
+  // Carrusel de categorias de la portada: las flechas desplazan la pista.
+  const catPrev = $("#catCarPrev"), catNext = $("#catCarNext");
+  if (catPrev) catPrev.addEventListener("click", () => desplazarCarrusel($("#homeCategories"), -1));
+  if (catNext) catNext.addEventListener("click", () => desplazarCarrusel($("#homeCategories"), 1));
 }
 
 // El script es "defer", asi que el DOM ya esta listo cuando corre.

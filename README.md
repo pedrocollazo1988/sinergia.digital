@@ -114,11 +114,25 @@ Abre `index.html`, busca `REEMPLAZAR` (hay 28 marcadores) y cambia:
   para adjuntar el PDF si el navegador lo permite.
 - **Herramientas Cuba**: dimensionador solar (equipos + horas de uso → paneles, inversor
   y baterías del catálogo) y calculadora de BTU para elegir el split.
+- **Portada por bloques** (estructura de tienda mayorista): hero rotativo → franja de
+  beneficios → perfil de cliente (persona natural / actor económico) → **carrusel de
+  categorías** con imagen y flechas → **3 bloques promocionales** → **5 accesos rápidos**
+  → **carrusel de testimonios** → ofertas flash con cuenta regresiva → más vendidos →
+  novedades → marcas.
+- **Pie de 5 columnas**: marca, Tienda, Ayuda, Contacto+Pagos y Nuestra empresa
+  (NIT, dirección y correo salen de `CONFIG.negocio`).
 
 ---
 
 ## 5. Checklist de SEO off-page
 
+> **Antes que nada**: el despliegue de Vercel responde `x-robots-tag: noindex` en
+> las previsualizaciones y en los despliegues antiguos, y **esa cabecera gana sobre
+> el `<meta name="robots">`**. Sin el `X-Robots-Tag` de `vercel.json` (ya incluido),
+> el sitio no se indexa por mucho SEO que tenga. Compruébalo con
+> `curl -sI https://TU-DOMINIO/ | grep -i x-robots`.
+
+- [ ] Comprobar que la cabecera `x-robots-tag` dice `index, follow`.
 - [ ] Alta en **Google Search Console** y envío del `sitemap.xml`.
 - [ ] Alta en **Bing Webmaster Tools** (importa desde GSC).
 - [ ] Ficha en **Google Business Profile** con dirección, horario, fotos y categoría.
@@ -189,6 +203,7 @@ seguridad; es el mejor equilibrio posible en un archivo único.
 | `lang="es-CU"`, canonical, hreflang, robots, theme-color | ✅ |
 | Open Graph + Twitter Cards | ✅ |
 | JSON-LD: Organization, Store, WebSite + SearchAction, BreadcrumbList, FAQPage | ✅ |
+| JSON-LD: `ItemList` con las 12 categorías (navegación por categoría en buscadores) | ✅ |
 | JSON-LD: Product + Offer (precio, moneda, disponibilidad, valoración) | ✅ al abrir una ficha |
 | Un solo H1 visible, jerarquía H2/H3 | ✅ (el H1 se mueve a la vista activa) |
 | HTML semántico + `alt` en todas las imágenes | ✅ |
