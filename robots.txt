@@ -7,6 +7,8 @@ Allow: /
 # No rastrear rutas de estado o parametros de ordenacion
 Disallow: /checkout
 Disallow: /carrito
+# Los endpoints de API no son paginas: no deben aparecer en resultados
+Disallow: /api/
 Disallow: /*?orden=
 Disallow: /*?min=
 Disallow: /*?max=

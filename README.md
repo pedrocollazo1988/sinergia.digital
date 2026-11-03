@@ -18,6 +18,11 @@ y solo se usa para el ticket; si no carga, el ticket cae en `window.print()`.
 | `robots.txt` | Reglas de rastreo y referencia al sitemap. |
 | `sitemap.xml` | 119 URLs (páginas, 12 categorías y 93 productos). |
 | `vercel.json` | Cabeceras, rewrites y caché. Es el único despliegue que se usa. |
+| `api/tasas.js` | Proxy de solo lectura hacia las tasas del Banco Central (evita CORS y no abre la CSP). |
+| `api/imagen.js` | Genera la imagen de una categoría con Pollinations.ai desde una lista cerrada de prompts. |
+| `lib/imagen-prompts.js` | Los textos que se le piden al generador de imágenes. Fuente única del script y del endpoint. |
+| `herramientas/generar-imagenes.mjs` | Genera las imágenes de la portada y las guarda en `public/img/gen`. |
+| `check-assets.py` | Comprueba que todo recurso local referenciado en el HTML existe. |
 
 ---
 
@@ -128,6 +133,15 @@ marcado son las redes sociales, el correo y el horario.
   novedades → marcas.
 - **Pie de 5 columnas**: marca, Tienda, Ayuda, Contacto+Pagos y Nuestra empresa
   (NIT, dirección y correo salen de `CONFIG.negocio`).
+- **Menú lateral desplegable**: la navegación vive en un cajón (`#sidebarNav`) que el
+  botón de la cabecera abre y cierra, a cualquier ancho de pantalla. Se cierra con
+  `Esc`, con el fondo o al elegir un enlace, y devuelve el foco al botón. El HTML sigue
+  siendo estático para que los rastreadores lo vean sin ejecutar JavaScript.
+- **Imágenes de portada generadas con IA**: el carrusel de categorías, las promos y los
+  accesos rápidos usan imágenes creadas con Pollinations.ai (gratis, sin clave), guardadas
+  en `public/img/gen` como WebP de ~10 KB. Para regenerarlas:
+  `node herramientas/generar-imagenes.mjs`. El endpoint `/api/imagen?cat=<id>` las
+  regenera al vuelo con caché de un año en el CDN.
 
 ---
 
@@ -195,6 +209,9 @@ tal cual; lo que ganas es SEO real por producto y pedidos que no se pierden.
 | Sin datos sensibles ni secretos en el código | ✅ `localStorage` solo guarda carrito, favoritos, tema y moneda |
 | Nunca se piden datos de tarjeta | ✅ aviso visible; Visa/MC solo por checkout alojado |
 | Aviso de que el front-end no valida pagos | ✅ en Métodos de pago, checkout y ticket |
+| API de imágenes con lista cerrada de prompts | ✅ `/api/imagen` solo acepta 12 ids; el texto no lo manda el cliente |
+| API de imágenes con tope de tamaño y caché | ✅ lado máximo 1024 px, `Cache-Control: immutable` 1 año |
+| `/api/` excluido del rastreo | ✅ en `robots.txt` |
 
 **Aviso**: `'unsafe-inline'` es necesario porque el CSS y el JS van embebidos en `index.html`.
 Para eliminarlo, separa los estilos y el script a archivos propios y usa `nonce` o `hash`.

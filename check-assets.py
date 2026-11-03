@@ -111,6 +111,34 @@ def main():
                 print(f"  SIN VERSIONAR {a}")
             fallos += len(sin_versionar)
 
+        # 1c) Imagenes huerfanas: estan en public/ pero ningun HTML las cita.
+        #     Se acumulan cuando un catalogo cambia (el 2026-11-03 habia 16, 1.1 MB
+        #     que se subian al despliegue sin usarse nunca). Es un aviso, no un
+        #     fallo: borrar o no es una decision de quien mantiene el sitio.
+        texto = ""
+        for pagina in ("index.html", "creditos.html", "sitemap.xml"):
+            pagina_leida = leer(pagina)
+            if pagina_leida:
+                texto += pagina_leida
+        huerfanas = []
+        for a in sorted(en_disco):
+            if not a.lower().endswith((".webp", ".jpg", ".jpeg", ".png", ".svg", ".avif")):
+                continue
+            nombre = os.path.basename(a)
+            tallo = os.path.splitext(nombre)[0]
+            base = re.sub(r"-(sm|lg|2x)$", "", tallo)
+            if a in texto or nombre in texto or tallo in texto:
+                continue
+            # La base vale si aparece seguida de algo que no sea otro sufijo de tamano.
+            if re.search(re.escape(base) + r"(?![a-z0-9-])", texto):
+                continue
+            huerfanas.append(a)
+        if huerfanas:
+            peso = sum(os.path.getsize(os.path.join(RAIZ, h)) for h in huerfanas)
+            print(f"aviso: {len(huerfanas)} imagenes huerfanas en public/ ({peso / 1024:.0f} KB, no las cita ningun HTML)")
+            for h in huerfanas[:10]:
+                print(f"  HUERFANA {h}")
+
     # 2) Proporcion de las variantes 1x/2x de cada logo.
     try:
         from PIL import Image

@@ -33,8 +33,8 @@
 <meta name="color-scheme" content="light dark">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
-<meta name="geo.region" content="CU-03">
-<meta name="geo.placename" content="La Habana, Cuba">
+<meta name="geo.region" content="CU-15">
+<meta name="geo.placename" content="Artemisa, Cuba">
 
 <link rel="canonical" href="https://sinergiadigital-pedrocollazo1988.vercel.app/">
 <link rel="alternate" hreflang="es-CU" href="https://sinergiadigital-pedrocollazo1988.vercel.app/">
@@ -538,16 +538,16 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .iconbtn__count:empty,.iconbtn__count[data-empty="true"]{display:none}
 
 .menu-toggle{display:inline-flex}
-@media (min-width:1024px){.menu-toggle{display:none}}
 
 /* ---------- 4b. BARRA LATERAL DE NAVEGACION ---------- */
-/* En escritorio la navegacion vive en una columna a la izquierda del
-   contenido. En pantallas pequenas la columna se oculta y los mismos enlaces
-   pasan al menu desplegable (#mobileNav); siguen en el HTML para el SEO. */
+/* La navegacion vive en una barra lateral SIEMPRE desplegable: en escritorio se
+   abre como cajon por encima del contenido (no ocupa columna), y en pantallas
+   pequenas comparte el mismo cajon. El boton de la cabecera la abre y la cierra.
+   El HTML se mantiene estatico para el SEO. */
 .layout{display:block}
 @media (min-width:1024px){
   .layout{
-    display:grid;grid-template-columns:264px minmax(0,1fr);
+    display:grid;grid-template-columns:minmax(0,1fr);
     gap:clamp(16px,2.4vw,34px);max-width:var(--maxw);margin-inline:auto;
     padding-inline:clamp(14px,3vw,28px);
   }
@@ -556,16 +556,31 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
      margen horizontal lo aporta .layout, para no sumar dos sangrados. */
   .layout main .wrap{max-width:none;padding-inline:0}
 }
-.sidebar{display:none}
-@media (min-width:1024px){
-  .sidebar{
-    display:block;align-self:start;
-    position:sticky;top:calc(var(--sticky-top,96px) + 1rem);
-    max-height:calc(100vh - var(--sticky-top,96px) - 2rem);overflow-y:auto;
-    padding:.7rem;background:var(--surface);border:1px solid var(--border);
-    border-radius:var(--radius);box-shadow:var(--shadow);scrollbar-width:thin;
-  }
+
+/* El cajon lateral: misma pieza a cualquier ancho. Ocupa el borde izquierdo,
+   fuera de pantalla hasta que se abre. No reserva columna en la rejilla. */
+.sidebar{
+  position:fixed;top:0;left:0;bottom:0;z-index:1450;
+  width:min(86vw,330px);max-width:330px;
+  padding:1rem .7rem;background:var(--surface);border-right:1px solid var(--border);
+  box-shadow:var(--shadow-lg);overflow-y:auto;overscroll-behavior:contain;
+  transform:translateX(-102%);visibility:hidden;
+  /* Al cerrar, visibility espera a que termine el deslizamiento; asi el cajon
+     no desaparece de golpe a mitad de la animacion. */
+  transition:transform .24s ease,visibility 0s linear .24s;
 }
+.sidebar[data-open="true"]{
+  transform:none;visibility:visible;
+  /* Al abrir, visibility cambia de inmediato: si esperara, focus() se ignoraria
+     y el teclado quedaria fuera del cajon. */
+  transition:transform .24s ease,visibility 0s;
+}
+.sidebar__head{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.4rem}
+.sidebar__backdrop{
+  position:fixed;inset:0;z-index:1440;background:rgba(6,10,24,.5);
+  opacity:0;visibility:hidden;transition:opacity .24s ease,visibility .24s ease;
+}
+.sidebar__backdrop[data-open="true"]{opacity:1;visibility:visible}
 .sidebar__title{
   margin:.4rem .55rem .3rem;font-size:.68rem;font-weight:800;letter-spacing:.12em;
   text-transform:uppercase;color:var(--text-mute);
@@ -581,18 +596,6 @@ hr{border:0;border-top:1px solid var(--border);margin:1.5rem 0}
 .sidebar__link:hover,.sidebar__btn:hover{background:var(--surface-2);color:var(--blue-text)}
 .sidebar__link[aria-current="page"]{background:var(--surface-2);color:var(--blue-text)}
 .sidebar__link svg,.sidebar__btn svg{width:19px;height:19px;flex:0 0 auto;color:var(--blue-text)}
-
-/* Menu movil desplegable */
-.mobile-nav{position:fixed;inset:0;z-index:1200;display:none}
-.mobile-nav[data-open="true"]{display:block}
-.mobile-nav__panel{
-  position:absolute;inset:0 auto 0 0;width:min(88vw,360px);background:var(--surface);
-  box-shadow:var(--shadow-lg);padding:1rem;overflow:auto;display:flex;flex-direction:column;gap:.2rem;
-  animation:slideIn .22s ease;
-}
-.mobile-nav__backdrop{position:absolute;inset:0;background:rgba(6,10,24,.5)}
-.mobile-nav a,.mobile-nav button{display:flex;align-items:center;gap:.6rem;padding:.7rem .6rem;border-radius:var(--radius-sm);color:var(--text);font-weight:600;text-align:left;width:100%}
-.mobile-nav a:hover,.mobile-nav button:hover{background:var(--surface-2)}
 
 /* ---------- 5. INICIO ---------- */
 .hero{position:relative;overflow:hidden;background:var(--grad-soft);border-bottom:1px solid var(--border)}
@@ -929,7 +932,10 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 .cookies[hidden]{display:none}
 .cookies p{margin:0;font-size:.85rem;color:var(--text-soft);flex:1 1 320px}
 
-.to-top{position:fixed;left:1rem;bottom:1rem;z-index:990;width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow);display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity var(--t-fast)}
+/* Boton "volver arriba": a la derecha, justo encima del flotante de WhatsApp.
+   La altura del flotante se publica en --float-wa desde JS para que no se
+   solapen si cambia el tamano de la fuente o el texto del boton. */
+.to-top{position:fixed;right:1rem;bottom:calc(1rem + var(--float-wa,46px) + .5rem);z-index:990;width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow);display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity var(--t-fast)}
 .to-top[data-show="true"]{opacity:1;pointer-events:auto}
 
 /* ---------- 11. HERRAMIENTAS (solar / BTU) ---------- */
@@ -987,7 +993,6 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 /* ---------- 12. ANIMACIONES Y MOVIMIENTO REDUCIDO ---------- */
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @keyframes pop{from{opacity:0;transform:scale(.97) translateY(6px)}to{opacity:1;transform:none}}
-@keyframes slideIn{from{transform:translateX(-100%)}to{transform:none}}
 @keyframes slideRight{from{transform:translateX(100%)}to{transform:none}}
 @keyframes shimmer{from{background-position:100% 0}to{background-position:-100% 0}}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
@@ -1089,7 +1094,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 @media print{
   body{background:#fff;color:#000;font-size:12px}
   .topbar,.header,.sidebar,.hero,.wa-float,.cookies,.to-top,.toast-host,.footer,
-  .modal__close,.modal__foot,.no-print,.drawer,.mobile-nav,.search{display:none!important}
+  .modal__close,.modal__foot,.no-print,.drawer,.sidebar,.sidebar__backdrop,.search{display:none!important}
   .overlay{position:static;background:none;padding:0;display:block}
   .modal{box-shadow:none;border:0;max-height:none;width:100%;animation:none}
   .modal__body{padding:0}
@@ -1241,45 +1246,16 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
         <svg aria-hidden="true"><use href="#i-cart"/></svg>
         <span class="iconbtn__count" id="cartCount" data-empty="true" aria-hidden="true"></span>
       </button>
-      <button class="iconbtn menu-toggle" id="menuToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileNav">
+      <button class="iconbtn menu-toggle" id="menuToggle" type="button" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="sidebarNav">
         <svg aria-hidden="true"><use href="#i-menu"/></svg>
       </button>
     </div>
   </div>
 
-  <!-- La navegacion principal vive ahora en la barra lateral (#sidebarNav),
-       a la izquierda del contenido. En pantallas pequenas la columna se oculta
-       y estos mismos enlaces se sirven desde el menu desplegable (#mobileNav).
-       Ambos bloques estan en el HTML estatico para que los rastreadores los
-       vean sin ejecutar JavaScript. -->
+  <!-- La navegacion principal vive en el cajon lateral (#sidebarNav), que el
+       boton de arriba abre y cierra. Esta en el HTML estatico para que los
+       rastreadores lo vean sin ejecutar JavaScript. -->
 </header>
-
-<!-- Menu movil -->
-<div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Menú de navegación" data-open="false">
-  <div class="mobile-nav__backdrop" data-close-nav></div>
-  <div class="mobile-nav__panel">
-    <div class="between" style="margin-bottom:.6rem">
-      <strong>Menú</strong>
-      <button class="iconbtn" type="button" data-close-nav aria-label="Cerrar menú"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
-    </div>
-    <a href="/" data-nav="inicio">Inicio</a>
-    <a href="/catalogo" data-nav="catalogo">Catálogo</a>
-    <a href="/ofertas" data-nav="ofertas">Ofertas</a>
-    <a href="/respaldo-energia" data-nav="soluciones">Respaldo de energía</a>
-    <a href="/como-comprar" data-nav="como-comprar">Cómo comprar</a>
-    <a href="/pagos" data-nav="pagos">Métodos de pago</a>
-    <a href="/envios" data-nav="envios">Envíos y recogida</a>
-    <a href="/garantia" data-nav="garantia">Garantía y devoluciones</a>
-    <a href="/preguntas" data-nav="preguntas">Preguntas frecuentes</a>
-    <a href="/nosotros" data-nav="nosotros">Sobre nosotros</a>
-    <a href="/contacto" data-nav="contacto">Contacto</a>
-    <a href="/carrito" data-nav="carrito">Carrito</a>
-    <hr>
-    <button type="button" data-tool="solar">Dimensionador solar</button>
-    <button type="button" data-tool="btu">Calculadora de BTU</button>
-    <button type="button" data-nav="favoritos">Favoritos</button>
-  </div>
-</div>
 
 <!-- Enlaces basicos para navegadores sin JavaScript -->
 <noscript>
@@ -1310,9 +1286,15 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 </noscript>
 
 <div class="layout">
-  <!-- Barra lateral de navegacion (escritorio). En movil se oculta por CSS y
-       los mismos enlaces se sirven desde #mobileNav. Estatica para el SEO. -->
-  <aside class="sidebar" id="sidebarNav" aria-label="Navegación principal">
+  <!-- Barra lateral de navegacion: SIEMPRE desplegable. El boton de la cabecera
+       (#menuToggle) abre este cajon, que entra desde la izquierda por encima del
+       contenido. Estatica en el HTML para que los rastreadores la vean sin JS. -->
+  <div class="sidebar__backdrop" id="sidebarBackdrop" data-open="false"></div>
+  <aside class="sidebar" id="sidebarNav" role="dialog" aria-modal="true" aria-label="Navegación principal" data-open="false">
+    <div class="sidebar__head">
+      <strong>Menú</strong>
+      <button class="iconbtn" type="button" id="sidebarClose" aria-label="Cerrar menú"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
     <nav aria-label="Secciones de la tienda">
       <h2 class="sidebar__title">Tienda</h2>
       <ul class="sidebar__list">
@@ -2569,10 +2551,27 @@ const CATEGORIAS = [
 // Mapa rapido id -> categoria
 const CATEGORIA_POR_ID = CATEGORIAS.reduce((acc, c) => (acc[c.id] = c, acc), {});
 
-// Imagen local que representa cada categoria en el carrusel de la portada.
-// Son fotos ya usadas en el catalogo (locales, de Wikimedia Commons), asi que
-// no se anade ninguna peticion nueva ni se sale del dominio.
+// Imagen de cada categoria en la portada. Las genera Pollinations con
+// herramientas/generar-imagenes.mjs y viven en public/img/gen (WebP, ~10 KB).
+// El valor de respaldo es la foto de Commons que habia antes, por si el archivo
+// generado no estuviera (asi nunca queda un hueco roto).
 const CATEGORIA_IMAGEN = {
+  computo: "/public/img/gen/computo.webp",
+  telecom: "/public/img/gen/telecom.webp",
+  impresion: "/public/img/gen/impresion.webp",
+  seguridad: "/public/img/gen/seguridad.webp",
+  alarmas: "/public/img/gen/alarmas.webp",
+  electrodomesticos: "/public/img/gen/electrodomesticos.webp",
+  oficina: "/public/img/gen/oficina.webp",
+  escolar: "/public/img/gen/escolar.webp",
+  solar: "/public/img/gen/solar.webp",
+  clima: "/public/img/gen/clima.webp",
+  herramientas: "/public/img/gen/herramientas.webp",
+  hogar: "/public/img/gen/hogar.webp"
+};
+
+// Foto de respaldo si el WebP generado no carga (misma clave de categoria).
+const CATEGORIA_IMAGEN_ALT = {
   computo: "/public/img/laptop-computer.webp",
   telecom: "/public/img/wifi-router.webp",
   impresion: "/public/img/multifunction-printer-office.webp",
@@ -2589,18 +2588,18 @@ const CATEGORIA_IMAGEN = {
 
 // Bloques promocionales de la portada.
 const PROMOS = [
-  { titulo: "Respaldo de energía", texto: "Paneles solares, inversores híbridos y baterías LiFePO4 dimensionados a tu consumo real.", img: "/public/img/portable-power-station.webp", cta: "Ver respaldo de energía", href: "/respaldo-energia", nav: "soluciones" },
-  { titulo: "Ofertas de la semana", texto: "Precios rebajados hasta agotar existencias. Ahorra en cómputo, clima, seguridad y más.", img: "/public/img/television-set.webp", cta: "Ver ofertas", href: "/ofertas", nav: "ofertas" },
-  { titulo: "Compra por volumen", texto: "MIPYMES, cooperativas y entidades: cotizaciones, factura y suministros recurrentes.", img: "/public/img/desktop-computer-tower.webp", cta: "Solicitar cotización", href: "/contacto", nav: "contacto" }
+  { titulo: "Respaldo de energía", texto: "Paneles solares, inversores híbridos y baterías LiFePO4 dimensionados a tu consumo real.", img: "/public/img/gen/promo-energia.webp", alt: "/public/img/portable-power-station.webp", cta: "Ver respaldo de energía", href: "/respaldo-energia", nav: "soluciones" },
+  { titulo: "Ofertas de la semana", texto: "Precios rebajados hasta agotar existencias. Ahorra en cómputo, clima, seguridad y más.", img: "/public/img/gen/promo-ofertas.webp", alt: "/public/img/television-set.webp", cta: "Ver ofertas", href: "/ofertas", nav: "ofertas" },
+  { titulo: "Compra por volumen", texto: "MIPYMES, cooperativas y entidades: cotizaciones, factura y suministros recurrentes.", img: "/public/img/gen/promo-mayorista.webp", alt: "/public/img/desktop-computer-tower.webp", cta: "Solicitar cotización", href: "/contacto", nav: "contacto" }
 ];
 
 // Accesos rapidos: lo que mas se busca, con enlaces directos al catalogo.
 const QUICK = [
-  { titulo: "Más vendidos", img: "/public/img/laptop-computer.webp", href: "/catalogo?tag=mas-vendido" },
-  { titulo: "Novedades", img: "/public/img/tablet-computer.webp", href: "/catalogo?tag=nuevo" },
-  { titulo: "Ofertas flash", img: "/public/img/electric-kettle.webp", href: "/ofertas" },
-  { titulo: "Energía solar", img: "/public/img/solar-panel-photovoltaic-module.webp", href: "/catalogo?cat=solar" },
-  { titulo: "Seguridad", img: "/public/img/dome-camera-security.webp", href: "/catalogo?cat=seguridad" }
+  { titulo: "Más vendidos", img: "/public/img/gen/quick-masvendido.webp", alt: "/public/img/laptop-computer.webp", href: "/catalogo?tag=mas-vendido" },
+  { titulo: "Novedades", img: "/public/img/gen/quick-novedades.webp", alt: "/public/img/tablet-computer.webp", href: "/catalogo?tag=nuevo" },
+  { titulo: "Ofertas flash", img: "/public/img/gen/quick-ofertas.webp", alt: "/public/img/electric-kettle.webp", href: "/ofertas" },
+  { titulo: "Energía solar", img: "/public/img/gen/solar.webp", alt: "/public/img/solar-panel-photovoltaic-module.webp", href: "/catalogo?cat=solar" },
+  { titulo: "Seguridad", img: "/public/img/gen/seguridad.webp", alt: "/public/img/dome-camera-security.webp", href: "/catalogo?cat=seguridad" }
 ];
 
 // Testimonios. SON DE EJEMPLO: hay que reemplazarlos por opiniones reales de
@@ -3129,7 +3128,7 @@ function icon(name, cls) {
 }
 
 // Imagen con onerror -> SVG placeholder (la tienda se ve bien sin internet).
-function productImage(src, alt, w, h, cls) {
+function productImage(src, alt, w, h, cls, respaldo) {
   const img = document.createElement("img");
   img.src = src;
   img.alt = alt;
@@ -3140,6 +3139,8 @@ function productImage(src, alt, w, h, cls) {
   if (cls) img.className = cls;
   img.addEventListener("error", function onErr() {
     img.removeEventListener("error", onErr);
+    // Cadena de respaldo: imagen generada -> foto de Commons -> SVG con iniciales.
+    if (respaldo && img.src.indexOf(respaldo) === -1) { img.src = respaldo; return; }
     img.src = placeholderSVG(alt);
   });
   return img;
@@ -3768,7 +3769,7 @@ function renderInicio() {
       const n = PRODUCTOS.filter(p => p.categoria === c.id).length;
       const a = el("a", { class: "catcar__item", attrs: { href: "/catalogo?cat=" + c.id, "data-nav": "catalogo", "data-cat": c.id, role: "listitem" } });
       const media = el("div", { class: "catcar__media" });
-      media.appendChild(productImage(CATEGORIA_IMAGEN[c.id] || "/public/img/sin-foto.webp", c.nombre + " en Sinergia Digital", 320, 240));
+      media.appendChild(productImage(CATEGORIA_IMAGEN[c.id] || "/public/img/sin-foto.webp", c.nombre + " en Sinergia Digital", 320, 240, null, CATEGORIA_IMAGEN_ALT[c.id]));
       const body = el("div", { class: "catcar__body" });
       body.appendChild(icon(c.icono));
       const txt = el("span");
@@ -3786,7 +3787,7 @@ function renderInicio() {
     promos.innerHTML = "";
     PROMOS.forEach(p => {
       const a = el("a", { class: "promo", attrs: { href: p.href, "data-nav": p.nav } });
-      a.appendChild(productImage(p.img, p.titulo + " en Sinergia Digital", 600, 460));
+      a.appendChild(productImage(p.img, p.titulo + " en Sinergia Digital", 600, 460, null, p.alt));
       const body = el("div", { class: "promo__body" });
       body.appendChild(el("b", { text: p.titulo }));
       body.appendChild(el("small", { text: p.texto }));
@@ -3801,7 +3802,7 @@ function renderInicio() {
     quick.innerHTML = "";
     QUICK.forEach(q => {
       const a = el("a", { class: "quick__card", attrs: { href: q.href, "data-nav": "catalogo" } });
-      a.appendChild(productImage(q.img, q.titulo + " en Sinergia Digital", 400, 320));
+      a.appendChild(productImage(q.img, q.titulo + " en Sinergia Digital", 400, 320, null, q.alt));
       a.appendChild(el("b", { text: q.titulo }));
       quick.appendChild(a);
     });
@@ -5020,7 +5021,7 @@ function mostrarVista(nombre, opciones) {
 
   // SEO: titulo, meta y URL
   actualizarSEO(vista, o);
-  cerrarMenuMovil();
+  cerrarMenuLateral();
 }
 
 function actualizarSEO(vista, o) {
@@ -5563,9 +5564,13 @@ function cerrarModal(id) {
 }
 function cerrarTodosLosModales() {
   $$(".overlay").forEach(m => { m.hidden = true; });
-  document.body.style.overflow = "";
   // El modal de vista rapida ya no esta visible: no hay que repintarlo.
   State.productoVistaRapida = null;
+  // El cajon lateral manda sobre los modales: si esta abierto, no se le quita
+  // el bloqueo de scroll.
+  if (!$("#sidebarNav") || $("#sidebarNav").getAttribute("data-open") !== "true") {
+    document.body.style.overflow = "";
+  }
 }
 function abrirCajon(id) {
   const d = $("#" + id);
@@ -5584,20 +5589,29 @@ function cerrarCajon(id) {
   if (focoPrevio && focoPrevio.focus) focoPrevio.focus();
   focoPrevio = null;
 }
-function abrirMenuMovil() {
-  const n = $("#mobileNav");
+function abrirMenuLateral() {
+  const n = $("#sidebarNav");
+  if (!n) return;
+  focoPrevio = document.activeElement;
   n.setAttribute("data-open", "true");
-  $("#menuToggle").setAttribute("aria-expanded", "true");
+  $("#sidebarBackdrop").setAttribute("data-open", "true");
+  const m = $("#menuToggle"); if (m) m.setAttribute("aria-expanded", "true");
   document.body.style.overflow = "hidden";
+  // El cajon pasa de visibility:hidden a visible. Leer offsetWidth fuerza al
+  // navegador a recalcular el estilo ahora mismo; sin eso, focus() se ignora
+  // porque el elemento aun cuenta como no visible.
+  void n.offsetWidth;
   const f = n.querySelector("a, button");
   if (f) f.focus();
 }
-function cerrarMenuMovil() {
-  const n = $("#mobileNav");
+function cerrarMenuLateral() {
+  const n = $("#sidebarNav");
   if (!n || n.getAttribute("data-open") !== "true") return;
   n.setAttribute("data-open", "false");
-  $("#menuToggle").setAttribute("aria-expanded", "false");
+  $("#sidebarBackdrop").setAttribute("data-open", "false");
+  const m = $("#menuToggle"); if (m) m.setAttribute("aria-expanded", "false");
   document.body.style.overflow = "";
+  if (focoPrevio && focoPrevio.isConnected) { focoPrevio.focus(); focoPrevio = null; }
 }
 
 // Vista rapida de producto en modal
@@ -5715,11 +5729,10 @@ function manejarClick(e) {
   // Cerrar modales / cajones / menu
   if (t.closest("[data-close-modal]")) { cerrarTodosLosModales(); return; }
   if (t.closest("[data-close-drawer]")) { cerrarCajon("drawerCart"); return; }
-  if (t.closest("[data-close-nav]")) { cerrarMenuMovil(); return; }
   // Clic en el fondo del overlay cierra
   if (t.classList && t.classList.contains("overlay")) { cerrarTodosLosModales(); return; }
   if (t.classList && t.classList.contains("drawer__backdrop")) { cerrarCajon("drawerCart"); return; }
-  if (t.classList && t.classList.contains("mobile-nav__backdrop")) { cerrarMenuMovil(); return; }
+  if (t.closest("#sidebarBackdrop") || t.closest("#sidebarClose")) { cerrarMenuLateral(); return; }
 
   // Navegacion interna
   const navLink = t.closest("[data-nav]");
@@ -5803,7 +5816,7 @@ function manejarClick(e) {
   if (t.closest("#cartToggle")) { renderDrawer(); abrirCajon("drawerCart"); return; }
   if (t.closest("#favToggle")) { mostrarVista("favoritos"); return; }
   if (t.closest("#themeToggle")) { alternarTema(); return; }
-  if (t.closest("#menuToggle")) { abrirMenuMovil(); return; }
+  if (t.closest("#menuToggle")) { const abierto = $("#sidebarNav").getAttribute("data-open") === "true"; abierto ? cerrarMenuLateral() : abrirMenuLateral(); return; }
   if (t.closest("#viewGrid")) { State.vista = "grid"; guardarEstado(); actualizarBotonesVista(); renderProductosActuales(); return; }
   if (t.closest("#viewList")) { State.vista = "list"; guardarEstado(); actualizarBotonesVista(); renderProductosActuales(); return; }
   if (t.closest("#loadMoreBtn")) { State.pagina++; renderCatalogo(); return; }
@@ -5848,9 +5861,11 @@ function manejarChange(e) {
 // Teclado
 function manejarKeydown(e) {
   if (e.key === "Escape") {
+    // Se cierra lo que este mas arriba: el cajon lateral tapa a los modales.
+    const lateral = $("#sidebarNav");
+    if (lateral && lateral.getAttribute("data-open") === "true") { cerrarMenuLateral(); return; }
     cerrarTodosLosModales();
     cerrarCajon("drawerCart");
-    cerrarMenuMovil();
     const sl = $("#searchList"); if (sl) sl.hidden = true;
     return;
   }
@@ -6097,6 +6112,9 @@ function medirCabecera() {
   if (!cab) return;
   const h = Math.round(cab.getBoundingClientRect().height);
   document.documentElement.style.setProperty("--sticky-top", h + "px");
+  // Altura del flotante de WhatsApp: el boton "volver arriba" se apoya encima.
+  const wa = document.querySelector(".wa-float");
+  if (wa) document.documentElement.style.setProperty("--float-wa", Math.round(wa.getBoundingClientRect().height) + "px");
 }
 
 function init() {

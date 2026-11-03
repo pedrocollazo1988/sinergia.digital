@@ -46,6 +46,17 @@ footer{border-top:1px solid var(--line);padding:1.5rem 1rem;color:var(--soft);fo
   (<code>public/logo-*</code>, <code>public/favicon-*</code>, <code>public/og-image.*</code>) son obra derivada
   de ese logotipo y comparten su titularidad.</p>
 
+  <h2>Imágenes de la portada (generadas con IA)</h2>
+  <p class="nota">Las imágenes del carrusel de categorías, de los bloques promocionales y de los accesos
+  rápidos de la portada se generan con un modelo de IA de texto a imagen
+  (<a href="https://pollinations.ai" rel="noopener noreferrer">Pollinations.ai</a>, con el modelo FLUX).
+  Son ilustraciones creadas por el propio sitio, no fotografías de terceros, así que no llevan
+  atribución de autoría. Se generan una sola vez con
+  <code>herramientas/generar-imagenes.mjs</code> y se guardan en <code>public/img/gen</code> en formato WebP
+  (unos 10 KB cada una). Los textos que se le piden al modelo están en <code>lib/imagen-prompts.js</code>.
+  Se incluyen como <em>ilustración genérica</em> del tipo de producto, no como fotografía exacta
+  del modelo concreto a la venta.</p>
+
   <h2>Fotografías del catálogo</h2>
   <p class="nota">Las fotografías de producto proceden de <a href="https://commons.wikimedia.org" rel="noopener noreferrer">Wikimedia Commons</a>.
   Se han recortado y reescalado (480 px de ancho, formato WebP) para aligerar la carga. Cada una conserva su licencia original,
